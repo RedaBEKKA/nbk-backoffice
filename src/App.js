@@ -1,42 +1,27 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+
+import Dashboard from 'pages/dashboard';
+import Login from 'pages/login';
 
 export default function App() {
+  const location = useLocation();
+  useEffect(() => {
+    console.log(location);
+  }, [location]);
+
   return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
-        </nav>
-
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/users" element={<Users />} />
-        </Routes>
-      </div>
-    </Router>
+    <Routes>
+      <Route path="/" element={<Dashboard />} />
+      <Route path="/login" element={<Login />} />
+      <Route
+        path="*"
+        element={
+          <main style={{ padding: '1rem' }}>
+            <p>There's nothing here!</p>
+          </main>
+        }
+      />
+    </Routes>
   );
-}
-
-function Home() {
-  return <h2>Home</h2>;
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
 }
