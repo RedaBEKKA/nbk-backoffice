@@ -31,17 +31,17 @@ import {
   FiChevronDown,
 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+
 import logo from 'images/logo.png';
 import routes from 'routes';
+import useStore from 'store';
+import { motion } from 'framer-motion';
 
-const LinkItems = [
-  { name: 'Home', icon: FiHome },
-  { name: 'Trending', icon: FiTrendingUp },
-  { name: 'Explore', icon: FiCompass },
-  { name: 'Favourites', icon: FiStar },
-  { name: 'Settings', icon: FiSettings },
-];
-
+const variants = {
+  hidden: { opacity: 0 },
+  enter: { opacity: 1 },
+  exit: { opacity: 0 },
+};
 export default function SidebarWithHeader({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -62,7 +62,17 @@ export default function SidebarWithHeader({ children }) {
       </Drawer>
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: '350px' }}>{children}</Box>
+      <Box ml={{ base: 0, md: '350px' }}>
+        <motion.div
+          variants={variants}
+          initial="hidden" // Set the initial state to variants.hidden
+          animate="enter" // Animated state to variants.enter
+          exit="exit" // Exit state (used later) to variants.exit
+          transition={{ type: 'linear' }}
+        >
+          {children}
+        </motion.div>
+      </Box>
     </Box>
   );
 }
@@ -114,8 +124,9 @@ const NavItem = ({ icon, children, path, menu, ...rest }) => {
           role="group"
           cursor="pointer"
           _hover={{
-            bg: '#c7d51f',
+            bg: '#linear-gradient(to right, #56ab2f, #a8e063)',
             color: 'black',
+            fontWeight: 'bold',
           }}
           {...rest}
         >
@@ -141,8 +152,9 @@ const NavItem = ({ icon, children, path, menu, ...rest }) => {
             role="group"
             cursor="pointer"
             _hover={{
-              bg: '#c7d51f',
+              bg: 'linear-gradient(to right, #56ab2f, #a8e063)',
               color: 'black',
+              fontWeight: 'bold',
             }}
             {...rest}
           >
@@ -165,6 +177,13 @@ const NavItem = ({ icon, children, path, menu, ...rest }) => {
 };
 
 const MobileNav = ({ onOpen, ...rest }) => {
+  const logout = useStore((state) => state.logout);
+  const getAppToken = useStore((state) => state.getAppToken);
+  const handleLogout = async () => {
+    logout();
+    await getAppToken();
+  };
+
   return (
     <Flex
       ml={{ base: 0, md: '350px' }}
@@ -185,14 +204,10 @@ const MobileNav = ({ onOpen, ...rest }) => {
         icon={<FiMenu />}
       />
 
-      <Text
-        display={{ base: 'flex', md: 'none' }}
-        fontSize="2xl"
-        fontFamily="monospace"
-        fontWeight="bold"
-      >
+      {/* <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
         Logo
-      </Text>
+      </Text> */}
+      <Image w="50px" display={{ base: 'flex', md: 'none' }} src={logo} alt=""></Image>
 
       <HStack spacing={{ base: '0', md: '6' }}>
         <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} />
@@ -202,9 +217,9 @@ const MobileNav = ({ onOpen, ...rest }) => {
               <HStack>
                 <Avatar
                   size={'sm'}
-                  src={
-                    'https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
-                  }
+                  //   src={
+                  //     'https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
+                  //   }
                 />
                 <VStack
                   display={{ base: 'none', md: 'flex' }}
@@ -212,7 +227,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
                   spacing="1px"
                   ml="2"
                 >
-                  <Text fontSize="sm">Justina Clark</Text>
+                  <Text fontSize="sm">Salah Beriani</Text>
                   <Text fontSize="xs" color="gray.600">
                     Admin
                   </Text>
@@ -230,9 +245,8 @@ const MobileNav = ({ onOpen, ...rest }) => {
               <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem>
               <MenuDivider /> */}
-              <Link to="/">
-                <MenuItem>Sign out</MenuItem>
-              </Link>
+
+              <MenuItem onClick={handleLogout}>Sign out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>

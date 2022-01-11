@@ -12,7 +12,7 @@ export default function Contacts() {
   return (
     <Layout>
       <Header></Header>
-      <Container maxW="9xl">
+      <Container maxW="8xl">
         {true ? (
           <LoadingTable></LoadingTable>
         ) : (

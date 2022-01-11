@@ -8,7 +8,7 @@ const auth = (set, get) => ({
     loginInfo: null,
   },
   logout: () => {
-    set({ isLoggedIn: false, appInfo: null, loginInfo: null });
+    set({ auth: { ...get().auth, isLoggedIn: false, appInfo: null, loginInfo: null } });
   },
   getAppToken: async () => {
     set({
@@ -32,6 +32,9 @@ const auth = (set, get) => ({
     try {
       const res = await Axios.get(`/authentication/users/${email}/${password}`);
       console.log(res);
+      set({
+        auth: { ...get().auth, loginInfo: res.data.data, isLoggedIn: true },
+      });
       return res;
     } catch (error) {
       console.log(error.response);

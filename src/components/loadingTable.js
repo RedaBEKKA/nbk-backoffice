@@ -14,7 +14,7 @@ import {
 export default function LoadingTable() {
   return (
     <Table overflow="hidden" rounded="xl" shadow="xl" bg={useColorModeValue('white', 'gray.900')}>
-      <Thead overflow="hidden" bg="gray.600">
+      <Thead overflow="hidden" bg="gray.900">
         <Tr overflow="hidden">
           <Th>
             <Skeleton height="12px" width="100px"></Skeleton>
