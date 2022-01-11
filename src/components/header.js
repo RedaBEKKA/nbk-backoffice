@@ -2,7 +2,7 @@ import React from 'react';
 import { Flex, Heading, Button, Text, Stack } from '@chakra-ui/react';
 import { BiShow } from 'react-icons/bi';
 
-export default function header() {
+export default function Header() {
   return (
     <Flex
       mb="4"

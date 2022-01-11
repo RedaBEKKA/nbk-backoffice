@@ -1,27 +1,40 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { Flex, Spinner } from '@chakra-ui/react';
 
-import Dashboard from 'pages/dashboard';
-import Login from 'pages/login';
+import routes from 'routes';
+import useStore from 'store';
 
 export default function App() {
   const location = useLocation();
+  const getAppToken = useStore((state) => state.getAppToken);
+  const appLoading = useStore((state) => state.auth.appLoading);
   useEffect(() => {
     console.log(location);
   }, [location]);
+  useEffect(() => {
+    getAppToken();
+  }, [getAppToken]);
 
   return (
-    <Routes>
-      <Route path="/" element={<Dashboard />} />
-      <Route path="/login" element={<Login />} />
-      <Route
-        path="*"
-        element={
-          <main style={{ padding: '1rem' }}>
-            <p>There's nothing here!</p>
-          </main>
-        }
-      />
-    </Routes>
+    <div>
+      {appLoading ? (
+        <Loading></Loading>
+      ) : (
+        <Routes>
+          {routes.map((route) => (
+            <Route key={route.label} path={route.path} element={<route.component />} />
+          ))}
+        </Routes>
+      )}
+    </div>
+  );
+}
+
+function Loading() {
+  return (
+    <Flex>
+      <Spinner></Spinner>
+    </Flex>
   );
 }

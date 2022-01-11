@@ -230,7 +230,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
               <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem>
               <MenuDivider /> */}
-              <Link to="/login">
+              <Link to="/">
                 <MenuItem>Sign out</MenuItem>
               </Link>
             </MenuList>

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import useStore from 'store';
 
 const baseURL = process.env.REACT_APP_API;
 const axiosInstance = axios.create({
@@ -9,18 +10,13 @@ const axiosInstance = axios.create({
   },
 });
 
-// // Add a request interceptor
-// axiosInstance.interceptors.request.use(function (config) {
-//   console.log(
-//     'tokkkeen',
-//     JSON.parse(JSON.parse(window.localStorage.getItem('persist:root')).auth)?.appToken
-//   );
-//   let token =
-//     JSON.parse(JSON.parse(window.localStorage.getItem('persist:root')).auth)?.accessToken ||
-//     JSON.parse(JSON.parse(window.localStorage.getItem('persist:root')).auth)?.appToken;
-//   config.headers.Authorization = `Bearer ${token}`;
+axiosInstance.interceptors.request.use(function (config) {
+  console.log(useStore.getState().auth);
+  let auth = useStore.getState().auth;
+  let token = auth?.loginInfo?.accessToken || auth?.appInfo?.accessToken;
+  config.headers.Authorization = `Bearer ${token}`;
 
-//   return config;
-// });
+  return config;
+});
 
 export default axiosInstance;
