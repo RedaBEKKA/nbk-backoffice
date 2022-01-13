@@ -5,7 +5,7 @@ import { FaFileExport } from 'react-icons/fa';
 import { AiFillFileAdd } from 'react-icons/ai';
 import Filter from './filter';
 
-export default function Header() {
+export default function Header({ title, FilterForm }) {
   const [showfilter, setShowfilter] = useState(false);
   const handleShowfilter = () => {
     setShowfilter(!showfilter);
@@ -15,14 +15,15 @@ export default function Header() {
       <Flex
         mb="4"
         justifyContent="space-between"
+        direction={{ base: 'column', md: 'row' }}
         p="4"
         pt="16"
         bg="linear-gradient(to right, #56ab2f, #a8e063)"
         color="white"
-        h={showfilter && 'xs'}
+        // h={showfilter && 'xs'}
       >
-        <Heading>title here</Heading>
-        <Stack spacing={4}>
+        <Heading>{title}</Heading>
+        <Stack spacing={4} justify="flex-end">
           <Stack direction="row">
             <Button
               leftIcon={<AiFillFileAdd />}
@@ -56,7 +57,7 @@ export default function Header() {
           </Stack>
         </Stack>
       </Flex>
-      {showfilter && <Filter></Filter>}
+      {showfilter && <Filter FilterForm={FilterForm}></Filter>}
     </>
   );
 }

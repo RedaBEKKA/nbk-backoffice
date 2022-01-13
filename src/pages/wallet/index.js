@@ -3,23 +3,20 @@ import Table from 'components/table';
 import LoadingTable from 'components/loadingTable';
 import Header from 'components/header';
 import Layout from 'components/layout';
-
-import useStore from 'store';
+import useGetWallets from './hooks/useGetWallets';
+import Filter from './components/filter';
 export default function Contacts() {
-  //   const { contacts, contactsColumns, contactsLoading, content } = useContacts();
-  //   const getAllContacts = useStore((state) => state.getAllContacts);
+  const { wallets, walletColumns, walletLoading } = useGetWallets();
 
   return (
     <Layout>
-      <Header></Header>
-      <Container maxW="9xl">
-        {true ? (
+      <Header FilterForm={Filter} title="Gestion des Portefeuille"></Header>
+      <Container maxW="8xl">
+        {walletLoading ? (
           <LoadingTable></LoadingTable>
         ) : (
           <>
-            <Table
-            //   columns={contactsColumns} data={contacts} content={content}
-            ></Table>
+            <Table columns={walletColumns} data={wallets || []}></Table>
           </>
         )}
       </Container>

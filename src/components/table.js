@@ -14,7 +14,7 @@ function DashTable({ columns, data }) {
   return (
     <>
       <Table
-        variant="striped"
+        // variant="striped"
         colorScheme="gray"
         rounded="xl"
         shadow="xl"
@@ -27,7 +27,7 @@ function DashTable({ columns, data }) {
             <Tr overflow="hidden" key={i} {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column, i) => (
                 <Th
-                  bg="gray.600"
+                  bg="gray.900"
                   color="green.100"
                   //   fontSize="md"
                   key={i}
@@ -60,52 +60,10 @@ function DashTable({ columns, data }) {
   );
 }
 
-// function App({ columns, data }) {
-function App() {
-  //   const data = React.useMemo(() => makeData(20), []);
-
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: 'Name',
-        columns: [
-          {
-            Header: 'First Name',
-            accessor: 'firstName',
-          },
-          {
-            Header: 'Last Name',
-            accessor: 'lastName',
-          },
-        ],
-      },
-      {
-        Header: 'Info',
-        columns: [
-          {
-            Header: 'Age',
-            accessor: 'age',
-          },
-          {
-            Header: 'Visits',
-            accessor: 'visits',
-          },
-          {
-            Header: 'Status',
-            accessor: 'status',
-          },
-          {
-            Header: 'Profile Progress',
-            accessor: 'progress',
-          },
-        ],
-      },
-    ],
-    []
-  );
+function App({ columns, data }) {
   return (
     <Box w="100%" overflowX="auto" overflowY="hidden">
-      {true && <DashTable columns={columns} data={[]} />}
+      {true && <DashTable columns={columns} data={data} />}
     </Box>
   );
 }
