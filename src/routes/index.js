@@ -17,6 +17,7 @@ import Transactions from 'pages/transactions';
 import Users from 'pages/users';
 import Documents from 'pages/documents';
 import Benifit from 'pages/benefit';
+import Payins from 'pages/operations/payins';
 import FourOfour from 'pages/404';
 
 const routes = [
@@ -83,43 +84,42 @@ const routes = [
     menu: false,
     sidbarlist: true,
   },
-  //   {
-  //     label: 'Gestion des opérations',
-  //     icon: RiSettings5Fill,
-  //     // component: components,
-  //     protected: true,
-  //     menu: true,
-  //     sidbarlist: true,
-  //     nested: [
-  //       {
-  //         label: 'payins',
-  //         path: '/payins',
-  //         icon: RiDashboardFill,
-  //         // component: components,
-  //         protected: true,
-  //         menu: false,
-  //         sidbarlist: true,
-  //       },
-  //       {
-  //         label: 'payout',
-  //         path: '/payout',
-  //         icon: RiDashboardFill,
-  //         // component: components,
-  //         protected: true,
-  //         menu: false,
-  //         sidbarlist: true,
-  //       },
-  //       {
-  //         label: 'payRefund',
-  //         path: '/payRefund',
-  //         icon: RiDashboardFill,
-  //         // component: components,
-  //         protected: true,
-  //         menu: false,
-  //         sidbarlist: true,
-  //       },
-  //     ],
-  //   },
+  {
+    label: 'Gestion des opérations',
+    icon: RiSettings5Fill,
+    // component: components,
+    protected: true,
+    menu: true,
+    sidbarlist: true,
+    nested: [
+      {
+        label: 'Payins',
+        path: '/payins',
+        // icon: RiDashboardFill,
+        component: Payins,
+        protected: true,
+        sidbarlist: true,
+      },
+      //   {
+      //     label: 'payout',
+      //     path: '/payout',
+      //     // icon: RiDashboardFill,
+      //     // component: components,
+      //     protected: true,
+      //     menu: false,
+      //     sidbarlist: true,
+      //   },
+      //   {
+      //     label: 'payRefund',
+      //     path: '/payRefund',
+      //     // icon: RiDashboardFill,
+      //     // component: components,
+      //     protected: true,
+      //     menu: false,
+      //     sidbarlist: true,
+      //   },
+    ],
+  },
   {
     label: 'Gestion des bénéficiaires',
     icon: SiBuzzfeed,

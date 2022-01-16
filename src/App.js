@@ -34,7 +34,18 @@ export default function App() {
         <Routes>
           <>
             {routes.map((route) => {
-              return route.protected ? (
+              return route.protected && route.menu ? (
+                route.nested.map((nestedRoute) => (
+                  <Route
+                    key={nestedRoute.label}
+                    exact
+                    path={nestedRoute.path}
+                    element={<PrivateRoute />}
+                  >
+                    <Route exact path={nestedRoute.path} element={<nestedRoute.component />} />
+                  </Route>
+                ))
+              ) : route.protected ? (
                 <Route key={route.label} exact path={route.path} element={<PrivateRoute />}>
                   <Route exact path={route.path} element={<route.component />} />
                 </Route>

@@ -19,6 +19,16 @@ import {
   MenuItem,
   MenuList,
   Image,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+  List,
+  ListItem,
+  ListIcon,
+  OrderedList,
+  UnorderedList,
 } from '@chakra-ui/react';
 import {
   FiHome,
@@ -83,6 +93,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
       transition="3s ease"
       bg="gray.900"
       borderRight="1px"
+      overflowY="auto"
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
       w={{ base: 'full', md: '350px' }}
       pos="fixed"
@@ -99,49 +110,80 @@ const SidebarContent = ({ onClose, ...rest }) => {
         </Flex>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
-      {routes.map(
-        (route) =>
-          route.protected &&
-          route.sidbarlist && (
-            <NavItem key={route.label} icon={route.icon} path={route.path} menu={route.menu}>
-              {route.label}
-            </NavItem>
-          )
-      )}
+      <Box mb="16">
+        {routes.map(
+          (route) =>
+            route.protected &&
+            route.sidbarlist && (
+              <NavItem
+                key={route.label}
+                icon={route.icon}
+                path={route.path}
+                menu={route.menu}
+                nested={route.nested}
+              >
+                {route.label}
+              </NavItem>
+            )
+        )}
+      </Box>
     </Box>
   );
 };
 
-const NavItem = ({ icon, children, path, menu, ...rest }) => {
+const NavItem = ({ icon, children, path, menu, nested, ...rest }) => {
   return (
     <>
       {menu ? (
-        <Flex
-          align="center"
-          p="4"
-          mx="4"
-          borderRadius="lg"
-          role="group"
-          cursor="pointer"
-          _hover={{
-            bg: '#linear-gradient(to right, #56ab2f, #a8e063)',
-            color: 'black',
-            fontWeight: 'bold',
-          }}
-          {...rest}
-        >
-          {icon && (
-            <Icon
-              mr="4"
-              fontSize="16"
-              _groupHover={{
-                color: 'black',
-              }}
-              as={icon}
-            />
-          )}
-          {children}
-        </Flex>
+        <Accordion allowMultiple>
+          <AccordionItem border="none">
+            <AccordionButton p="0" outline="none" border="none" w="full">
+              <Flex
+                w="full"
+                align="center"
+                p="4"
+                mx="4"
+                borderRadius="lg"
+                role="group"
+                cursor="pointer"
+                _hover={{
+                  bg: 'linear-gradient(to right, #56ab2f, #a8e063)',
+                  color: 'black',
+                  fontWeight: 'bold',
+                }}
+                {...rest}
+              >
+                {icon && (
+                  <Icon
+                    mr="4"
+                    fontSize="16"
+                    _groupHover={{
+                      color: 'black',
+                    }}
+                    as={icon}
+                  />
+                )}
+                <Flex w="full" align="center" justifyContent="space-between" alignItems="center">
+                  <h2>{children}</h2>
+                  <FiChevronDown></FiChevronDown>
+                </Flex>
+              </Flex>
+            </AccordionButton>
+            <AccordionPanel pb={4}>
+              <UnorderedList ml="16">
+                {nested.map((route) => (
+                  <Box m="2" key={route.label}>
+                    <Link to={route.path}>
+                      <ListItem color="green.300" fontWeight="bold">
+                        {route.label}
+                      </ListItem>
+                    </Link>
+                  </Box>
+                ))}
+              </UnorderedList>
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
       ) : (
         <Link to={path} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
           <Flex
