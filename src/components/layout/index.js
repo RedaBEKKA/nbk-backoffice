@@ -72,7 +72,7 @@ export default function SidebarWithHeader({ children }) {
       </Drawer>
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: '350px' }}>
+      <Box pb="16" ml={{ base: 0, md: '350px' }}>
         <motion.div
           variants={variants}
           initial="hidden" // Set the initial state to variants.hidden
