@@ -1,10 +1,11 @@
 /* eslint-disable react/display-name */
 import { useTable } from 'react-table';
 import React from 'react';
-import { Table, Thead, Tbody, Tr, Th, Td, Box } from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tr, Th, Td, Box, Flex } from '@chakra-ui/react';
 // import makeData from './makeData';
 
 function DashTable({ columns, data }) {
+  console.log('dataaaa', data);
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({
     columns,
     data,
@@ -56,6 +57,11 @@ function DashTable({ columns, data }) {
           })}
         </Tbody>
       </Table>
+      {!data.length && (
+        <Flex w="full" p="16" justifyContent="center" alignItems="center">
+          il n'y a pas de données
+        </Flex>
+      )}
     </>
   );
 }
