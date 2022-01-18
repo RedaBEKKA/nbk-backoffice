@@ -14,6 +14,7 @@ import Dashboard from 'pages/dashboard';
 import Wallet from 'pages/wallet';
 import Cards from 'pages/cards';
 import Transactions from 'pages/transactions';
+import Transfers from 'pages/transfers';
 import Users from 'pages/users';
 import Documents from 'pages/documents';
 import Benifit from 'pages/benefit';
@@ -130,7 +131,7 @@ const routes = [
     sidbarlist: true,
   },
   {
-    label: 'Gestion des transferts',
+    label: 'Gestion des transactions',
     path: '/transactions',
     icon: BiTransfer,
     component: Transactions,
@@ -138,6 +139,15 @@ const routes = [
     menu: false,
     sidbarlist: true,
   },
+  //   {
+  //     label: 'Gestion des transfers',
+  //     path: '/transfers',
+  //     icon: BiTransfer,
+  //     component: Transfers,
+  //     protected: true,
+  //     menu: false,
+  //     sidbarlist: true,
+  //   },
   {
     label: 'Gestion des cartes',
     path: '/cards',

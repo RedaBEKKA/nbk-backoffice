@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
-import { Badge } from '@chakra-ui/react';
+import { Badge, Text } from '@chakra-ui/react';
 import useStore from 'store';
-
+import { Link } from 'react-router-dom';
 export default function useGetWallets() {
   const getLoading = useStore((state) => state.wallets.getLoading);
   const wallets = useStore((state) => state.wallets.wallets);
@@ -56,6 +56,18 @@ export default function useGetWallets() {
                   annulé
                 </Badge>
               )}
+            </>
+          );
+        },
+      },
+      {
+        accessor: 'links',
+        Cell: ({ row: { original } }) => {
+          return (
+            <>
+              <Text color="purple.500" fontWeight="bold" cursor="pointer">
+                <Link to={`/transfers?walletId=${original.walletId}`}>transfers</Link>
+              </Text>
             </>
           );
         },
