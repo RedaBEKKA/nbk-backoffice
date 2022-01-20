@@ -3,11 +3,23 @@ import Table from 'components/table';
 import LoadingTable from 'components/loadingTable';
 import Header from 'components/header';
 import Layout from 'components/layout';
-
-import useStore from 'store';
+import useGetBenefits from './hooks/useGetBenefits';
+import Filter from './components/filter';
 export default function Contacts() {
-  //   const { contacts, contactsColumns, contactsLoading, content } = useContacts();
-  //   const getAllContacts = useStore((state) => state.getAllContacts);
+  const { benefits, benefitColumns, benefitLoading } = useGetBenefits();
 
-  return <Layout>empty</Layout>;
+  return (
+    <Layout>
+      <Header FilterForm={Filter} title="Gestion des Cartes"></Header>
+      <Container maxW="8xl">
+        {benefitLoading ? (
+          <LoadingTable></LoadingTable>
+        ) : (
+          <>
+            <Table columns={benefitColumns} data={benefits || []}></Table>
+          </>
+        )}
+      </Container>
+    </Layout>
+  );
 }
