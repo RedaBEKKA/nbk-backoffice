@@ -10,7 +10,11 @@ export default function Contacts() {
 
   return (
     <Layout>
-      <Header FilterForm={Filter} title="Gestion des Cartes"></Header>
+      <Header
+        FilterForm={Filter}
+        title="Gestion des Beneficiaries
+"
+      ></Header>
       <Container maxW="8xl">
         {benefitLoading ? (
           <LoadingTable></LoadingTable>

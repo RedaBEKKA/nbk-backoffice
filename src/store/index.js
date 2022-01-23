@@ -8,6 +8,7 @@ import payins from './payins';
 import users from './users';
 import transfers from './transfers';
 import benefit from './benefit';
+import documents from './documents';
 
 const useStore = create(
   devtools(
@@ -20,6 +21,7 @@ const useStore = create(
         ...users(set, get),
         ...transfers(set, get),
         ...benefit(set, get),
+        ...documents(set, get),
       }),
       {
         name: 'nbk',

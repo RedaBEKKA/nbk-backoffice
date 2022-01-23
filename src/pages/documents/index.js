@@ -3,11 +3,23 @@ import Table from 'components/table';
 import LoadingTable from 'components/loadingTable';
 import Header from 'components/header';
 import Layout from 'components/layout';
+import useGetDocuments from './hooks/useGetDocuments';
+import Filter from './components/filter';
+export default function Documents() {
+  const { documents, documentColumns, documentLoading } = useGetDocuments();
 
-import useStore from 'store';
-export default function Contacts() {
-  //   const { contacts, contactsColumns, contactsLoading, content } = useContacts();
-  //   const getAllContacts = useStore((state) => state.getAllContacts);
-
-  return <Layout>empty</Layout>;
+  return (
+    <Layout>
+      <Header FilterForm={Filter} title="Gestion des Document"></Header>
+      <Container maxW="8xl">
+        {documentLoading ? (
+          <LoadingTable></LoadingTable>
+        ) : (
+          <>
+            <Table columns={documentColumns} data={documents || []}></Table>
+          </>
+        )}
+      </Container>
+    </Layout>
+  );
 }

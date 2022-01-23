@@ -40,12 +40,24 @@ export default function useGetCards() {
         accessor: 'userId',
       },
       {
-        Header: 'bic',
-        accessor: 'bic',
+        Header: 'nickName',
+        accessor: 'nickName',
+      },
+      {
+        Header: 'name',
+        accessor: 'name',
+      },
+      {
+        Header: 'tag',
+        accessor: 'tag',
       },
       {
         Header: 'iban',
         accessor: 'iban',
+      },
+      {
+        Header: 'createdDate',
+        accessor: 'createdDate',
       },
 
       {
@@ -108,6 +120,36 @@ function SingleView({ original }) {
                   USER ID :{' '}
                 </Text>
                 <Text fontSize="lg">{original.userId}</Text>
+              </Flex>
+              <Flex justifyContent="space-between" alignItems="center">
+                <Text fontSize="lg" fontWeight="bold">
+                  NICK NAME :{' '}
+                </Text>
+                <Text fontSize="lg">{original.nickName}</Text>
+              </Flex>
+              <Flex justifyContent="space-between" alignItems="center">
+                <Text fontSize="lg" fontWeight="bold">
+                  NAME :{' '}
+                </Text>
+                <Text fontSize="lg">{original.name}</Text>
+              </Flex>
+              <Flex justifyContent="space-between" alignItems="center">
+                <Text fontSize="lg" fontWeight="bold">
+                  TAG :{' '}
+                </Text>
+                <Text fontSize="lg">{original.tag}</Text>
+              </Flex>
+              <Flex justifyContent="space-between" alignItems="center">
+                <Text fontSize="lg" fontWeight="bold">
+                  IBAN :{' '}
+                </Text>
+                <Text fontSize="xs">{original.iban}</Text>
+              </Flex>
+              <Flex justifyContent="space-between" alignItems="center">
+                <Text fontSize="lg" fontWeight="bold">
+                  CREATED DATE :{' '}
+                </Text>
+                <Text fontSize="lg">{original.createdDate}</Text>
               </Flex>
             </SimpleGrid>
           </DrawerBody>
