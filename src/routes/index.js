@@ -16,6 +16,7 @@ import Cards from 'pages/cards';
 import Transactions from 'pages/transactions';
 import Transfers from 'pages/transfers';
 import Users from 'pages/users';
+import EditeUser from 'pages/users/components/Edite';
 import Documents from 'pages/documents';
 import Benifit from 'pages/benefit';
 import Payins from 'pages/operations/payins';
@@ -66,6 +67,15 @@ const routes = [
     protected: true,
     menu: false,
     sidbarlist: true,
+  },
+  {
+    label: 'edit Utilisateurs',
+    path: '/users/edit',
+    icon: HiUsers,
+    component: EditeUser,
+    protected: true,
+    menu: false,
+    sidbarlist: false,
   },
   {
     label: 'Gestion des Portefeuille',

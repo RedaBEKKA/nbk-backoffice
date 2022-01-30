@@ -18,6 +18,8 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { BiShow } from 'react-icons/bi';
+import { RiEditBoxFill } from 'react-icons/ri';
+import { useLocation } from 'react-router-dom';
 
 import useStore from 'store';
 import { Link } from 'react-router-dom';
@@ -25,10 +27,17 @@ import { Link } from 'react-router-dom';
 export default function useGetWallets() {
   const getLoading = useStore((state) => state.users.getLoading);
   const users = useStore((state) => state.users.users);
+  const user = useStore((state) => state.users.user);
   const getAllUsers = useStore((state) => state.getAllUsers);
+  const getUser = useStore((state) => state.getUser);
+
+  let location = useLocation();
+  const queryParams = new URLSearchParams(location?.search);
+  console.log(queryParams.get('id'));
+  let userId = queryParams.get('id');
   useEffect(() => {
-    getAllUsers();
-  }, [getAllUsers]);
+    userId ? getUser(userId) : getAllUsers();
+  }, [getAllUsers, getUser, userId]);
   const userColumns = useMemo(
     () => [
       {
@@ -106,7 +115,7 @@ export default function useGetWallets() {
     ],
     []
   );
-  return { userLoading: getLoading, users, userColumns };
+  return { userLoading: getLoading, users, userColumns, userId, user };
 }
 
 function SingleView({ original }) {
@@ -129,7 +138,12 @@ function SingleView({ original }) {
           >
             <Flex py="8" justifyContent="space-between" alignItems="center">
               <Box>Visualiser Un Utilisateur</Box>
-              <Flex>{/* <Delete id={original.documentId}></Delete> */}</Flex>
+              <Flex>
+                {/* <Delete id={original.documentId}></Delete> */}
+                <Link to={`/users?id=${original?.userId}`}>
+                  <RiEditBoxFill style={{ fontSize: 26 }}></RiEditBoxFill>
+                </Link>
+              </Flex>
             </Flex>
           </DrawerHeader>
           <DrawerBody>

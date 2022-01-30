@@ -9,8 +9,8 @@ import Filter from './components/filter';
 export default function Transfers() {
   let search;
   let location = useLocation();
-  console.log(location);
   const queryParams = new URLSearchParams(location?.search);
+  console.log(location);
   console.log(queryParams);
   for (const [key, value] of queryParams) {
     console.log({ [key]: value });
