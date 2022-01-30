@@ -35,6 +35,18 @@ export default function useGetWallets() {
         Header: 'id',
         accessor: 'documentId',
       },
+      {
+        Header: 'type',
+        accessor: 'documentType',
+      },
+      {
+        Header: 'last name',
+        accessor: 'userLastname',
+      },
+      {
+        Header: 'first name',
+        accessor: 'userFirstname',
+      },
 
       {
         Header: 'status',
@@ -113,9 +125,47 @@ function SingleView({ original }) {
             >
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  ID :{' '}
+                  TAG :{' '}
                 </Text>
-                <Text fontSize="lg">{original.documentId}</Text>
+                <Text fontSize="lg">{original.documentTag}</Text>
+              </Flex>
+              <Flex justifyContent="space-between" alignItems="center">
+                <Text fontSize="lg" fontWeight="bold">
+                  STATUS :{' '}
+                </Text>
+                {original.documentStatus === 'PENDING' && (
+                  <Badge variant="solid" colorScheme="orange">
+                    en attendant
+                  </Badge>
+                )}
+                {original.documentStatus === 'VALIDATED' && (
+                  <Badge variant="solid" colorScheme="green">
+                    validé
+                  </Badge>
+                )}
+                {original.documentStatus === 'CANCELED' && (
+                  <Badge variant="solid" colorScheme="red">
+                    annulé
+                  </Badge>
+                )}
+              </Flex>
+              <Flex justifyContent="space-between" alignItems="center">
+                <Text fontSize="lg" fontWeight="bold">
+                  LAST NAME :{' '}
+                </Text>
+                <Text fontSize="lg">{original.userLastname}</Text>
+              </Flex>
+              <Flex justifyContent="space-between" alignItems="center">
+                <Text fontSize="lg" fontWeight="bold">
+                  FIRST NAME :{' '}
+                </Text>
+                <Text fontSize="lg">{original.userFirstname}</Text>
+              </Flex>
+              <Flex justifyContent="space-between" alignItems="center">
+                <Text fontSize="lg" fontWeight="bold">
+                  CREATE DATE :{' '}
+                </Text>
+                <Text fontSize="lg">{original.createdDate}</Text>
               </Flex>
             </SimpleGrid>
           </DrawerBody>
