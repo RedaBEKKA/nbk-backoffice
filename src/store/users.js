@@ -59,6 +59,20 @@ const users = (set, get) => ({
       return error.response;
     }
   },
+  editUser: async (id, payload) => {
+    const params = {
+      ...payload,
+    };
+
+    try {
+      const res = await Axios.put(`/users/${id}`, { params });
+      console.log('edit user response', res);
+      return res;
+    } catch (error) {
+      console.log(error.response);
+      return error.response;
+    }
+  },
 });
 
 export default users;

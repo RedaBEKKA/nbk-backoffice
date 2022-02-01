@@ -5,7 +5,7 @@ import { FaFileExport } from 'react-icons/fa';
 import { AiFillFileAdd } from 'react-icons/ai';
 import Filter from './filter';
 
-export default function Header({ title, FilterForm }) {
+export default function Header({ title, FilterForm, edit }) {
   const [showfilter, setShowfilter] = useState(false);
   const handleShowfilter = () => {
     setShowfilter(!showfilter);
@@ -23,39 +23,41 @@ export default function Header({ title, FilterForm }) {
         // h={showfilter && 'xs'}
       >
         <Heading>{title}</Heading>
-        <Stack spacing={4} justify="flex-end">
-          <Stack direction="row">
-            <Button
-              leftIcon={<AiFillFileAdd />}
-              _hover={{ bg: 'gray.900' }}
-              _focus={{ bg: 'gray.900' }}
-              bg="black"
-              color="white"
+        {!edit && (
+          <Stack spacing={4} justify="flex-end">
+            <Stack direction="row">
+              <Button
+                leftIcon={<AiFillFileAdd />}
+                _hover={{ bg: 'gray.900' }}
+                _focus={{ bg: 'gray.900' }}
+                bg="black"
+                color="white"
+              >
+                Ajoutes
+              </Button>
+              <Button
+                leftIcon={<FaFileExport />}
+                _hover={{ bg: 'gray.900' }}
+                _focus={{ bg: 'gray.900' }}
+                bg="black"
+                color="white"
+              >
+                Export
+              </Button>
+            </Stack>
+            <Stack
+              cursor="pointer"
+              onClick={handleShowfilter}
+              align="center"
+              direction="row"
+              fontSize="lg"
+              fontWeight="bold"
             >
-              Ajoutes
-            </Button>
-            <Button
-              leftIcon={<FaFileExport />}
-              _hover={{ bg: 'gray.900' }}
-              _focus={{ bg: 'gray.900' }}
-              bg="black"
-              color="white"
-            >
-              Export
-            </Button>
+              <BiShow style={{ fontSize: 24 }}></BiShow>
+              <Text>{showfilter ? 'masquer les filtres' : 'afficher les filtres'}</Text>
+            </Stack>
           </Stack>
-          <Stack
-            cursor="pointer"
-            onClick={handleShowfilter}
-            align="center"
-            direction="row"
-            fontSize="lg"
-            fontWeight="bold"
-          >
-            <BiShow style={{ fontSize: 24 }}></BiShow>
-            <Text>{showfilter ? 'masquer les filtres' : 'afficher les filtres'}</Text>
-          </Stack>
-        </Stack>
+        )}
       </Flex>
       {showfilter && <Filter FilterForm={FilterForm}></Filter>}
     </>

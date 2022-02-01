@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import useStore from 'store';
 
-export default function useFilter() {
-  //   const getFilteredUsers = useStore((state) => state.getFilteredUsers);
+export default function useFilter(userId) {
+  const editUser = useStore((state) => state.editUser);
   const {
     register,
     handleSubmit,
@@ -12,12 +12,12 @@ export default function useFilter() {
 
   const onSubmit = async (data) => {
     console.log(data);
-    for (const key in data) {
-      if (data[key] === '') {
-        delete data[key];
-      }
-    }
-    // await getFilteredUsers(data);
+    // for (const key in data) {
+    //   if (data[key] === '') {
+    //     delete data[key];
+    //   }
+    // }
+    await editUser(userId, data);
   };
 
   return {

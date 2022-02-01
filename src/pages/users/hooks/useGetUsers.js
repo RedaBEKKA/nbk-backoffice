@@ -25,11 +25,12 @@ import useStore from 'store';
 import { Link } from 'react-router-dom';
 
 export default function useGetWallets() {
+  const getAllUsers = useStore((state) => state.getAllUsers);
   const getLoading = useStore((state) => state.users.getLoading);
   const users = useStore((state) => state.users.users);
-  const user = useStore((state) => state.users.user);
-  const getAllUsers = useStore((state) => state.getAllUsers);
   const getUser = useStore((state) => state.getUser);
+  const getSingleLoading = useStore((state) => state.users.getSingleLoading);
+  const user = useStore((state) => state.users.user);
 
   let location = useLocation();
   const queryParams = new URLSearchParams(location?.search);
@@ -115,7 +116,7 @@ export default function useGetWallets() {
     ],
     []
   );
-  return { userLoading: getLoading, users, userColumns, userId, user };
+  return { userLoading: getLoading, users, userColumns, userId, user, getSingleLoading };
 }
 
 function SingleView({ original }) {
