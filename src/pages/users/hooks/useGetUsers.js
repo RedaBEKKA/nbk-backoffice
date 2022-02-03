@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import {
   Badge,
   Button,
@@ -16,6 +16,8 @@ import {
   GridItem,
   Heading,
   Text,
+  HStack,
+  useToast,
 } from '@chakra-ui/react';
 import { BiShow } from 'react-icons/bi';
 import { RiEditBoxFill } from 'react-icons/ri';
@@ -25,12 +27,19 @@ import useStore from 'store';
 import { Link } from 'react-router-dom';
 
 export default function useGetWallets() {
+  const toast = useToast();
   const getAllUsers = useStore((state) => state.getAllUsers);
   const getLoading = useStore((state) => state.users.getLoading);
   const users = useStore((state) => state.users.users);
   const getUser = useStore((state) => state.getUser);
+  const updateKycReview = useStore((state) => state.updateKycReview);
+  const updateKycLiveness = useStore((state) => state.updateKycLiveness);
   const getSingleLoading = useStore((state) => state.users.getSingleLoading);
+  const kyclivenessLoading = useStore((state) => state.users.kyclivenessLoading);
+  const kycreviewLoading = useStore((state) => state.users.kycreviewLoading);
   const user = useStore((state) => state.users.user);
+
+  console.log('kycrloading', kycreviewLoading);
 
   let location = useLocation();
   const queryParams = new URLSearchParams(location?.search);
@@ -39,6 +48,50 @@ export default function useGetWallets() {
   useEffect(() => {
     userId ? getUser(userId) : getAllUsers();
   }, [getAllUsers, getUser, userId]);
+
+  const disptachKycReviewUpdate = useCallback(
+    async (userId) => {
+      const res = await updateKycReview(userId);
+      if (res?.data?.status === 'success') {
+        toast({
+          description: 'opération terminée avec succès',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          description: "quelque chose s'est mal passé",
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        });
+      }
+    },
+    [updateKycReview]
+  );
+  const disptachKycLivenessUpdate = useCallback(
+    async (userId) => {
+      const res = await updateKycLiveness(userId);
+      if (res?.data?.status === 'success') {
+        toast({
+          description: 'opération terminée avec succès',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          description: "quelque chose s'est mal passé",
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        });
+      }
+    },
+    [updateKycLiveness]
+  );
+
   const userColumns = useMemo(
     () => [
       {
@@ -96,7 +149,25 @@ export default function useGetWallets() {
         Cell: ({ row: { original } }) => {
           return (
             <>
-              <SingleView original={original}></SingleView>
+              <HStack>
+                <SingleView original={original}></SingleView>
+                <Button
+                  isLoading={kyclivenessLoading.userId === original.userId}
+                  isDisabled={kyclivenessLoading.loading}
+                  onClick={() => disptachKycLivenessUpdate(original?.userId)}
+                  colorScheme="orange"
+                >
+                  kycliveness
+                </Button>
+                <Button
+                  isLoading={kycreviewLoading.userId === original.userId}
+                  isDisabled={kycreviewLoading.loading}
+                  onClick={() => disptachKycReviewUpdate(original?.userId)}
+                  colorScheme="orange"
+                >
+                  kycreview
+                </Button>
+              </HStack>
             </>
           );
         },
@@ -114,7 +185,7 @@ export default function useGetWallets() {
       //     },
       //   },
     ],
-    []
+    [kycreviewLoading, disptachKycReviewUpdate, disptachKycLivenessUpdate, kyclivenessLoading]
   );
   return { userLoading: getLoading, users, userColumns, userId, user, getSingleLoading };
 }

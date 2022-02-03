@@ -60,7 +60,7 @@ const routes = [
     sidbarlist: true,
   },
   {
-    label: 'Utilisateurs',
+    label: 'Gestion des Utilisateurs',
     path: '/users',
     icon: HiUsers,
     component: Users,

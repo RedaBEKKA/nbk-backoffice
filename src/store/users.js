@@ -6,6 +6,8 @@ const users = (set, get) => ({
     user: null,
     getLoading: false,
     getSingleLoading: false,
+    kycreviewLoading: { loading: false, userId: null },
+    kyclivenessLoading: { loading: false, userId: null },
   },
 
   getAllUsers: async () => {
@@ -70,6 +72,44 @@ const users = (set, get) => ({
       return res;
     } catch (error) {
       console.log(error.response);
+      return error.response;
+    }
+  },
+  updateKycReview: async (id) => {
+    set({
+      users: { ...get().users, kycreviewLoading: { loading: true, userId: id } },
+    });
+    try {
+      const res = await Axios.put(`/users/${id}/kycreview`);
+      console.log('put kycreview response', res);
+      set({
+        users: { ...get().users, kycreviewLoading: { loading: false, userId: null } },
+      });
+      return res;
+    } catch (error) {
+      console.log(error.response);
+      set({
+        users: { ...get().users, kycreviewLoading: { loading: false, userId: null } },
+      });
+      return error.response;
+    }
+  },
+  updateKycLiveness: async (id) => {
+    set({
+      users: { ...get().users, kyclivenessLoading: { loading: true, userId: id } },
+    });
+    try {
+      const res = await Axios.put(`/users/${id}/kycliveness`);
+      console.log('put kycliveness response', res);
+      set({
+        users: { ...get().users, kyclivenessLoading: { loading: false, userId: null } },
+      });
+      return res;
+    } catch (error) {
+      console.log(error.response);
+      set({
+        users: { ...get().users, kyclivenessLoading: { loading: false, userId: null } },
+      });
       return error.response;
     }
   },
