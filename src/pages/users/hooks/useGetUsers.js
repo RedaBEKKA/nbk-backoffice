@@ -20,10 +20,10 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { BiShow } from 'react-icons/bi';
-import { RiEditBoxFill } from 'react-icons/ri';
 import { useLocation } from 'react-router-dom';
 
 import useStore from 'store';
+import { RiEditBoxFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 
 export default function useGetWallets() {
@@ -32,9 +32,9 @@ export default function useGetWallets() {
   const getLoading = useStore((state) => state.users.getLoading);
   const users = useStore((state) => state.users.users);
   const getUser = useStore((state) => state.getUser);
+  const getSingleLoading = useStore((state) => state.users.getSingleLoading);
   const updateKycReview = useStore((state) => state.updateKycReview);
   const updateKycLiveness = useStore((state) => state.updateKycLiveness);
-  const getSingleLoading = useStore((state) => state.users.getSingleLoading);
   const kyclivenessLoading = useStore((state) => state.users.kyclivenessLoading);
   const kycreviewLoading = useStore((state) => state.users.kycreviewLoading);
   const user = useStore((state) => state.users.user);

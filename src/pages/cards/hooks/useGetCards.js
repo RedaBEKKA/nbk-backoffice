@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, lazy, Suspense } from 'react';
 import {
   Badge,
   Button,
@@ -16,11 +16,18 @@ import {
   GridItem,
   Heading,
   Text,
+  HStack,
+  Spinner,
 } from '@chakra-ui/react';
 import { BiShow } from 'react-icons/bi';
 import { AiFillDelete } from 'react-icons/ai';
-
+import UnblockPin from '../components/UnblockPin';
+import LockUnlock from '../components/LockUnlock';
 import useStore from 'store';
+import { RiEditBoxFill } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
+
+import UserSingleView from '../components/UserSingleView';
 
 export default function useGetCards() {
   const getLoading = useStore((state) => state.cards.getLoading);
@@ -41,7 +48,13 @@ export default function useGetCards() {
       },
       {
         Header: 'user id',
-        accessor: 'userId',
+        Cell: ({ row: { original } }) => {
+          return (
+            <>
+              <UserSingleView userId={original.userId}></UserSingleView>
+            </>
+          );
+        },
       },
       {
         Header: 'status code',
@@ -59,9 +72,11 @@ export default function useGetCards() {
         accessor: 'viewww',
         Cell: ({ row: { original } }) => {
           return (
-            <>
+            <HStack>
               <SingleView original={original}></SingleView>
-            </>
+              <LockUnlock id={original.cardId}></LockUnlock>
+              <UnblockPin id={original.cardId}></UnblockPin>
+            </HStack>
           );
         },
       },
@@ -76,7 +91,7 @@ function SingleView({ original }) {
 
   return (
     <>
-      <Button onClick={onOpen}>
+      <Button size="sm" onClick={onOpen}>
         <BiShow style={{ fontSize: 24 }}></BiShow>
       </Button>
 

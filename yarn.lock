@@ -7880,6 +7880,11 @@ react-remove-scroll@2.4.1:
     use-callback-ref "^1.2.3"
     use-sidecar "^1.0.1"
 
+react-render-if-visible@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-render-if-visible/-/react-render-if-visible-1.0.3.tgz#b85aeabaa896aa4f06c53832dc3493901bdb6475"
+  integrity sha512-jOm0JSBjCHWkj3A2o0+nFprUa+FcbI1e1vZEiqbm0QLAEd76FNx2zBZiWskg8oIKf/q8knI+fFDPlIyj5wgGHQ==
+
 react-router-dom@^6.2.1:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.2.1.tgz#32ec81829152fbb8a7b045bf593a22eadf019bec"

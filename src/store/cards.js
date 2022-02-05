@@ -41,6 +41,28 @@ const card = (set, get) => ({
       return error.response;
     }
   },
+  cardLockUnlock: async (id, lockStatus) => {
+    try {
+      const res = await Axios.put(`/cards/${id}/lockUnlock?lockStatus=${lockStatus}`);
+      console.log('lockUnlock', res);
+
+      return res;
+    } catch (error) {
+      console.log(error.response);
+      return error.response;
+    }
+  },
+  cardUnblockPin: async (id) => {
+    try {
+      const res = await Axios.put(`/cards/${id}/unblockPin`);
+      console.log('unblockPin', res);
+
+      return res;
+    } catch (error) {
+      console.log(error.response);
+      return error.response;
+    }
+  },
 });
 
 export default card;
