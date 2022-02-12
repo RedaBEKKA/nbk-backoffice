@@ -65,9 +65,10 @@ const users = (set, get) => ({
     const params = {
       ...payload,
     };
+    console.log('edit params', params);
 
     try {
-      const res = await Axios.put(`/users/${id}`, { params });
+      const res = await Axios.put(`/users/${id}`, {}, { params });
       console.log('edit user response', res);
       return res;
     } catch (error) {

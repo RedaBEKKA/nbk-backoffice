@@ -30,31 +30,43 @@ export default function Edite({ userId, user }) {
           </FormControl>
           <FormControl>
             <FormLabel> specifiedUSPerson</FormLabel>
-            <Select {...register('specifiedUSPerson')} variant="filled">
-              <option value="0">No</option>
-              <option value="1">Yes</option>
+            <Select
+              defaultValue={user?.specifiedUSPerson}
+              {...register('specifiedUSPerson')}
+              variant="filled"
+            >
+              <option value={0}>No</option>
+              <option value={1}>Yes</option>
             </Select>
           </FormControl>
           <FormControl>
             <FormLabel> controllingPersonType</FormLabel>
-            <Select {...register('controllingPersonType')} variant="filled">
-              <option value="0">None</option>
-              <option value="1">ShareHolder</option>
+            <Select
+              defaultValue={user?.controllingPersonType}
+              {...register('controllingPersonType')}
+              variant="filled"
+            >
+              <option value={0}>None</option>
+              <option value={1}>ShareHolder</option>
               <option value="2">Other relationships</option>
               <option value="3">Director</option>
             </Select>
           </FormControl>
           <FormControl>
             <FormLabel> employeeType</FormLabel>
-            <Select {...register('employeeType')} variant="filled">
-              <option value="0">None</option>
-              <option value="1">Leader</option>
+            <Select
+              defaultValue={user?.employeeType}
+              {...register('employeeType')}
+              variant="filled"
+            >
+              <option value={0}>None</option>
+              <option value={1}>Leader</option>
               <option value="2">Employee</option>
             </Select>
           </FormControl>
           <FormControl>
             <FormLabel> legalForm</FormLabel>
-            <Select {...register('legalForm')} variant="filled">
+            <Select defaultValue={user?.legalForm} {...register('legalForm')} variant="filled">
               <option value="">--</option>
               <option value="1000">1000</option>
               <option value="1100">1100</option>
@@ -321,7 +333,7 @@ export default function Edite({ userId, user }) {
           </FormControl>
           <FormControl>
             <FormLabel> title</FormLabel>
-            <Select {...register('title')} variant="filled">
+            <Select defaultValue={user?.title} {...register('title')} variant="filled">
               <option value="M">M</option>
               <option value="MME">MME</option>
               <option value="MLLE">MLLE</option>
@@ -329,7 +341,7 @@ export default function Edite({ userId, user }) {
           </FormControl>
           <FormControl>
             <FormLabel> incomeRange</FormLabel>
-            <Select {...register('incomeRange')} variant="filled">
+            <Select defaultValue={user?.incomeRange} {...register('incomeRange')} variant="filled">
               <option value="0-18">0-18</option>
               <option value="19-23">19-23</option>
               <option value="24-27">24-27</option>
@@ -565,7 +577,11 @@ export default function Edite({ userId, user }) {
           </FormControl>
           <FormControl>
             <FormLabel> legalAnnualTurnOver</FormLabel>
-            <Select {...register('legalAnnualTurnOver')} variant="filled">
+            <Select
+              defaultValue={user?.legalAnnualTurnOver}
+              {...register('legalAnnualTurnOver')}
+              variant="filled"
+            >
               <option value="">Business annual turnover (in k€)</option>
 
               <option value="0-39">0-39</option>
@@ -580,7 +596,11 @@ export default function Edite({ userId, user }) {
           </FormControl>
           <FormControl>
             <FormLabel> legalNetIncomeRange</FormLabel>
-            <Select {...register('legalNetIncomeRange')} variant="filled">
+            <Select
+              defaultValue={user?.legalNetIncomeRange}
+              {...register('legalNetIncomeRange')}
+              variant="filled"
+            >
               <option value="">Business net income range (in k€)</option>
 
               <option value="0-4">0-4</option>
@@ -593,7 +613,11 @@ export default function Edite({ userId, user }) {
           </FormControl>
           <FormControl>
             <FormLabel> legalNumberOfEmployeeRange</FormLabel>
-            <Select {...register('legalNumberOfEmployeeRange')} variant="filled">
+            <Select
+              defaultValue={user?.legalNumberOfEmployeeRange}
+              {...register('legalNumberOfEmployeeRange')}
+              variant="filled"
+            >
               <option value="">Business number of employees range</option>
 
               <option value="0">0</option>
@@ -656,7 +680,11 @@ export default function Edite({ userId, user }) {
           </FormControl>
           <FormControl>
             <FormLabel> personalAssets</FormLabel>
-            <Select {...register('personalAssets')} variant="filled">
+            <Select
+              defaultValue={user?.personalAssets}
+              {...register('personalAssets')}
+              variant="filled"
+            >
               <option value="">User's personal assets range exprimed in K€.</option>
               <option value="0-2">0-2</option>
               <option value="3-22">3-22</option>
@@ -668,43 +696,59 @@ export default function Edite({ userId, user }) {
           </FormControl>
           <FormControl>
             <FormLabel> activityOutsideEu</FormLabel>
-            <Select {...register('activityOutsideEu')} variant="filled">
+            <Select
+              defaultValue={user?.activityOutsideEu}
+              {...register('activityOutsideEu')}
+              variant="filled"
+            >
               <option value="">Commercial activity outside of EU (only for Professionals)</option>
-              <option value="0">No</option>
-              <option value="1">Yes</option>
+              <option value={0}>No</option>
+              <option value={1}>Yes</option>
             </Select>
           </FormControl>
           <FormControl>
             <FormLabel> economicSanctions</FormLabel>
-            <Select {...register('economicSanctions')} variant="filled">
+            <Select
+              defaultValue={user?.economicSanctions}
+              {...register('economicSanctions')}
+              variant="filled"
+            >
               <option value="">
                 Company, subsidiaries, entities, employees, directors, joint ventures are subject to
                 Economic Sanctions (only for Professionals)
               </option>
-              <option value="0">No</option>
-              <option value="1">Yes</option>
+              <option value={0}>No</option>
+              <option value={1}>Yes</option>
             </Select>
           </FormControl>
           <FormControl>
             <FormLabel> residentCountriesSanctions</FormLabel>
-            <Select {...register('residentCountriesSanctions')} variant="filled">
+            <Select
+              defaultValue={user?.residentCountriesSanctions}
+              {...register('residentCountriesSanctions')}
+              variant="filled"
+            >
               <option value="">
                 Company, subsidiaries, entities, employees, directors, joint ventures are subject to
                 Economic Sanctions (only for Professionals)
               </option>
-              <option value="0">No</option>
-              <option value="1">Yes</option>
+              <option value={0}>No</option>
+              <option value={1}>Yes</option>
             </Select>
           </FormControl>
           <FormControl>
             <FormLabel> involvedSanctions</FormLabel>
-            <Select {...register('involvedSanctions')} variant="filled">
+            <Select
+              defaultValue={user?.involvedSanctions}
+              {...register('involvedSanctions')}
+              variant="filled"
+            >
               <option value="">
                 Company involved in countries or with people subject to Economic Sanctions after
                 careful review (only for Professionals)
               </option>
-              <option value="0">No</option>
-              <option value="1">Yes</option>
+              <option value={0}>No</option>
+              <option value={1}>Yes</option>
             </Select>
           </FormControl>
           <FormControl>

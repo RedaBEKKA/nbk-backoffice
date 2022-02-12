@@ -84,37 +84,37 @@ export default function UserSingleView({ userId }) {
                   <Text fontSize="lg" fontWeight="bold">
                     Nom :{' '}
                   </Text>
-                  <Text fontSize="lg">{user.firstname}</Text>
+                  <Text fontSize="lg">{user?.firstname}</Text>
                 </Flex>
                 <Flex justifyContent="space-between" alignItems="center">
                   <Text fontSize="lg" fontWeight="bold">
                     Prénom :{' '}
                   </Text>
-                  <Text fontSize="lg">{user.lastname}</Text>
+                  <Text fontSize="lg">{user?.lastname}</Text>
                 </Flex>
                 <Flex justifyContent="space-between" alignItems="center">
                   <Text fontSize="lg" fontWeight="bold">
                     Email :{' '}
                   </Text>
-                  <Text fontSize="lg">{user.email}</Text>
+                  <Text fontSize="lg">{user?.email}</Text>
                 </Flex>
                 <Flex justifyContent="space-between" alignItems="center">
                   <Text fontSize="lg" fontWeight="bold">
                     Téléphone :{' '}
                   </Text>
-                  <Text fontSize="lg">{user.phone}</Text>
+                  <Text fontSize="lg">{user?.phone}</Text>
                 </Flex>
                 <Flex justifyContent="space-between" alignItems="center">
                   <Text fontSize="lg" fontWeight="bold">
                     Pays :{' '}
                   </Text>
-                  <Text fontSize="lg">{user.state}</Text>
+                  <Text fontSize="lg">{user?.state}</Text>
                 </Flex>
                 <Flex justifyContent="space-between" alignItems="center">
                   <Text fontSize="lg" fontWeight="bold">
                     Ville :{' '}
                   </Text>
-                  <Text fontSize="lg">{user.city}</Text>
+                  <Text fontSize="lg">{user?.city}</Text>
                 </Flex>
               </SimpleGrid>
             )}
