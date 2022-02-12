@@ -8,6 +8,7 @@ const users = (set, get) => ({
     getSingleLoading: false,
     kycreviewLoading: { loading: false, userId: null },
     kyclivenessLoading: { loading: false, userId: null },
+    blockLoading: false,
   },
 
   getAllUsers: async () => {
@@ -23,6 +24,48 @@ const users = (set, get) => ({
       return res;
     } catch (error) {
       console.log(error.response);
+      return error.response;
+    }
+  },
+  disableUser: async (body) => {
+    console.log('body', body);
+    set({
+      users: { ...get().users, blockLoading: true },
+    });
+    try {
+      const res = await Axios.post(`/users/disable`, body);
+      console.log('disble user', res);
+
+      set({
+        users: { ...get().users, blockLoading: false },
+      });
+      return res;
+    } catch (error) {
+      console.log(error.response);
+      set({
+        users: { ...get().users, blockLoading: false },
+      });
+      return error.response;
+    }
+  },
+  enableUser: async (body) => {
+    set({
+      users: { ...get().users, blockLoading: true },
+    });
+
+    try {
+      const res = await Axios.post(`/users/enable`, body);
+      console.log('enable user', res);
+      set({
+        users: { ...get().users, blockLoading: false },
+      });
+
+      return res;
+    } catch (error) {
+      console.log(error.response);
+      set({
+        users: { ...get().users, blockLoading: false },
+      });
       return error.response;
     }
   },

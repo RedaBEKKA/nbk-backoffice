@@ -24,7 +24,9 @@ import { useLocation } from 'react-router-dom';
 
 import useStore from 'store';
 import { RiEditBoxFill } from 'react-icons/ri';
+import { ImBlocked } from 'react-icons/im';
 import { Link } from 'react-router-dom';
+import DisableUser from '../components/DisableUser';
 
 export default function useGetWallets() {
   const toast = useToast();
@@ -210,12 +212,13 @@ function SingleView({ original }) {
           >
             <Flex py="8" justifyContent="space-between" alignItems="center">
               <Box>Visualiser Un Utilisateur</Box>
-              <Flex>
+              <HStack>
                 {/* <Delete id={original.documentId}></Delete> */}
                 <Link to={`/users?id=${original?.userId}`}>
                   <RiEditBoxFill style={{ fontSize: 26 }}></RiEditBoxFill>
                 </Link>
-              </Flex>
+                <DisableUser userName={original?.email}></DisableUser>
+              </HStack>
             </Flex>
           </DrawerHeader>
           <DrawerBody>
