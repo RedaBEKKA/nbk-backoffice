@@ -26,6 +26,8 @@ import LockUnlock from '../components/LockUnlock';
 import useStore from 'store';
 import { RiEditBoxFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
+import DisableUser from 'pages/users/components/DisableUser';
+import EnableUser from 'pages/users/components/EnableUser';
 
 export default function UserSingleView({ userId }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -60,10 +62,13 @@ export default function UserSingleView({ userId }) {
             <Flex py="8" justifyContent="space-between" alignItems="center">
               <Box>Visualiser Un Utilisateur</Box>
               <Flex>
-                {/* <Delete id={original.documentId}></Delete> */}
-                <Link to={`/users?id=${userId}`}>
-                  <RiEditBoxFill style={{ fontSize: 26 }}></RiEditBoxFill>
+                <Link to={`/users?id=${user?.userId}`}>
+                  <Button bg="black" _hover={{ bg: 'black' }}>
+                    <RiEditBoxFill style={{ fontSize: 26 }}></RiEditBoxFill>
+                  </Button>
                 </Link>
+                <DisableUser userName={user?.email}></DisableUser>
+                <EnableUser userName={user?.email}></EnableUser>
               </Flex>
             </Flex>
           </DrawerHeader>
@@ -115,6 +120,18 @@ export default function UserSingleView({ userId }) {
                     Ville :{' '}
                   </Text>
                   <Text fontSize="lg">{user?.city}</Text>
+                </Flex>
+                <Flex justifyContent="space-between" alignItems="center">
+                  <Text fontSize="lg" fontWeight="bold">
+                    Wallet ID :{' '}
+                  </Text>
+                  <Text fontSize="lg">{user.walletId}</Text>
+                </Flex>
+                <Flex justifyContent="space-between" alignItems="center">
+                  <Text fontSize="lg" fontWeight="bold">
+                    Card ID :{' '}
+                  </Text>
+                  <Text fontSize="lg">{user.cardId}</Text>
                 </Flex>
               </SimpleGrid>
             )}

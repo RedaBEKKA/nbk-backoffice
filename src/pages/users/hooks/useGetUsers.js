@@ -24,9 +24,9 @@ import { useLocation } from 'react-router-dom';
 
 import useStore from 'store';
 import { RiEditBoxFill } from 'react-icons/ri';
-import { ImBlocked } from 'react-icons/im';
 import { Link } from 'react-router-dom';
 import DisableUser from '../components/DisableUser';
+import EnableUser from '../components/EnableUser';
 
 export default function useGetWallets() {
   const toast = useToast();
@@ -215,9 +215,12 @@ function SingleView({ original }) {
               <HStack>
                 {/* <Delete id={original.documentId}></Delete> */}
                 <Link to={`/users?id=${original?.userId}`}>
-                  <RiEditBoxFill style={{ fontSize: 26 }}></RiEditBoxFill>
+                  <Button bg="black" _hover={{ bg: 'black' }}>
+                    <RiEditBoxFill style={{ fontSize: 26 }}></RiEditBoxFill>
+                  </Button>
                 </Link>
                 <DisableUser userName={original?.email}></DisableUser>
+                <EnableUser userName={original?.email}></EnableUser>
               </HStack>
             </Flex>
           </DrawerHeader>
@@ -264,6 +267,18 @@ function SingleView({ original }) {
                   Ville :{' '}
                 </Text>
                 <Text fontSize="lg">{original.city}</Text>
+              </Flex>
+              <Flex justifyContent="space-between" alignItems="center">
+                <Text fontSize="lg" fontWeight="bold">
+                  Wallet ID :{' '}
+                </Text>
+                <Text fontSize="lg">{original.walletId}</Text>
+              </Flex>
+              <Flex justifyContent="space-between" alignItems="center">
+                <Text fontSize="lg" fontWeight="bold">
+                  Card ID :{' '}
+                </Text>
+                <Text fontSize="lg">{original.cardId}</Text>
               </Flex>
             </SimpleGrid>
           </DrawerBody>

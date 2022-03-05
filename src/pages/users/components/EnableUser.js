@@ -9,20 +9,20 @@ import {
   Button,
   useToast,
 } from '@chakra-ui/react';
-import { ImBlocked } from 'react-icons/im';
+import { FaCheckCircle } from 'react-icons/fa';
 import useStore from 'store';
 
 export default function AlertDialogExample({ userName }) {
   const [isOpen, setIsOpen] = React.useState(false);
   const onClose = () => setIsOpen(false);
   const cancelRef = React.useRef();
-  const disableUser = useStore((state) => state.disableUser);
+  const enableUser = useStore((state) => state.enableUser);
   const blockLoading = useStore((state) => state.users.blockLoading);
   const toast = useToast();
 
-  const disable = async () => {
+  const enable = async () => {
     console.log('diable');
-    const res = await disableUser({ userName });
+    const res = await enableUser({ userName });
     if (res?.data?.status === 'success') {
       toast({
         description: 'opération terminée avec succès',
@@ -40,22 +40,21 @@ export default function AlertDialogExample({ userName }) {
       });
     }
   };
-  const enable = () => {};
 
   return (
     <>
       <Button bg="black" _hover={{ bg: 'black' }}>
-        <ImBlocked onClick={() => setIsOpen(true)} style={{ fontSize: 26 }}></ImBlocked>
+        <FaCheckCircle onClick={() => setIsOpen(true)} style={{ fontSize: 26 }}></FaCheckCircle>
       </Button>
 
       <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose}>
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Disable User
+              Enable User
             </AlertDialogHeader>
 
-            <AlertDialogBody>Are you sure? You want to disable user</AlertDialogBody>
+            <AlertDialogBody>Are you sure? You want to enable user</AlertDialogBody>
 
             <AlertDialogFooter>
               <Button isDisabled={blockLoading} ref={cancelRef} onClick={onClose}>
@@ -64,11 +63,11 @@ export default function AlertDialogExample({ userName }) {
               <Button
                 isDisabled={blockLoading}
                 isLoading={blockLoading}
-                colorScheme="red"
-                onClick={disable}
+                colorScheme="green"
+                onClick={enable}
                 ml={3}
               >
-                Disable
+                Enable
               </Button>
             </AlertDialogFooter>
           </AlertDialogContent>

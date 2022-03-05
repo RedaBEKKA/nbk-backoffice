@@ -1,4 +1,4 @@
-import Axios from 'api';
+import Axios from "api";
 
 const auth = (set, get) => ({
   auth: {
@@ -8,7 +8,14 @@ const auth = (set, get) => ({
     loginInfo: null,
   },
   logout: () => {
-    set({ auth: { ...get().auth, isLoggedIn: false, appInfo: null, loginInfo: null } });
+    set({
+      auth: {
+        ...get().auth,
+        isLoggedIn: false,
+        appInfo: null,
+        loginInfo: null,
+      },
+    });
   },
   getAppToken: async () => {
     set({
@@ -30,7 +37,9 @@ const auth = (set, get) => ({
   },
   login: async ({ email, password }) => {
     try {
-      const res = await Axios.get(`/authentication/users/${email}/${password}`);
+      const res = await Axios.post(
+        `/authentication/admins/${email}/${password}`
+      );
       console.log(res);
       set({
         auth: { ...get().auth, loginInfo: res.data.data, isLoggedIn: true },
@@ -43,7 +52,9 @@ const auth = (set, get) => ({
   },
   forgetPassword: async ({ email }) => {
     try {
-      const res = await Axios.get(`/authentication/forgot/password/users/${email}`);
+      const res = await Axios.get(
+        `/authentication/forgot/password/users/${email}`
+      );
       console.log(res);
       return res;
     } catch (error) {
