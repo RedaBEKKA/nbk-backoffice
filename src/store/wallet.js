@@ -1,4 +1,4 @@
-import Axios from 'api';
+import Axios from "api";
 
 const wallet = (set, get) => ({
   wallets: {
@@ -9,6 +9,7 @@ const wallet = (set, get) => ({
   getAllWallets: async () => {
     const params = {
       walletTypeId: 9,
+      pageCount: 2,
     };
     set({
       wallets: { ...get().wallets, getLoading: true },
@@ -17,7 +18,11 @@ const wallet = (set, get) => ({
       const res = await Axios.get(`/wallets`, { params });
       console.log(res);
       set({
-        wallets: { ...get().wallets, wallets: res?.data?.data?.wallets, getLoading: false },
+        wallets: {
+          ...get().wallets,
+          wallets: res?.data?.data?.wallets,
+          getLoading: false,
+        },
       });
       return res;
     } catch (error) {
@@ -37,7 +42,11 @@ const wallet = (set, get) => ({
       const res = await Axios.get(`/wallets`, { params });
       console.log(res);
       set({
-        wallets: { ...get().wallets, wallets: res?.data?.data?.wallets, getLoading: false },
+        wallets: {
+          ...get().wallets,
+          wallets: res?.data?.data?.wallets,
+          getLoading: false,
+        },
       });
       return res;
     } catch (error) {

@@ -1,4 +1,4 @@
-import Axios from 'api';
+import Axios from "api";
 
 const benefits = (set, get) => ({
   benefits: {
@@ -10,8 +10,10 @@ const benefits = (set, get) => ({
     set({
       benefits: { ...get().benefits, getLoading: true },
     });
+    const params = { pageCount: 2 };
+
     try {
-      const res = await Axios.get(`/beneficiaries`);
+      const res = await Axios.get(`/beneficiaries`, { params });
       console.log(res);
       set({
         benefits: {

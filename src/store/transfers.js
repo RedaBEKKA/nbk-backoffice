@@ -1,4 +1,4 @@
-import Axios from 'api';
+import Axios from "api";
 
 const transfer = (set, get) => ({
   transfers: {
@@ -12,12 +12,17 @@ const transfer = (set, get) => ({
     });
     const params = {
       ...query,
+      pageCount: 2,
     };
     try {
       const res = await Axios.get(`/transfers`, { params });
       console.log(res);
       set({
-        transfers: { ...get().transfers, transfers: res?.data?.data?.transfers, getLoading: false },
+        transfers: {
+          ...get().transfers,
+          transfers: res?.data?.data?.transfers,
+          getLoading: false,
+        },
       });
       return res;
     } catch (error) {
@@ -36,7 +41,11 @@ const transfer = (set, get) => ({
       const res = await Axios.get(`/transfers`, { params });
       console.log(res);
       set({
-        transfers: { ...get().transfers, transfers: res?.data?.data?.transfers, getLoading: false },
+        transfers: {
+          ...get().transfers,
+          transfers: res?.data?.data?.transfers,
+          getLoading: false,
+        },
       });
       return res;
     } catch (error) {

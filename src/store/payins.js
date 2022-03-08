@@ -1,4 +1,4 @@
-import Axios from 'api';
+import Axios from "api";
 
 const payins = (set, get) => ({
   payins: {
@@ -10,11 +10,17 @@ const payins = (set, get) => ({
     set({
       payins: { ...get().payins, getLoading: true },
     });
+    const params = { pageCount: 2 };
+
     try {
-      const res = await Axios.get(`/payins`);
+      const res = await Axios.get(`/payins`, { params });
       console.log(res);
       set({
-        payins: { ...get().payins, payins: res?.data?.data?.payins, getLoading: false },
+        payins: {
+          ...get().payins,
+          payins: res?.data?.data?.payins,
+          getLoading: false,
+        },
       });
       return res;
     } catch (error) {
@@ -33,7 +39,11 @@ const payins = (set, get) => ({
       const res = await Axios.get(`/payins`, { params });
       console.log(res);
       set({
-        payins: { ...get().payins, payins: res?.data?.data?.payins, getLoading: false },
+        payins: {
+          ...get().payins,
+          payins: res?.data?.data?.payins,
+          getLoading: false,
+        },
       });
       return res;
     } catch (error) {

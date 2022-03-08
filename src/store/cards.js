@@ -1,4 +1,4 @@
-import Axios from 'api';
+import Axios from "api";
 
 const card = (set, get) => ({
   cards: {
@@ -10,11 +10,17 @@ const card = (set, get) => ({
     set({
       cards: { ...get().cards, getLoading: true },
     });
+    const params = { pageCount: 2 };
+
     try {
-      const res = await Axios.get(`/cards`);
+      const res = await Axios.get(`/cards`, { params });
       console.log(res);
       set({
-        cards: { ...get().cards, cards: res?.data?.data?.cards, getLoading: false },
+        cards: {
+          ...get().cards,
+          cards: res?.data?.data?.cards,
+          getLoading: false,
+        },
       });
       return res;
     } catch (error) {
@@ -33,7 +39,11 @@ const card = (set, get) => ({
       const res = await Axios.get(`/cards`, { params });
       console.log(res);
       set({
-        cards: { ...get().cards, cards: res?.data?.data?.cards, getLoading: false },
+        cards: {
+          ...get().cards,
+          cards: res?.data?.data?.cards,
+          getLoading: false,
+        },
       });
       return res;
     } catch (error) {
@@ -43,8 +53,10 @@ const card = (set, get) => ({
   },
   cardLockUnlock: async (id, lockStatus) => {
     try {
-      const res = await Axios.put(`/cards/${id}/lockUnlock?lockStatus=${lockStatus}`);
-      console.log('lockUnlock', res);
+      const res = await Axios.put(
+        `/cards/${id}/lockUnlock?lockStatus=${lockStatus}`
+      );
+      console.log("lockUnlock", res);
 
       return res;
     } catch (error) {
@@ -55,7 +67,7 @@ const card = (set, get) => ({
   cardUnblockPin: async (id) => {
     try {
       const res = await Axios.put(`/cards/${id}/unblockPin`);
-      console.log('unblockPin', res);
+      console.log("unblockPin", res);
 
       return res;
     } catch (error) {

@@ -1,4 +1,4 @@
-import Axios from 'api';
+import Axios from "api";
 
 const document = (set, get) => ({
   documents: {
@@ -11,11 +11,17 @@ const document = (set, get) => ({
     set({
       documents: { ...get().documents, getLoading: true },
     });
+    const params = { pageCount: 2 };
+
     try {
-      const res = await Axios.get(`/documents`);
+      const res = await Axios.get(`/documents`, { params });
       console.log(res);
       set({
-        documents: { ...get().documents, documents: res?.data?.data?.documents, getLoading: false },
+        documents: {
+          ...get().documents,
+          documents: res?.data?.data?.documents,
+          getLoading: false,
+        },
       });
       return res;
     } catch (error) {
@@ -34,7 +40,11 @@ const document = (set, get) => ({
       const res = await Axios.get(`/documents`, { params });
       console.log(res);
       set({
-        documents: { ...get().documents, documents: res?.data?.data?.documents, getLoading: false },
+        documents: {
+          ...get().documents,
+          documents: res?.data?.data?.documents,
+          getLoading: false,
+        },
       });
       return res;
     } catch (error) {
@@ -48,7 +58,7 @@ const document = (set, get) => ({
     });
     try {
       const res = await Axios.delete(`/documents/${id}`);
-      console.log('delete document', res);
+      console.log("delete document", res);
       set({
         documents: {
           ...get().documents,

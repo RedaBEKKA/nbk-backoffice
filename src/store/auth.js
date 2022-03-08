@@ -37,9 +37,10 @@ const auth = (set, get) => ({
   },
   login: async ({ email, password }) => {
     try {
-      const res = await Axios.post(
-        `/authentication/admins/${email}/${password}`
-      );
+      const res = await Axios.post(`/admin/authentication/admins`, {
+        userName: email,
+        userPassword: password,
+      });
       console.log(res);
       set({
         auth: { ...get().auth, loginInfo: res.data.data, isLoggedIn: true },

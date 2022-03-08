@@ -1,4 +1,4 @@
-import Axios from 'api';
+import Axios from "api";
 
 const users = (set, get) => ({
   users: {
@@ -15,11 +15,16 @@ const users = (set, get) => ({
     set({
       users: { ...get().users, getLoading: true },
     });
+    const params = { pageCount: 2 };
     try {
-      const res = await Axios.get(`/users`);
+      const res = await Axios.get(`/users`, { params });
       console.log(res);
       set({
-        users: { ...get().users, users: res?.data?.data?.users, getLoading: false },
+        users: {
+          ...get().users,
+          users: res?.data?.data?.users,
+          getLoading: false,
+        },
       });
       return res;
     } catch (error) {
@@ -28,13 +33,13 @@ const users = (set, get) => ({
     }
   },
   disableUser: async (body) => {
-    console.log('body', body);
+    console.log("body", body);
     set({
       users: { ...get().users, blockLoading: true },
     });
     try {
       const res = await Axios.post(`/users/disable`, body);
-      console.log('disble user', res);
+      console.log("disble user", res);
 
       set({
         users: { ...get().users, blockLoading: false },
@@ -55,7 +60,7 @@ const users = (set, get) => ({
 
     try {
       const res = await Axios.post(`/users/enable`, body);
-      console.log('enable user', res);
+      console.log("enable user", res);
       set({
         users: { ...get().users, blockLoading: false },
       });
@@ -75,9 +80,13 @@ const users = (set, get) => ({
     });
     try {
       const res = await Axios.get(`/users/${id}`);
-      console.log('single user', res);
+      console.log("single user", res);
       set({
-        users: { ...get().users, user: res?.data?.data?.users, getSingleLoading: false },
+        users: {
+          ...get().users,
+          user: res?.data?.data?.users,
+          getSingleLoading: false,
+        },
       });
       return res;
     } catch (error) {
@@ -94,9 +103,13 @@ const users = (set, get) => ({
     });
     try {
       const res = await Axios.get(`/users`, { params });
-      console.log('usersss', res);
+      console.log("usersss", res);
       set({
-        users: { ...get().users, users: res?.data?.data?.users, getLoading: false },
+        users: {
+          ...get().users,
+          users: res?.data?.data?.users,
+          getLoading: false,
+        },
       });
       return res;
     } catch (error) {
@@ -108,11 +121,11 @@ const users = (set, get) => ({
     const params = {
       ...payload,
     };
-    console.log('edit params', params);
+    console.log("edit params", params);
 
     try {
       const res = await Axios.put(`/users/${id}`, {}, { params });
-      console.log('edit user response', res);
+      console.log("edit user response", res);
       return res;
     } catch (error) {
       console.log(error.response);
@@ -121,38 +134,56 @@ const users = (set, get) => ({
   },
   updateKycReview: async (id) => {
     set({
-      users: { ...get().users, kycreviewLoading: { loading: true, userId: id } },
+      users: {
+        ...get().users,
+        kycreviewLoading: { loading: true, userId: id },
+      },
     });
     try {
       const res = await Axios.put(`/users/${id}/kycreview`);
-      console.log('put kycreview response', res);
+      console.log("put kycreview response", res);
       set({
-        users: { ...get().users, kycreviewLoading: { loading: false, userId: null } },
+        users: {
+          ...get().users,
+          kycreviewLoading: { loading: false, userId: null },
+        },
       });
       return res;
     } catch (error) {
       console.log(error.response);
       set({
-        users: { ...get().users, kycreviewLoading: { loading: false, userId: null } },
+        users: {
+          ...get().users,
+          kycreviewLoading: { loading: false, userId: null },
+        },
       });
       return error.response;
     }
   },
   updateKycLiveness: async (id) => {
     set({
-      users: { ...get().users, kyclivenessLoading: { loading: true, userId: id } },
+      users: {
+        ...get().users,
+        kyclivenessLoading: { loading: true, userId: id },
+      },
     });
     try {
       const res = await Axios.put(`/users/${id}/kycliveness`);
-      console.log('put kycliveness response', res);
+      console.log("put kycliveness response", res);
       set({
-        users: { ...get().users, kyclivenessLoading: { loading: false, userId: null } },
+        users: {
+          ...get().users,
+          kyclivenessLoading: { loading: false, userId: null },
+        },
       });
       return res;
     } catch (error) {
       console.log(error.response);
       set({
-        users: { ...get().users, kyclivenessLoading: { loading: false, userId: null } },
+        users: {
+          ...get().users,
+          kyclivenessLoading: { loading: false, userId: null },
+        },
       });
       return error.response;
     }
