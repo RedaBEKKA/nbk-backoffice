@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Table,
   Thead,
@@ -9,12 +9,17 @@ import {
   useColorModeValue,
   Skeleton,
   SkeletonCircle,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
 export default function LoadingTable() {
   return (
-    <Table overflow="hidden" rounded="xl" shadow="xl" bg={useColorModeValue('white', 'gray.900')}>
-      <Thead overflow="hidden" bg="gray.900">
+    <Table
+      overflow="hidden"
+      rounded="xl"
+      shadow="xl"
+      bg={useColorModeValue("white", "gray.900")}
+    >
+      <Thead overflow="hidden" bg="gray.200">
         <Tr overflow="hidden">
           <Th>
             <Skeleton height="12px" width="100px"></Skeleton>
