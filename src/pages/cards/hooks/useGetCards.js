@@ -1,4 +1,4 @@
-import { useEffect, useMemo, lazy, Suspense } from 'react';
+import { useEffect, useMemo } from "react";
 import {
   Badge,
   Button,
@@ -18,16 +18,16 @@ import {
   Text,
   HStack,
   Spinner,
-} from '@chakra-ui/react';
-import { BiShow } from 'react-icons/bi';
-import { AiFillDelete } from 'react-icons/ai';
-import UnblockPin from '../components/UnblockPin';
-import LockUnlock from '../components/LockUnlock';
-import useStore from 'store';
-import { RiEditBoxFill } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+} from "@chakra-ui/react";
+import { BiShow } from "react-icons/bi";
+import { AiFillDelete } from "react-icons/ai";
+import UnblockPin from "../components/UnblockPin";
+import LockUnlock from "../components/LockUnlock";
+import useStore from "store";
+import { RiEditBoxFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
-import UserSingleView from '../components/UserSingleView';
+import UserSingleView from "../components/UserSingleView";
 
 export default function useGetCards() {
   const getLoading = useStore((state) => state.cards.getLoading);
@@ -39,15 +39,15 @@ export default function useGetCards() {
   const cardColumns = useMemo(
     () => [
       {
-        Header: 'id',
-        accessor: 'cardId',
+        Header: "id",
+        accessor: "cardId",
       },
       {
-        Header: 'wallet id',
-        accessor: 'walletTypeId',
+        Header: "wallet id",
+        accessor: "walletTypeId",
       },
       {
-        Header: 'user id',
+        Header: "user id",
         Cell: ({ row: { original } }) => {
           return (
             <>
@@ -57,19 +57,19 @@ export default function useGetCards() {
         },
       },
       {
-        Header: 'status code',
-        accessor: 'statusCode',
+        Header: "status code",
+        accessor: "statusCode",
       },
       {
-        Header: 'masked pan',
-        accessor: 'maskedPan',
+        Header: "masked pan",
+        accessor: "maskedPan",
       },
       {
-        Header: 'perms group',
-        accessor: 'permsGroup',
+        Header: "perms group",
+        accessor: "permsGroup",
       },
       {
-        accessor: 'viewww',
+        accessor: "viewww",
         Cell: ({ row: { original } }) => {
           return (
             <HStack>
@@ -95,11 +95,12 @@ function SingleView({ original }) {
         <BiShow style={{ fontSize: 24 }}></BiShow>
       </Button>
 
-      <Drawer size="xl" placement={'right'} onClose={onClose} isOpen={isOpen}>
+      <Drawer size="xl" placement={"right"} onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerHeader
-            bg="linear-gradient(to right, #56ab2f, #a8e063)"
+            // bg="linear-gradient(to right, #56ab2f, #a8e063)"
+            bg="#2DDCB1"
             color="white"
             borderBottomWidth="1px"
             h="md"
@@ -121,49 +122,49 @@ function SingleView({ original }) {
             >
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  CART ID :{' '}
+                  CART ID :{" "}
                 </Text>
                 <Text fontSize="lg">{original.cardId}</Text>
               </Flex>
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  USER ID :{' '}
+                  USER ID :{" "}
                 </Text>
                 <Text fontSize="lg">{original.userId}</Text>
               </Flex>
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  START DATE :{' '}
+                  START DATE :{" "}
                 </Text>
                 <Text fontSize="lg">{original.startDate}</Text>
               </Flex>
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  END DATE :{' '}
+                  END DATE :{" "}
                 </Text>
                 <Text fontSize="lg">{original.endDate}</Text>
               </Flex>
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  DELIVIERY TITLE :{' '}
+                  DELIVIERY TITLE :{" "}
                 </Text>
                 <Text fontSize="lg">{original.deliveryTitle}</Text>
               </Flex>
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  DELIVERY COUNTRY :{' '}
+                  DELIVERY COUNTRY :{" "}
                 </Text>
                 <Text fontSize="lg">{original.deliveryCountry}</Text>
               </Flex>
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  MASKED PAN :{' '}
+                  MASKED PAN :{" "}
                 </Text>
                 <Text fontSize="lg">{original.maskedPan}</Text>
               </Flex>
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  PERMS GROUP :{' '}
+                  PERMS GROUP :{" "}
                 </Text>
                 <Text fontSize="lg">{original.permsGroup}</Text>
               </Flex>

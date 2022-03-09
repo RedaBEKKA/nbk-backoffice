@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
-import { useTable, usePagination } from 'react-table';
-import React from 'react';
+import { useTable, usePagination } from "react-table";
+import React from "react";
 import {
   Table,
   Thead,
@@ -14,11 +14,11 @@ import {
   Input,
   Select,
   Stack,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 // import makeData from './makeData';
 
 function DashTable({ columns, data }) {
-  console.log('dataaaa', data);
+  console.log("dataaaa", data);
   const {
     getTableProps,
     getTableBodyProps,
@@ -60,16 +60,20 @@ function DashTable({ columns, data }) {
       >
         <Thead overflow="hidden">
           {headerGroups.map((headerGroup, i) => (
-            <Tr overflow="hidden" key={i} {...headerGroup.getHeaderGroupProps()}>
+            <Tr
+              overflow="hidden"
+              key={i}
+              {...headerGroup.getHeaderGroupProps()}
+            >
               {headerGroup.headers.map((column, i) => (
                 <Th
-                  bg="gray.900"
-                  color="green.100"
+                  bg="gray.200"
+                  color="gray.900"
                   //   fontSize="md"
                   key={i}
                   {...column.getHeaderProps()}
                 >
-                  {column.render('Header')}
+                  {column.render("Header")}
                 </Th>
               ))}
             </Tr>
@@ -83,7 +87,7 @@ function DashTable({ columns, data }) {
                 {row.cells.map((cell, i) => {
                   return (
                     <Td key={i} {...cell.getCellProps()}>
-                      {cell.render('Cell')}
+                      {cell.render("Cell")}
                     </Td>
                   );
                 })}
@@ -99,25 +103,28 @@ function DashTable({ columns, data }) {
         </Flex>
       )}
       <Box my="4" bg="white" rounded="xl" shadow="xl" p="2">
-        <Stack direction={{ base: 'column', md: 'row' }}>
+        <Stack direction={{ base: "column", md: "row" }}>
           <Button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-            {'<<'}
-          </Button>{' '}
+            {"<<"}
+          </Button>{" "}
           <Button onClick={() => previousPage()} disabled={!canPreviousPage}>
-            {'<'}
-          </Button>{' '}
+            {"<"}
+          </Button>{" "}
           <Button onClick={() => nextPage()} disabled={!canNextPage}>
-            {'>'}
-          </Button>{' '}
-          <Button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-            {'>>'}
-          </Button>{' '}
+            {">"}
+          </Button>{" "}
+          <Button
+            onClick={() => gotoPage(pageCount - 1)}
+            disabled={!canNextPage}
+          >
+            {">>"}
+          </Button>{" "}
           <Flex alignItems="center" justifyContent="center">
             <Box mx="2">
-              Page{' '}
+              Page{" "}
               <strong>
                 {pageIndex + 1} de {pageOptions.length}
-              </strong>{' '}
+              </strong>{" "}
             </Box>
             <Box mx="2"> | Aller à la page: </Box>
             <Input
@@ -131,7 +138,7 @@ function DashTable({ columns, data }) {
               }}
               w="100px"
             />
-          </Flex>{' '}
+          </Flex>{" "}
           <Select
             variant="filled"
             w="150px"

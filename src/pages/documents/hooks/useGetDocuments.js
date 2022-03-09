@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from "react";
 import {
   Badge,
   Button,
@@ -16,12 +16,12 @@ import {
   GridItem,
   Heading,
   Text,
-} from '@chakra-ui/react';
-import { BiShow } from 'react-icons/bi';
-import { AiFillDelete } from 'react-icons/ai';
-import Delete from '../components/Delete';
-import useStore from 'store';
-import { Link } from 'react-router-dom';
+} from "@chakra-ui/react";
+import { BiShow } from "react-icons/bi";
+import { AiFillDelete } from "react-icons/ai";
+import Delete from "../components/Delete";
+import useStore from "store";
+import { Link } from "react-router-dom";
 export default function useGetWallets() {
   const getLoading = useStore((state) => state.documents.getLoading);
   const documents = useStore((state) => state.documents.documents);
@@ -32,39 +32,39 @@ export default function useGetWallets() {
   const documentColumns = useMemo(
     () => [
       {
-        Header: 'id',
-        accessor: 'documentId',
+        Header: "id",
+        accessor: "documentId",
       },
       {
-        Header: 'type',
-        accessor: 'documentType',
+        Header: "type",
+        accessor: "documentType",
       },
       {
-        Header: 'last name',
-        accessor: 'userLastname',
+        Header: "last name",
+        accessor: "userLastname",
       },
       {
-        Header: 'first name',
-        accessor: 'userFirstname',
+        Header: "first name",
+        accessor: "userFirstname",
       },
 
       {
-        Header: 'status',
-        accessor: 'status',
+        Header: "status",
+        accessor: "status",
         Cell: ({ row: { original } }) => {
           return (
             <>
-              {original.documentStatus === 'PENDING' && (
+              {original.documentStatus === "PENDING" && (
                 <Badge variant="solid" colorScheme="orange">
                   en attendant
                 </Badge>
               )}
-              {original.documentStatus === 'VALIDATED' && (
+              {original.documentStatus === "VALIDATED" && (
                 <Badge variant="solid" colorScheme="green">
                   validé
                 </Badge>
               )}
-              {original.documentStatus === 'CANCELED' && (
+              {original.documentStatus === "CANCELED" && (
                 <Badge variant="solid" colorScheme="red">
                   annulé
                 </Badge>
@@ -75,7 +75,7 @@ export default function useGetWallets() {
       },
 
       {
-        accessor: 'viewww',
+        accessor: "viewww",
         Cell: ({ row: { original } }) => {
           return (
             <>
@@ -99,11 +99,12 @@ function SingleView({ original }) {
         <BiShow style={{ fontSize: 24 }}></BiShow>
       </Button>
 
-      <Drawer size="xl" placement={'right'} onClose={onClose} isOpen={isOpen}>
+      <Drawer size="xl" placement={"right"} onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerHeader
-            bg="linear-gradient(to right, #56ab2f, #a8e063)"
+            // bg="linear-gradient(to right, #56ab2f, #a8e063)"
+            bg="#2DDCB1"
             color="white"
             borderBottomWidth="1px"
             h="md"
@@ -125,25 +126,25 @@ function SingleView({ original }) {
             >
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  TAG :{' '}
+                  TAG :{" "}
                 </Text>
                 <Text fontSize="lg">{original.documentTag}</Text>
               </Flex>
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  STATUS :{' '}
+                  STATUS :{" "}
                 </Text>
-                {original.documentStatus === 'PENDING' && (
+                {original.documentStatus === "PENDING" && (
                   <Badge variant="solid" colorScheme="orange">
                     en attendant
                   </Badge>
                 )}
-                {original.documentStatus === 'VALIDATED' && (
+                {original.documentStatus === "VALIDATED" && (
                   <Badge variant="solid" colorScheme="green">
                     validé
                   </Badge>
                 )}
-                {original.documentStatus === 'CANCELED' && (
+                {original.documentStatus === "CANCELED" && (
                   <Badge variant="solid" colorScheme="red">
                     annulé
                   </Badge>
@@ -151,19 +152,19 @@ function SingleView({ original }) {
               </Flex>
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  LAST NAME :{' '}
+                  LAST NAME :{" "}
                 </Text>
                 <Text fontSize="lg">{original.userLastname}</Text>
               </Flex>
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  FIRST NAME :{' '}
+                  FIRST NAME :{" "}
                 </Text>
                 <Text fontSize="lg">{original.userFirstname}</Text>
               </Flex>
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  CREATE DATE :{' '}
+                  CREATE DATE :{" "}
                 </Text>
                 <Text fontSize="lg">{original.createdDate}</Text>
               </Flex>

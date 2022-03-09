@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Flex, Heading, Button, Text, Stack } from '@chakra-ui/react';
-import { BiShow } from 'react-icons/bi';
-import { FaFileExport } from 'react-icons/fa';
-import { AiFillFileAdd } from 'react-icons/ai';
-import Filter from './filter';
+import React, { useState } from "react";
+import { Flex, Heading, Button, Text, Stack } from "@chakra-ui/react";
+import { BiShow } from "react-icons/bi";
+import { FaFileExport } from "react-icons/fa";
+import { AiFillFileAdd } from "react-icons/ai";
+import Filter from "./filter";
 
 export default function Header({ title, FilterForm, edit }) {
   const [showfilter, setShowfilter] = useState(false);
@@ -15,10 +15,11 @@ export default function Header({ title, FilterForm, edit }) {
       <Flex
         mb="4"
         justifyContent="space-between"
-        direction={{ base: 'column', md: 'row' }}
+        direction={{ base: "column", md: "row" }}
         p="4"
         pt="16"
-        bg="linear-gradient(to right, #56ab2f, #a8e063)"
+        // bg="linear-gradient(to right, #56ab2f, #a8e063)"
+        bg="#2DDCB1"
         color="white"
         // h={showfilter && 'xs'}
       >
@@ -28,8 +29,8 @@ export default function Header({ title, FilterForm, edit }) {
             <Stack direction="row">
               <Button
                 leftIcon={<AiFillFileAdd />}
-                _hover={{ bg: 'gray.900' }}
-                _focus={{ bg: 'gray.900' }}
+                _hover={{ bg: "gray.900" }}
+                _focus={{ bg: "gray.900" }}
                 bg="black"
                 color="white"
               >
@@ -37,8 +38,8 @@ export default function Header({ title, FilterForm, edit }) {
               </Button>
               <Button
                 leftIcon={<FaFileExport />}
-                _hover={{ bg: 'gray.900' }}
-                _focus={{ bg: 'gray.900' }}
+                _hover={{ bg: "gray.900" }}
+                _focus={{ bg: "gray.900" }}
                 bg="black"
                 color="white"
               >
@@ -54,7 +55,9 @@ export default function Header({ title, FilterForm, edit }) {
               fontWeight="bold"
             >
               <BiShow style={{ fontSize: 24 }}></BiShow>
-              <Text>{showfilter ? 'masquer les filtres' : 'afficher les filtres'}</Text>
+              <Text>
+                {showfilter ? "masquer les filtres" : "afficher les filtres"}
+              </Text>
             </Stack>
           </Stack>
         )}

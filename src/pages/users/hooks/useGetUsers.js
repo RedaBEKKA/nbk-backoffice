@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from "react";
 import {
   Badge,
   Button,
@@ -18,15 +18,15 @@ import {
   Text,
   HStack,
   useToast,
-} from '@chakra-ui/react';
-import { BiShow } from 'react-icons/bi';
-import { useLocation } from 'react-router-dom';
+} from "@chakra-ui/react";
+import { BiShow } from "react-icons/bi";
+import { useLocation } from "react-router-dom";
 
-import useStore from 'store';
-import { RiEditBoxFill } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
-import DisableUser from '../components/DisableUser';
-import EnableUser from '../components/EnableUser';
+import useStore from "store";
+import { RiEditBoxFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
+import DisableUser from "../components/DisableUser";
+import EnableUser from "../components/EnableUser";
 
 export default function useGetWallets() {
   const toast = useToast();
@@ -37,16 +37,18 @@ export default function useGetWallets() {
   const getSingleLoading = useStore((state) => state.users.getSingleLoading);
   const updateKycReview = useStore((state) => state.updateKycReview);
   const updateKycLiveness = useStore((state) => state.updateKycLiveness);
-  const kyclivenessLoading = useStore((state) => state.users.kyclivenessLoading);
+  const kyclivenessLoading = useStore(
+    (state) => state.users.kyclivenessLoading
+  );
   const kycreviewLoading = useStore((state) => state.users.kycreviewLoading);
   const user = useStore((state) => state.users.user);
 
-  console.log('kycrloading', kycreviewLoading);
+  console.log("kycrloading", kycreviewLoading);
 
   let location = useLocation();
   const queryParams = new URLSearchParams(location?.search);
-  console.log(queryParams.get('id'));
-  let userId = queryParams.get('id');
+  console.log(queryParams.get("id"));
+  let userId = queryParams.get("id");
   useEffect(() => {
     userId ? getUser(userId) : getAllUsers();
   }, [getAllUsers, getUser, userId]);
@@ -54,17 +56,17 @@ export default function useGetWallets() {
   const disptachKycReviewUpdate = useCallback(
     async (userId) => {
       const res = await updateKycReview(userId);
-      if (res?.data?.status === 'success') {
+      if (res?.data?.status === "success") {
         toast({
-          description: 'opération terminée avec succès',
-          status: 'success',
+          description: "opération terminée avec succès",
+          status: "success",
           duration: 3000,
           isClosable: true,
         });
       } else {
         toast({
           description: "quelque chose s'est mal passé",
-          status: 'error',
+          status: "error",
           duration: 9000,
           isClosable: true,
         });
@@ -75,17 +77,17 @@ export default function useGetWallets() {
   const disptachKycLivenessUpdate = useCallback(
     async (userId) => {
       const res = await updateKycLiveness(userId);
-      if (res?.data?.status === 'success') {
+      if (res?.data?.status === "success") {
         toast({
-          description: 'opération terminée avec succès',
-          status: 'success',
+          description: "opération terminée avec succès",
+          status: "success",
           duration: 3000,
           isClosable: true,
         });
       } else {
         toast({
           description: "quelque chose s'est mal passé",
-          status: 'error',
+          status: "error",
           duration: 9000,
           isClosable: true,
         });
@@ -97,47 +99,47 @@ export default function useGetWallets() {
   const userColumns = useMemo(
     () => [
       {
-        Header: 'Nom ',
-        accessor: 'firstname',
+        Header: "Nom ",
+        accessor: "firstname",
       },
       {
-        Header: 'Prénom',
-        accessor: 'lastname',
+        Header: "Prénom",
+        accessor: "lastname",
       },
       {
-        Header: 'Email',
-        accessor: 'email',
+        Header: "Email",
+        accessor: "email",
       },
       {
-        Header: 'Téléphone',
-        accessor: 'phone',
+        Header: "Téléphone",
+        accessor: "phone",
       },
       {
-        Header: 'Pays',
-        accessor: 'state',
+        Header: "Pays",
+        accessor: "state",
       },
       {
-        Header: 'Ville',
-        accessor: 'city',
+        Header: "Ville",
+        accessor: "city",
       },
 
       {
-        Header: 'Status',
-        accessor: 'status',
+        Header: "Status",
+        accessor: "status",
         Cell: ({ row: { original } }) => {
           return (
             <>
-              {original.userStatus === 'PENDING' && (
+              {original.userStatus === "PENDING" && (
                 <Badge variant="solid" colorScheme="orange">
                   en attendant
                 </Badge>
               )}
-              {original.userStatus === 'VALIDATED' && (
+              {original.userStatus === "VALIDATED" && (
                 <Badge variant="solid" colorScheme="green">
                   validé
                 </Badge>
               )}
-              {original.userStatus === 'CANCELED' && (
+              {original.userStatus === "CANCELED" && (
                 <Badge variant="solid" colorScheme="red">
                   annulé
                 </Badge>
@@ -147,7 +149,7 @@ export default function useGetWallets() {
         },
       },
       {
-        accessor: 'viewww',
+        accessor: "viewww",
         Cell: ({ row: { original } }) => {
           return (
             <>
@@ -187,9 +189,21 @@ export default function useGetWallets() {
       //     },
       //   },
     ],
-    [kycreviewLoading, disptachKycReviewUpdate, disptachKycLivenessUpdate, kyclivenessLoading]
+    [
+      kycreviewLoading,
+      disptachKycReviewUpdate,
+      disptachKycLivenessUpdate,
+      kyclivenessLoading,
+    ]
   );
-  return { userLoading: getLoading, users, userColumns, userId, user, getSingleLoading };
+  return {
+    userLoading: getLoading,
+    users,
+    userColumns,
+    userId,
+    user,
+    getSingleLoading,
+  };
 }
 
 function SingleView({ original }) {
@@ -201,11 +215,12 @@ function SingleView({ original }) {
         <BiShow style={{ fontSize: 24 }}></BiShow>
       </Button>
 
-      <Drawer size="xl" placement={'right'} onClose={onClose} isOpen={isOpen}>
+      <Drawer size="xl" placement={"right"} onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerHeader
-            bg="linear-gradient(to right, #56ab2f, #a8e063)"
+            // bg="linear-gradient(to right, #56ab2f, #a8e063)"
+            bg="#2DDCB1"
             color="white"
             borderBottomWidth="1px"
             h="md"
@@ -215,7 +230,7 @@ function SingleView({ original }) {
               <HStack>
                 {/* <Delete id={original.documentId}></Delete> */}
                 <Link to={`/users?id=${original?.userId}`}>
-                  <Button bg="black" _hover={{ bg: 'black' }}>
+                  <Button bg="black" _hover={{ bg: "black" }}>
                     <RiEditBoxFill style={{ fontSize: 26 }}></RiEditBoxFill>
                   </Button>
                 </Link>
@@ -234,49 +249,49 @@ function SingleView({ original }) {
             >
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  Nom :{' '}
+                  Nom :{" "}
                 </Text>
                 <Text fontSize="lg">{original.firstname}</Text>
               </Flex>
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  Prénom :{' '}
+                  Prénom :{" "}
                 </Text>
                 <Text fontSize="lg">{original.lastname}</Text>
               </Flex>
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  Email :{' '}
+                  Email :{" "}
                 </Text>
                 <Text fontSize="lg">{original.email}</Text>
               </Flex>
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  Téléphone :{' '}
+                  Téléphone :{" "}
                 </Text>
                 <Text fontSize="lg">{original.phone}</Text>
               </Flex>
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  Pays :{' '}
+                  Pays :{" "}
                 </Text>
                 <Text fontSize="lg">{original.state}</Text>
               </Flex>
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  Ville :{' '}
+                  Ville :{" "}
                 </Text>
                 <Text fontSize="lg">{original.city}</Text>
               </Flex>
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  Wallet ID :{' '}
+                  Wallet ID :{" "}
                 </Text>
                 <Text fontSize="lg">{original.walletId}</Text>
               </Flex>
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  Card ID :{' '}
+                  Card ID :{" "}
                 </Text>
                 <Text fontSize="lg">{original.cardId}</Text>
               </Flex>

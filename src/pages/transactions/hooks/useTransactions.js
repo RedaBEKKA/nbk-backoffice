@@ -15,39 +15,43 @@ import {
 import { BiShow } from "react-icons/bi";
 
 import useStore from "store";
-import Delete from "../components/Delete";
-export default function useGetCards() {
-  const getLoading = useStore((state) => state.benefits.getLoading);
-  const benefits = useStore((state) => state.benefits.benefits);
-  const getAllBenefits = useStore((state) => state.getAllBenefits);
+export default function useTransactions({ walletId }) {
+  const getLoading = useStore((state) => state.transactions.getLoading);
+  const transactions = useStore((state) => state.transactions.transactions);
+  const getAllTransactions = useStore((state) => state.getAllTransactions);
   useEffect(() => {
-    getAllBenefits();
-  }, [getAllBenefits]);
-  const benefitColumns = useMemo(
+    getAllTransactions({ walletId });
+  }, [getAllTransactions, walletId]);
+  const transactionColumns = useMemo(
     () => [
       {
         Header: "id",
-        accessor: "id",
+        accessor: "transactionId",
       },
       {
-        Header: "userId",
-        accessor: "userId",
+        Header: "currency",
+        accessor: "currency",
       },
-      {
-        Header: "nickName",
-        accessor: "nickName",
-      },
+
       {
         Header: "name",
         accessor: "name",
       },
       {
-        Header: "tag",
-        accessor: "tag",
+        Header: "transactionType",
+        accessor: "transactionType",
       },
       {
-        Header: "iban",
-        accessor: "iban",
+        Header: "amount",
+        accessor: "amount",
+      },
+      {
+        Header: "walletCreditBalance",
+        accessor: "walletCreditBalance",
+      },
+      {
+        Header: "walletDebitBalance",
+        accessor: "walletDebitBalance",
       },
       {
         Header: "createdDate",
@@ -67,7 +71,7 @@ export default function useGetCards() {
     ],
     []
   );
-  return { benefitLoading: getLoading, benefits, benefitColumns };
+  return { transactionLoading: getLoading, transactions, transactionColumns };
 }
 
 function SingleView({ original }) {
@@ -90,10 +94,8 @@ function SingleView({ original }) {
             h="md"
           >
             <Flex py="8" justifyContent="space-between" alignItems="center">
-              <Box>Visualiser Un Beneficiarie</Box>
-              <Flex>
-                <Delete id={original.id}></Delete>
-              </Flex>
+              <Box>Visualiser Un Transaction</Box>
+              <Flex>{/* <Delete id={original.id}></Delete> */}</Flex>
             </Flex>
           </DrawerHeader>
           <DrawerBody>
@@ -108,38 +110,9 @@ function SingleView({ original }) {
                 <Text fontSize="lg" fontWeight="bold">
                   ID :{" "}
                 </Text>
-                <Text fontSize="lg">{original.id}</Text>
+                <Text fontSize="lg">{original.transactionId}</Text>
               </Flex>
-              <Flex justifyContent="space-between" alignItems="center">
-                <Text fontSize="lg" fontWeight="bold">
-                  USER ID :{" "}
-                </Text>
-                <Text fontSize="lg">{original.userId}</Text>
-              </Flex>
-              <Flex justifyContent="space-between" alignItems="center">
-                <Text fontSize="lg" fontWeight="bold">
-                  NICK NAME :{" "}
-                </Text>
-                <Text fontSize="lg">{original.nickName}</Text>
-              </Flex>
-              <Flex justifyContent="space-between" alignItems="center">
-                <Text fontSize="lg" fontWeight="bold">
-                  NAME :{" "}
-                </Text>
-                <Text fontSize="lg">{original.name}</Text>
-              </Flex>
-              <Flex justifyContent="space-between" alignItems="center">
-                <Text fontSize="lg" fontWeight="bold">
-                  TAG :{" "}
-                </Text>
-                <Text fontSize="lg">{original.tag}</Text>
-              </Flex>
-              <Flex justifyContent="space-between" alignItems="center">
-                <Text fontSize="lg" fontWeight="bold">
-                  IBAN :{" "}
-                </Text>
-                <Text fontSize="xs">{original.iban}</Text>
-              </Flex>
+
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
                   CREATED DATE :{" "}
