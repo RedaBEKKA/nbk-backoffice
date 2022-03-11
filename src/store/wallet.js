@@ -6,7 +6,7 @@ const wallet = (set, get) => ({
     getLoading: false,
   },
 
-  getAllWallets: async () => {
+  getAllWallets: async (parameters) => {
     const params = {
       walletTypeId: 9,
       pageCount: 2,
@@ -15,7 +15,7 @@ const wallet = (set, get) => ({
       wallets: { ...get().wallets, getLoading: true },
     });
     try {
-      const res = await Axios.get(`/wallets`, { params });
+      const res = await Axios.get(`/wallets`, { params: parameters || params });
       console.log(res);
       set({
         wallets: {

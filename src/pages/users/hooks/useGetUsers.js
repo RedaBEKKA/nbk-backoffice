@@ -4,16 +4,14 @@ import {
   Button,
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
-  DrawerCloseButton,
   useDisclosure,
   Box,
   Flex,
   SimpleGrid,
-  GridItem,
+  Spinner,
   Heading,
   Text,
   HStack,
@@ -98,6 +96,10 @@ export default function useGetWallets() {
 
   const userColumns = useMemo(
     () => [
+      {
+        Header: "userId ",
+        accessor: "userId",
+      },
       {
         Header: "Nom ",
         accessor: "firstname",
@@ -208,10 +210,23 @@ export default function useGetWallets() {
 
 function SingleView({ original }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const getLoading = useStore((state) => state.wallets.getLoading);
+  const wallets = useStore((state) => state.wallets.wallets);
+  const getAllWallets = useStore((state) => state.getAllWallets);
+
+  const getSingleView = () => {
+    // getAllWallets({ userId: original?.userId, pageCount: 2 });
+    //TODO WALLET USERID IS HARD CODED
+    getAllWallets({ userId: 2151518 });
+    onOpen();
+  };
+
+  console.log("user id", original.userId);
+  console.log("wallets of user", wallets);
 
   return (
     <>
-      <Button onClick={onOpen}>
+      <Button onClick={getSingleView}>
         <BiShow style={{ fontSize: 24 }}></BiShow>
       </Button>
 
@@ -240,6 +255,9 @@ function SingleView({ original }) {
             </Flex>
           </DrawerHeader>
           <DrawerBody>
+            <Heading my="4" size="md">
+              user info :
+            </Heading>
             <SimpleGrid
               border="1px solid black"
               rounded="xl"
@@ -296,6 +314,45 @@ function SingleView({ original }) {
                 <Text fontSize="lg">{original.cardId}</Text>
               </Flex>
             </SimpleGrid>
+            {getLoading ? (
+              <Flex mt="8" justifyContent="center">
+                <Spinner></Spinner>
+              </Flex>
+            ) : (
+              <>
+                <Heading my="4" size="md">
+                  user wallets :
+                </Heading>
+                {!wallets && (
+                  <Flex
+                    w="full"
+                    p="16"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    il n'y a pas de données
+                  </Flex>
+                )}
+                {wallets?.map((wallet) => (
+                  <SimpleGrid
+                    key={wallet.walletId}
+                    border="1px solid black"
+                    rounded="xl"
+                    p="4"
+                    mt="8"
+                    columns={{ base: 1, md: 2 }}
+                    spacing={8}
+                  >
+                    <Flex justifyContent="space-between" alignItems="center">
+                      <Text fontSize="lg" fontWeight="bold">
+                        iban :{" "}
+                      </Text>
+                      <Text fontSize="lg">{wallet.iban}</Text>
+                    </Flex>
+                  </SimpleGrid>
+                ))}
+              </>
+            )}
           </DrawerBody>
         </DrawerContent>
       </Drawer>
