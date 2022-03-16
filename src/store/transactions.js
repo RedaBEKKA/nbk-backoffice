@@ -10,7 +10,7 @@ const transactions = (set, get) => ({
     set({
       transactions: { ...get().transactions, getLoading: true },
     });
-    const params = { pageCount: 2, ...paramaters };
+    const params = { pageCount: 10, ...paramaters };
 
     try {
       const res = await Axios.get(`/transactions`, { params });

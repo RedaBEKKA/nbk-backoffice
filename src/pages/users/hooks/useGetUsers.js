@@ -215,7 +215,7 @@ function SingleView({ original }) {
   const getAllWallets = useStore((state) => state.getAllWallets);
 
   const getSingleView = () => {
-    // getAllWallets({ userId: original?.userId, pageCount: 2 });
+    // getAllWallets({ userId: original?.userId, pageCount: 10 });
     //TODO WALLET USERID IS HARD CODED
     getAllWallets({ userId: 2151518 });
     onOpen();

@@ -126,13 +126,13 @@ export default function UserSingleView({ userId }) {
                   <Text fontSize="lg" fontWeight="bold">
                     Wallet ID :{" "}
                   </Text>
-                  <Text fontSize="lg">{user.walletId}</Text>
+                  <Text fontSize="lg">{user?.walletId}</Text>
                 </Flex>
                 <Flex justifyContent="space-between" alignItems="center">
                   <Text fontSize="lg" fontWeight="bold">
                     Card ID :{" "}
                   </Text>
-                  <Text fontSize="lg">{user.cardId}</Text>
+                  <Text fontSize="lg">{user?.cardId}</Text>
                 </Flex>
               </SimpleGrid>
             )}

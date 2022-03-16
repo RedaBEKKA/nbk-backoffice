@@ -23,6 +23,7 @@ import { BiShow } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import UnblockPin from "../components/UnblockPin";
 import LockUnlock from "../components/LockUnlock";
+import Limit from "../components/limit";
 import useStore from "store";
 import { RiEditBoxFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
@@ -76,6 +77,7 @@ export default function useGetCards() {
               <SingleView original={original}></SingleView>
               <LockUnlock id={original.cardId}></LockUnlock>
               <UnblockPin id={original.cardId}></UnblockPin>
+              <Limit id={original.cardId}></Limit>
             </HStack>
           );
         },

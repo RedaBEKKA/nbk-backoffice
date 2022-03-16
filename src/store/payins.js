@@ -10,7 +10,7 @@ const payins = (set, get) => ({
     set({
       payins: { ...get().payins, getLoading: true },
     });
-    const params = { pageCount: 2 };
+    const params = { pageCount: 10 };
 
     try {
       const res = await Axios.get(`/payins`, { params });

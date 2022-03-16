@@ -9,7 +9,7 @@ const wallet = (set, get) => ({
   getAllWallets: async (parameters) => {
     const params = {
       walletTypeId: 9,
-      pageCount: 2,
+      pageCount: 10,
     };
     set({
       wallets: { ...get().wallets, getLoading: true },

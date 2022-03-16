@@ -12,7 +12,7 @@ const transfer = (set, get) => ({
     });
     const params = {
       ...query,
-      pageCount: 2,
+      pageCount: 10,
     };
     try {
       const res = await Axios.get(`/transfers`, { params });
