@@ -7,6 +7,7 @@ import {
   Stack,
   Box,
   Input,
+  Flex,
 } from "@chakra-ui/react";
 import useFilter from "../hooks/useFilter";
 
@@ -27,21 +28,29 @@ export default function Filter() {
   ];
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Stack direction={{ base: "column", md: "row" }} flexWrap="wrap">
+      <Flex direction={{ base: "column", md: "row" }} flexWrap="wrap">
         {queries.map((query, i) => (
-          <FormControl h="100%" flex={"1 0 21%"} key={i}>
-            <FormLabel m="2">{query}</FormLabel>
+          <FormControl
+            m={{ base: "none", md: "4" }}
+            my={{ base: "2" }}
+            flex={{ base: "none", md: "1 0 21%" }}
+            key={i}
+          >
+            <FormLabel>{query}</FormLabel>
             <Input
-              m="2"
               placeholder={query}
               variant="filled"
               {...register(query)}
             ></Input>
           </FormControl>
         ))}
-      </Stack>
-      <Stack direction={{ base: "column", md: "row" }} flexWrap="wrap">
-        <FormControl h="100%" flex={"1 0 21%"}>
+        {/* </Flex>
+      <Flex direction={{ base: "column", md: "row" }} flexWrap="wrap"> */}
+        <FormControl
+          m={{ base: "none", md: "4" }}
+          my={{ base: "4" }}
+          flex={{ base: "none", md: "1 0 21%" }}
+        >
           <FormLabel>userStatus</FormLabel>
           <Select variant="filled" {...register("userStatus")}>
             <option value={""}>none</option>
@@ -51,7 +60,11 @@ export default function Filter() {
           </Select>
         </FormControl>
 
-        <FormControl flex={"1 0 21%"}>
+        <FormControl
+          m={{ base: "none", md: "4" }}
+          my={{ base: "4" }}
+          flex={{ base: "none", md: "1 0 21%" }}
+        >
           <FormLabel>sortBy</FormLabel>
           <Select variant="filled" {...register("sortBy")}>
             <option value={""}>none</option>
@@ -62,7 +75,11 @@ export default function Filter() {
             <option value={"updatedDateFrom"}>updatedDateFrom</option>
           </Select>
         </FormControl>
-        <FormControl flex={"1 0 21%"}>
+        <FormControl
+          m={{ base: "none", md: "4" }}
+          my={{ base: "4" }}
+          flex={{ base: "none", md: "1 0 21%" }}
+        >
           <FormLabel>sortOrder</FormLabel>
           <Select variant="filled" {...register("sortOrder")}>
             <option value={""}>none</option>
@@ -70,9 +87,14 @@ export default function Filter() {
             <option value={"ASC"}>ASC</option>
           </Select>
         </FormControl>
-      </Stack>
+      </Flex>
 
-      <Box m="4" display="flex" justifyContent="flex-end">
+      <Box
+        my="4"
+        mx={{ base: "none", md: "4" }}
+        display="flex"
+        justifyContent="flex-end"
+      >
         <Button
           _hover={{ bg: "gray.900" }}
           _focus={{ bg: "gray.900" }}
