@@ -86,6 +86,17 @@ const card = (set, get) => ({
       return error.response;
     }
   },
+  cardOptions: async (id, data) => {
+    try {
+      const res = await Axios.put(`/cards/${id}/options`, data);
+      console.log("options", res);
+
+      return res;
+    } catch (error) {
+      console.log(error.response);
+      return error.response;
+    }
+  },
 });
 
 export default card;

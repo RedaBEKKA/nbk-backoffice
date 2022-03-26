@@ -1,32 +1,25 @@
 import { useEffect, useMemo } from "react";
 import {
-  Badge,
   Button,
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
-  DrawerCloseButton,
   useDisclosure,
   Box,
   Flex,
   SimpleGrid,
-  GridItem,
-  Heading,
   Text,
   HStack,
-  Spinner,
 } from "@chakra-ui/react";
 import { BiShow } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import UnblockPin from "../components/UnblockPin";
 import LockUnlock from "../components/LockUnlock";
 import Limit from "../components/limit";
+import Options from "../components/options";
 import useStore from "store";
-import { RiEditBoxFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
 
 import UserSingleView from "../components/UserSingleView";
 
@@ -78,6 +71,7 @@ export default function useGetCards() {
               <LockUnlock id={original.cardId}></LockUnlock>
               <UnblockPin id={original.cardId}></UnblockPin>
               <Limit id={original.cardId}></Limit>
+              <Options id={original.cardId}></Options>
             </HStack>
           );
         },
