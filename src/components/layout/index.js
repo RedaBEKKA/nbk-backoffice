@@ -302,7 +302,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
                   spacing="1px"
                   ml="2"
                 >
-                  <Text fontSize="sm">Salah Beriani</Text>
+                  <Text fontSize="sm">Reda BEKKA</Text>
                   <Text fontSize="xs" color="gray.600">
                     Admin
                   </Text>
