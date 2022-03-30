@@ -18,7 +18,7 @@ import {
 // import makeData from './makeData';
 
 function DashTable({ columns, data }) {
-  console.log("dataaaa", data);
+  // console.log("dataaaa", data);
   const {
     getTableProps,
     getTableBodyProps,

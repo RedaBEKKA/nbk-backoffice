@@ -14,7 +14,7 @@ const benefits = (set, get) => ({
 
     try {
       const res = await Axios.get(`/beneficiaries`, { params });
-      console.log(res);
+      // console.log(res);
       set({
         benefits: {
           ...get().benefits,
@@ -37,7 +37,7 @@ const benefits = (set, get) => ({
     });
     try {
       const res = await Axios.get(`/beneficiaries`, { params });
-      console.log(res);
+      // console.log(res);
       set({
         benefits: {
           ...get().benefits,
@@ -54,7 +54,7 @@ const benefits = (set, get) => ({
   deleteBenefit: async (id) => {
     try {
       const res = await Axios.delete(`/beneficiaries/${id}`);
-      console.log(res);
+      // console.log(res);
       return res;
     } catch (error) {
       console.log(error.response);

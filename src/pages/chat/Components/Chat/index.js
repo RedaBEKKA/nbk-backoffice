@@ -8,6 +8,8 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  InputRightAddon,
+  InputRightElement,
   Skeleton,
   Text,
   WrapItem,
@@ -18,7 +20,10 @@ import { Icon } from "@chakra-ui/react";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { BiSearchAlt2 } from "react-icons/bi";
 import Profile from "./Profile.js";
-
+import { BiSend } from "react-icons/bi";
+import HeadChat from "./headChat/index.js";
+import Receiver from "./receiver/index.js";
+import Sender from "./Sender/index.js";
 function BackGroundMessage() {
   return (
     <Box
@@ -42,8 +47,8 @@ function BackGroundMessage() {
               <WrapItem>
                 <Avatar
                   cursor="pointer"
-                  name="Dan Abrahmov"
-                  src="https://bit.ly/dan-abramov"
+                  name="Oan Abrahmov"
+                  src="https://bit.ly/tioluwani-kolawole"
                   size="sm"
                 />
               </WrapItem>
@@ -55,10 +60,10 @@ function BackGroundMessage() {
             </Flex>
             <Box mx="5" mt="4">
               <InputGroup>
-                <InputLeftElement
+                {/* <InputLeftElement
                   pointerEvents="none"
                   children={<Icon as={BiSearchAlt2} color="gray.300" />}
-                />
+                /> */}
                 <Input
                   type="tel"
                   placeholder="search or start new chat"
@@ -73,113 +78,59 @@ function BackGroundMessage() {
             <Heading as="h2" px={"5"} size="md" color="#2DDCB1">
               Chats
             </Heading>
-            <Profile title="Ryan Florence" url="https://bit.ly/ryan-florence" />
             <Profile
-              title="Prosper Otemuyiwa"
-              url="https://bit.ly/prosper-baba"
+              title="Ryan Florence"
+              url="https://bit.ly/tioluwani-kolawole"
             />
             <Profile
-              title="Christian Nwamba"
-              url="https://bit.ly/sage-adebayo"
+              title="arosper Otemuyiwa"
+              url="https://bit.ly/tioluwani-kolawole"
+            />
+            <Profile
+              title="Bhristian Nwamba"
+              url="https://bit.ly/tioluwani-kolawole"
             />
           </Box>
         </Box>
         <Box h="83vh" bg="#888" w="100%">
-          <Flex align={"center"} bg="#252F3E" h="4rem" px={5}>
-            <WrapItem>
-              <Avatar
-                cursor="pointer"
-                name="Dan Abrahmov"
-                src="https://bit.ly/dan-abramov"
-                size="md"
-              />
-            </WrapItem>
+          <HeadChat />
 
-            <Heading as="h2" px={"5"} size="md" color="#fff">
-              Dan Abrahmov
-            </Heading>
-          </Flex>
           <Box
             w="100%"
             h="100%"
             bgGradient={[
-              "linear(to-tr, green.100, yellow.400)",
+              "linear(to-tr, gray.100, gray.400)",
               "linear(to-t, blue.200, teal.500)",
-              "linear(to-b, green.100, green.100)",
+              "linear(to-b, gray.100, gray.100)",
             ]}
+            pos={"relative"}
           >
-            <Flex direction={"row"} align='flex-end'  >
-              <Avatar
-                m="5"
-                cursor="pointer"
-                name="Dan Abrahmov"
-                src="https://bit.ly/sage-adebayo"
-                size="md"
-              />
-                  
-              <Box   >
-                <Flex
-                  bg="#eee"
-                  boxShadow={"md"}
-                  borderRadius={20}
-                  px={3}
-                  h="40px"
-                  my="3"
-                  justifyContent={"center"}
-                  direction={"column"}
-                  w="65px"
-                >
-                  <Text>Hello</Text>
-                </Flex>
+            <Receiver />
+            <Sender />
 
-                <Flex
-                  bg="#eee"
-                  boxShadow={"md"}
-                  borderRadius={20}
-                  px={3}
-                  h="40px"
-                  my="3"
-                  justifyContent={"center"}
-                  direction={"column"}
-                  w="175px"
-
-                >
-                  <Text>lorem ipsum lorem</Text>
-                </Flex>
-                <Flex
-                  bg="#eee"
-                  boxShadow={"md"}
-                  borderRadius={20}
-                  px={3}
-                  h="40px"
-                  my="3"
-                  justifyContent={"center"}
-                  direction={"column"}
-                >
-                  <Text>lorem ipsum lorem lorem ipsum loremlorem ipsum lorem</Text>
-                </Flex>
-       
-              </Box>
-
+            <Flex
+              bg={"#fff"}
+              m="5"
+              pos={"absolute"}
+              bottom="5rem"
+              w="95%"
+              borderRadius={25}
+            >
+              <InputGroup>
+                <Input placeholder="send a message" borderRadius={25} />
+                <InputRightElement
+                  pointerEvents="stroke"
+                  children={
+                    <Icon
+                      color="gray.300"
+                      as={BiSend}
+                      cursor="pointer"
+                      boxSize="30px"
+                    />
+                  }
+                />
+              </InputGroup>
             </Flex>
-            
-                  
-            <Flex w={"100%"}  justifyContent={"flex-end"}  pr='4' >
-                <Flex
-                  bg="#999"
-                  boxShadow={"md"}
-                  borderRadius={20}
-                  px={3}
-                  h="40px"
-                  my="3"
-                  justifyContent={"center"}
-                  direction={"column"}
-                  w="175px"
-
-                >
-                  <Text color={"#fff"}>lorem ipsum lorem</Text>
-                </Flex>
-                </Flex>
           </Box>
         </Box>
       </Flex>
@@ -188,3 +139,4 @@ function BackGroundMessage() {
 }
 
 export default BackGroundMessage;
+// <Icon as={BiSend} boxSize='30px' />

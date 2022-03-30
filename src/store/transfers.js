@@ -16,7 +16,7 @@ const transfer = (set, get) => ({
     };
     try {
       const res = await Axios.get(`/transfers`, { params });
-      console.log(res);
+      // console.log(res);
       set({
         transfers: {
           ...get().transfers,
@@ -39,7 +39,7 @@ const transfer = (set, get) => ({
     });
     try {
       const res = await Axios.get(`/transfers`, { params });
-      console.log(res);
+      // console.log(res);
       set({
         transfers: {
           ...get().transfers,

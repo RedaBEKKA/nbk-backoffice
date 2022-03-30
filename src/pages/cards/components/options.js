@@ -22,7 +22,7 @@ export default function Options({ id }) {
   const { register, handleSubmit, isSubmitting, onSubmit, errors } =
     useOptions(id);
   const key = "limitPaymentAll";
-  console.log(errors[key]);
+  // console.log(errors[key]);
   return (
     <>
       <Button onClick={onOpen} size="sm" colorScheme="orange">

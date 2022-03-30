@@ -13,7 +13,7 @@ function Profile({ title, url }) {
       <Flex direction={"row"} justify={"space-between"} py="3" w="100%">
         <Flex px={"5"} direction={"row"} align="center">
           <WrapItem>
-            <Avatar cursor="pointer" name="Dan Abrahmov" src={url} size="sm" />
+            <Avatar cursor="pointer" name={title} src={url} size="sm" />
           </WrapItem>
           <Box px={3}>
             <Heading fontSize="sm">{title}</Heading>

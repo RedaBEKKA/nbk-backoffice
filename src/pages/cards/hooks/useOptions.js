@@ -47,7 +47,7 @@ export default function useOptions(id) {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
-    console.log(id, data);
+    // console.log(id, data);
     for (const key in data) {
       if (data[key] === "") {
         delete data[key];

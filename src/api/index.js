@@ -11,7 +11,7 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(function (config) {
-  console.log(useStore.getState().auth);
+  // console.log(useStore.getState().auth);
   let auth = useStore.getState().auth;
   let token = auth?.loginInfo?.AccessToken || auth?.appInfo?.AccessToken;
   config.headers.Authorization = `Bearer ${token}`;

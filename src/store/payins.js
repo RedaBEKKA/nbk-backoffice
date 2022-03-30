@@ -14,7 +14,7 @@ const payins = (set, get) => ({
 
     try {
       const res = await Axios.get(`/payins`, { params });
-      console.log(res);
+      // console.log(res);
       set({
         payins: {
           ...get().payins,
@@ -37,7 +37,7 @@ const payins = (set, get) => ({
     });
     try {
       const res = await Axios.get(`/payins`, { params });
-      console.log(res);
+      // console.log(res);
       set({
         payins: {
           ...get().payins,
@@ -54,7 +54,7 @@ const payins = (set, get) => ({
   deletePayin: async (id) => {
     try {
       const res = await Axios.delete(`/payins/${id}`);
-      console.log(res);
+      // console.log(res);
       return res;
     } catch (error) {
       console.log(error.response);
