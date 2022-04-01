@@ -40,7 +40,7 @@ function Profile({ title, url, date }) {
             {loading ? (
               <>
                 <Skeleton m="2" w="100px" height="20px" />
-                <Skeleton m="2" w="200px" height="10px" />
+                <Skeleton m="2" w="100px" height="10px" />
               </>
             ) : (
               <>

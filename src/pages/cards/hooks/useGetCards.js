@@ -37,7 +37,7 @@ export default function useGetCards() {
   useEffect(() => {
     getAllCards();
   }, [getAllCards]);
-  
+
   const cardColumns = useMemo(
     () => [
       {
@@ -75,35 +75,32 @@ export default function useGetCards() {
         Cell: ({ row: { original } }) => {
           // console.log('original', original)
           return (
-            // <HStack>
-            //   <SingleView original={original}></SingleView>
-            //   <LockUnlock id={original.cardId}></LockUnlock>
-            //   <UnblockPin id={original.cardId}></UnblockPin>
-            //   <Limit id={original.cardId}></Limit>
-            //   <Options id={original.cardId}></Options>
-            // </HStack>
-            <Menu>
-              <MenuButton as={Button}>
-                <BsThreeDotsVertical></BsThreeDotsVertical>
-              </MenuButton>
-              <MenuList>
-                <MenuItem>
-                  <Activate id={original.cardId}></Activate>
-                </MenuItem>
-                <MenuItem>
-                  <LockUnlock id={original.cardId}></LockUnlock>
-                </MenuItem>
-                <MenuItem>
-                  <UnblockPin id={original.cardId}></UnblockPin>
-                </MenuItem>
-                <MenuItem>
-                  <Options id={original.cardId}></Options>
-                </MenuItem>
-                <MenuItem>
-                  <Limit id={original.cardId}></Limit>
-                </MenuItem>
-              </MenuList>
-            </Menu>
+            <HStack>
+              <SingleView original={original}></SingleView>
+
+              <Menu>
+                <MenuButton size="sm" as={Button}>
+                  <BsThreeDotsVertical></BsThreeDotsVertical>
+                </MenuButton>
+                <MenuList>
+                  <MenuItem>
+                    <Activate id={original.cardId}></Activate>
+                  </MenuItem>
+                  <MenuItem>
+                    <LockUnlock id={original.cardId}></LockUnlock>
+                  </MenuItem>
+                  <MenuItem>
+                    <UnblockPin id={original.cardId}></UnblockPin>
+                  </MenuItem>
+                  <MenuItem>
+                    <Options id={original.cardId}></Options>
+                  </MenuItem>
+                  <MenuItem>
+                    <Limit id={original.cardId}></Limit>
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            </HStack>
           );
         },
       },
