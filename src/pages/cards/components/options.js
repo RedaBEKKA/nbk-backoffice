@@ -13,6 +13,7 @@ import {
   FormLabel,
   Input,
   FormErrorMessage,
+  Text,
 } from "@chakra-ui/react";
 import useOptions from "../hooks/useOptions";
 
@@ -25,9 +26,12 @@ export default function Options({ id }) {
   console.log(errors[key]);
   return (
     <>
-      <Button onClick={onOpen} size="sm" colorScheme="orange">
+      {/* <Button onClick={onOpen} size="sm" colorScheme="orange">
         options
-      </Button>
+      </Button> */}
+      <Text w="100%" onClick={onOpen}>
+        Options
+      </Text>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

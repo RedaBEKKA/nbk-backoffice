@@ -10,7 +10,7 @@ const benefits = (set, get) => ({
     set({
       benefits: { ...get().benefits, getLoading: true },
     });
-    const params = { pageCount: 10 };
+    const params = { pageCount: 2 };
 
     try {
       const res = await Axios.get(`/beneficiaries`, { params });

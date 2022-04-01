@@ -12,13 +12,19 @@ import {
   SimpleGrid,
   Text,
   HStack,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from "@chakra-ui/react";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import { BiShow } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import UnblockPin from "../components/UnblockPin";
 import LockUnlock from "../components/LockUnlock";
 import Limit from "../components/limit";
 import Options from "../components/options";
+import Activate from "../components/Activate";
 import useStore from "store";
 
 import UserSingleView from "../components/UserSingleView";
@@ -66,13 +72,35 @@ export default function useGetCards() {
         accessor: "viewww",
         Cell: ({ row: { original } }) => {
           return (
-            <HStack>
-              <SingleView original={original}></SingleView>
-              <LockUnlock id={original.cardId}></LockUnlock>
-              <UnblockPin id={original.cardId}></UnblockPin>
-              <Limit id={original.cardId}></Limit>
-              <Options id={original.cardId}></Options>
-            </HStack>
+            // <HStack>
+            //   <SingleView original={original}></SingleView>
+            //   <LockUnlock id={original.cardId}></LockUnlock>
+            //   <UnblockPin id={original.cardId}></UnblockPin>
+            //   <Limit id={original.cardId}></Limit>
+            //   <Options id={original.cardId}></Options>
+            // </HStack>
+            <Menu>
+              <MenuButton as={Button}>
+                <BsThreeDotsVertical></BsThreeDotsVertical>
+              </MenuButton>
+              <MenuList>
+                <MenuItem>
+                  <Activate id={original.cardId}></Activate>
+                </MenuItem>
+                <MenuItem>
+                  <LockUnlock id={original.cardId}></LockUnlock>
+                </MenuItem>
+                <MenuItem>
+                  <UnblockPin id={original.cardId}></UnblockPin>
+                </MenuItem>
+                <MenuItem>
+                  <Options id={original.cardId}></Options>
+                </MenuItem>
+                <MenuItem>
+                  <Limit id={original.cardId}></Limit>
+                </MenuItem>
+              </MenuList>
+            </Menu>
           );
         },
       },

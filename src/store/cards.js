@@ -10,7 +10,7 @@ const card = (set, get) => ({
     set({
       cards: { ...get().cards, getLoading: true },
     });
-    const params = { pageCount: 10 };
+    const params = { pageCount: 2 };
 
     try {
       const res = await Axios.get(`/cards`, { params });
@@ -90,6 +90,17 @@ const card = (set, get) => ({
     try {
       const res = await Axios.put(`/cards/${id}/options`, data);
       console.log("options", res);
+
+      return res;
+    } catch (error) {
+      console.log(error.response);
+      return error.response;
+    }
+  },
+  cardActivate: async (id) => {
+    try {
+      const res = await Axios.put(`/cards/${id}/activate`);
+      console.log("activate", res);
 
       return res;
     } catch (error) {

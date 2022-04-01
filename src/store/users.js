@@ -15,7 +15,7 @@ const users = (set, get) => ({
     set({
       users: { ...get().users, getLoading: true },
     });
-    const params = { pageCount: 10 };
+    const params = { pageCount: 2 };
     try {
       const res = await Axios.get(`/users`, { params });
       console.log(res);
