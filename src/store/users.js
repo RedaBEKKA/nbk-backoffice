@@ -83,7 +83,7 @@ const users = (set, get) => ({
     });
     try {
       const res = await Axios.get(`/users/${id}`);
-      console.log("res", res);
+      // console.log("res", res);
 
       set({
         users: {

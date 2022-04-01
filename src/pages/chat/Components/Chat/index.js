@@ -1,30 +1,28 @@
 import {
   Avatar,
   Box,
-  Center,
-  Container,
   Flex,
   Heading,
   Input,
   InputGroup,
-  InputLeftElement,
-  InputRightAddon,
   InputRightElement,
-  Skeleton,
-  Text,
   WrapItem,
+  Spinner,
+  Center,
 } from "@chakra-ui/react";
-import LoadingMessages from "components/LoadingMessages";
 import React from "react";
 import { Icon } from "@chakra-ui/react";
 import { BiDotsVerticalRounded } from "react-icons/bi";
-import { BiSearchAlt2 } from "react-icons/bi";
 import Profile from "./Profile.js";
 import { BiSend } from "react-icons/bi";
 import HeadChat from "./headChat/index.js";
 import Receiver from "./receiver/index.js";
 import Sender from "./Sender/index.js";
+import useGetUsers from "../../Hooks/useGetUsers";
+import useGetChannels from "../../Hooks/useGetChannels";
 function BackGroundMessage() {
+  // const {} = useGetUsers();
+  const { loading, channels } = useGetChannels();
   return (
     <Box
       bg="#333"
@@ -74,22 +72,26 @@ function BackGroundMessage() {
             </Box>
           </Box>
 
-          <Box pt="5" bg="#fff">
+          <Box overflowY="auto" h="full" pb="8" pt="5" bg="#fff">
             <Heading as="h2" px={"5"} size="md" color="#2DDCB1">
               Chats
             </Heading>
-            <Profile
-              title="Ryan Florence"
-              url="https://bit.ly/tioluwani-kolawole"
-            />
-            <Profile
-              title="arosper Otemuyiwa"
-              url="https://bit.ly/tioluwani-kolawole"
-            />
-            <Profile
-              title="Bhristian Nwamba"
-              url="https://bit.ly/tioluwani-kolawole"
-            />
+            {loading ? (
+              <Center p="8">
+                <Spinner color="#2DDCB1" />
+              </Center>
+            ) : (
+              <>
+                {channels.map((channel) => (
+                  <Profile
+                    date={channel.createdAt}
+                    key={channel.channelId}
+                    title={channel.userId}
+                    url="https://bit.ly/tioluwani-kolawole"
+                  />
+                ))}
+              </>
+            )}
           </Box>
         </Box>
         <Box h="83vh" bg="#888" w="100%">

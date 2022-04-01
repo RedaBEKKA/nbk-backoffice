@@ -96,9 +96,9 @@ const SidebarContent = ({ onClose, ...rest }) => {
       transition="3s ease"
       bg="#2DDCB1"
       borderRight="1px"
-      overflowY="auto"
       borderRightColor={useColorModeValue("gray.200", "gray.700")}
       w={{ base: "full", md: "350px" }}
+      overflowY="auto"
       pos="fixed"
       h="full"
       color="white"
