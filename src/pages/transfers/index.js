@@ -10,10 +10,10 @@ export default function Transfers() {
   let search;
   let location = useLocation();
   const queryParams = new URLSearchParams(location?.search);
-  console.log(location);
-  console.log(queryParams);
+  // console.log(location);
+  // console.log(queryParams);
   for (const [key, value] of queryParams) {
-    console.log({ [key]: value });
+    // console.log({ [key]: value });
     search = { [key]: value };
   }
 

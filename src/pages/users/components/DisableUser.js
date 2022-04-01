@@ -21,7 +21,7 @@ export default function AlertDialogExample({ userName }) {
   const toast = useToast();
 
   const disable = async () => {
-    console.log('diable');
+    // console.log('diable');
     const res = await disableUser({ userName });
     if (res?.data?.status === 'success') {
       toast({

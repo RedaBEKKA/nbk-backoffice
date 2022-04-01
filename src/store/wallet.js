@@ -16,7 +16,7 @@ const wallet = (set, get) => ({
     });
     try {
       const res = await Axios.get(`/wallets`, { params: parameters || params });
-      console.log(res);
+      // console.log(res);
       set({
         wallets: {
           ...get().wallets,
@@ -40,7 +40,7 @@ const wallet = (set, get) => ({
     });
     try {
       const res = await Axios.get(`/wallets`, { params });
-      console.log(res);
+      // console.log(res);
       set({
         wallets: {
           ...get().wallets,

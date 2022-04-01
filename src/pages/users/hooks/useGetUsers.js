@@ -41,11 +41,11 @@ export default function useGetWallets() {
   const kycreviewLoading = useStore((state) => state.users.kycreviewLoading);
   const user = useStore((state) => state.users.user);
 
-  console.log("kycrloading", kycreviewLoading);
+  // console.log("kycrloading", kycreviewLoading);
 
   let location = useLocation();
   const queryParams = new URLSearchParams(location?.search);
-  console.log(queryParams.get("id"));
+  // console.log(queryParams.get("id"));
   let userId = queryParams.get("id");
   useEffect(() => {
     userId ? getUser(userId) : getAllUsers();

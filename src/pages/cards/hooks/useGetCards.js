@@ -33,9 +33,11 @@ export default function useGetCards() {
   const getLoading = useStore((state) => state.cards.getLoading);
   const cards = useStore((state) => state.cards.cards);
   const getAllCards = useStore((state) => state.getAllCards);
+
   useEffect(() => {
     getAllCards();
   }, [getAllCards]);
+  
   const cardColumns = useMemo(
     () => [
       {
@@ -71,6 +73,7 @@ export default function useGetCards() {
       {
         accessor: "viewww",
         Cell: ({ row: { original } }) => {
+          // console.log('original', original)
           return (
             // <HStack>
             //   <SingleView original={original}></SingleView>
@@ -188,7 +191,7 @@ function SingleView({ original }) {
               </Flex>
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize="lg" fontWeight="bold">
-                  PERMS GROUP :{" "}
+                  PERMS GROUP:{" "}
                 </Text>
                 <Text fontSize="lg">{original.permsGroup}</Text>
               </Flex>

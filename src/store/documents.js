@@ -15,7 +15,7 @@ const document = (set, get) => ({
 
     try {
       const res = await Axios.get(`/documents`, { params });
-      console.log(res);
+      // console.log(res);
       set({
         documents: {
           ...get().documents,
@@ -38,7 +38,7 @@ const document = (set, get) => ({
     });
     try {
       const res = await Axios.get(`/documents`, { params });
-      console.log(res);
+      // console.log(res);
       set({
         documents: {
           ...get().documents,

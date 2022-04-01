@@ -96,9 +96,9 @@ const SidebarContent = ({ onClose, ...rest }) => {
       transition="3s ease"
       bg="#2DDCB1"
       borderRight="1px"
-      overflowY="auto"
       borderRightColor={useColorModeValue("gray.200", "gray.700")}
       w={{ base: "full", md: "350px" }}
+      overflowY="auto"
       pos="fixed"
       h="full"
       color="white"
@@ -154,6 +154,8 @@ const NavItem = ({ icon, children, path, menu, nested, ...rest }) => {
                 borderRadius="lg"
                 role="group"
                 cursor="pointer"
+                fontWeight= "bold"
+
                 _hover={{
                   // bg: "linear-gradient(to right, #56ab2f, #a8e063)",
                   bg: "#eeeeee",
@@ -211,6 +213,8 @@ const NavItem = ({ icon, children, path, menu, nested, ...rest }) => {
             borderRadius="lg"
             role="group"
             cursor="pointer"
+            fontWeight= "bold"
+
             _hover={{
               // bg: "linear-gradient(to right, #56ab2f, #a8e063)",
               bg: "#eeeeee",
@@ -302,7 +306,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
                   spacing="1px"
                   ml="2"
                 >
-                  <Text fontSize="sm">Salah Beriani</Text>
+                  <Text fontSize="sm">Reda BEKKA</Text>
                   <Text fontSize="xs" color="gray.600">
                     Admin
                   </Text>

@@ -14,7 +14,7 @@ const transactions = (set, get) => ({
 
     try {
       const res = await Axios.get(`/transactions`, { params });
-      console.log(res);
+      // console.log(res);
       set({
         transactions: {
           ...get().transactions,
@@ -37,7 +37,7 @@ const transactions = (set, get) => ({
     });
     try {
       const res = await Axios.get(`/transactions`, { params });
-      console.log(res);
+      // console.log(res);
       set({
         transactions: {
           ...get().transactions,

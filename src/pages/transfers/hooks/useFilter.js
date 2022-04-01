@@ -11,7 +11,7 @@ export default function useFilter(search) {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     let payload = { ...data, ...search };
     for (const key in payload) {
       if (payload[key] === '') {

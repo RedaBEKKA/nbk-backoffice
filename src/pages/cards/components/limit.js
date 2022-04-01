@@ -36,7 +36,7 @@ export default function Limit({ id }) {
   const { register, handleSubmit, isSubmitting, onSubmit, errors } =
     useLimit(id);
   const key = "limitPaymentAll";
-  console.log(errors[key]);
+  // console.log(errors[key]);
   return (
     <>
       <Text w="100%" onClick={onOpen}>
