@@ -82,7 +82,7 @@ function BackGroundMessage() {
               </Center>
             ) : (
               <>
-                {channels.map((channel) => (
+                {channels && channels.length>0 && channels.map((channel) => (
                   <Profile
                     date={channel.createdAt}
                     key={channel.channelId}
