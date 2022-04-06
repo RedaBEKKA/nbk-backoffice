@@ -18,10 +18,8 @@ import { BiSend } from "react-icons/bi";
 import HeadChat from "./headChat/index.js";
 import Receiver from "./receiver/index.js";
 import Sender from "./Sender/index.js";
-import useGetUsers from "../../Hooks/useGetUsers";
 import useGetChannels from "../../Hooks/useGetChannels";
 function BackGroundMessage() {
-  // const {} = useGetUsers();
   const { loading, channels } = useGetChannels();
   return (
     <Box
@@ -82,14 +80,17 @@ function BackGroundMessage() {
               </Center>
             ) : (
               <>
-                {channels && channels.length>0 && channels.map((channel) => (
-                  <Profile
-                    date={channel.createdAt}
-                    key={channel.channelId}
-                    title={channel.userId}
-                    url="https://bit.ly/tioluwani-kolawole"
-                  />
-                ))}
+                {channels &&
+                  channels.length > 0 &&
+                  channels.map((channel) => (
+                    <Profile
+                      date={channel.createdAt}
+                      key={channel.channelId}
+                      title={channel.userId}
+                      url="https://bit.ly/tioluwani-kolawole"
+                      channel={channel}
+                    />
+                  ))}
               </>
             )}
           </Box>
