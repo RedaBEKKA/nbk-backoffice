@@ -11,7 +11,7 @@ export default function useFilter() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     for (const key in data) {
       if (data[key] === '') {
         delete data[key];

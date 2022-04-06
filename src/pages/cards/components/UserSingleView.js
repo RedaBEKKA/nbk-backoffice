@@ -40,9 +40,9 @@ export default function UserSingleView({ userId }) {
     onOpen();
   };
 
-  console.log("userrr", user);
-  console.log("userrr", userId);
-  console.log("userrr", getSingleLoading);
+  // console.log("userrr", user);
+  // console.log("userrr", userId);
+  // console.log("userrr", getSingleLoading);
 
   return (
     <>

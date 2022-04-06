@@ -11,19 +11,20 @@ import {
   Text,
 } from "@chakra-ui/react";
 import useStore from "store";
+import ErrorHandler from "components/ErrorHandler";
 
-export default function UnblockPin({ id }) {
+export default function Activate({ id }) {
   const [isOpen, setIsOpen] = React.useState(false);
   const onClose = () => setIsOpen(false);
   const cancelRef = React.useRef();
-  const cardUnblockPin = useStore((state) => state.cardUnblockPin);
+  const cardActivate = useStore((state) => state.cardActivate);
   const getAllCards = useStore((state) => state.getAllCards);
   const toast = useToast();
   const [loading, setLoading] = useState(false);
 
   const submit = async () => {
     setLoading(true);
-    const res = await cardUnblockPin(id);
+    const res = await cardActivate(id);
     if (res.data.status === "success") {
       setLoading(false);
       await getAllCards();
@@ -36,7 +37,7 @@ export default function UnblockPin({ id }) {
     } else {
       setLoading(false);
       toast({
-        description: "quelque chose s'est mal passé",
+        description: <ErrorHandler res={res}></ErrorHandler>,
         status: "error",
         duration: 9000,
         isClosable: true,
@@ -50,7 +51,7 @@ export default function UnblockPin({ id }) {
         unblockPin
       </Button> */}
       <Text w="100%" onClick={() => setIsOpen(true)}>
-        Unblock Pin
+        Activate Card
       </Text>
 
       <AlertDialog
@@ -61,11 +62,11 @@ export default function UnblockPin({ id }) {
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Unblock Pin
+              Activate Card
             </AlertDialogHeader>
 
             <AlertDialogBody>
-              Are you sure? You want to unblock the pin?
+              Are you sure? You want to activate the card?
             </AlertDialogBody>
 
             <AlertDialogFooter>
@@ -79,7 +80,7 @@ export default function UnblockPin({ id }) {
                 onClick={submit}
                 ml={3}
               >
-                Unblock
+                Activate
               </Button>
             </AlertDialogFooter>
           </AlertDialogContent>

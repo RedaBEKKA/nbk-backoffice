@@ -14,6 +14,7 @@ import {
   Select,
   Input,
   FormErrorMessage,
+  Text,
 } from "@chakra-ui/react";
 import useLimit from "../hooks/useLimit";
 
@@ -35,12 +36,15 @@ export default function Limit({ id }) {
   const { register, handleSubmit, isSubmitting, onSubmit, errors } =
     useLimit(id);
   const key = "limitPaymentAll";
-  console.log(errors[key]);
+  // console.log(errors[key]);
   return (
     <>
-      <Button onClick={onOpen} size="sm" colorScheme="orange">
+      <Text w="100%" onClick={onOpen}>
+        Limit
+      </Text>
+      {/* <Button onClick={onOpen} size="sm" colorScheme="orange">
         limit
-      </Button>
+      </Button> */}
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

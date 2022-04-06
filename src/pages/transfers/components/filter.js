@@ -7,11 +7,11 @@ import useFilter from '../hooks/useFilter';
 export default function Filter() {
   let search;
   let location = useLocation();
-  console.log(location);
+  // console.log(location);
   const queryParams = new URLSearchParams(location?.search);
-  console.log(queryParams);
+  // console.log(queryParams);
   for (const [key, value] of queryParams) {
-    console.log({ [key]: value });
+    // console.log({ [key]: value });
     search = { [key]: value };
   }
   const { register, handleSubmit, isSubmitting, onSubmit } = useFilter(search);

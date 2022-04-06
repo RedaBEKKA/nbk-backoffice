@@ -21,6 +21,7 @@ import Documents from 'pages/documents';
 import Benifit from 'pages/benefit';
 import Payins from 'pages/operations/payins';
 import FourOfour from 'pages/404';
+import Chat from 'pages/chat';
 
 const routes = [
   {
@@ -174,6 +175,15 @@ const routes = [
     protected: false,
     menu: false,
     sidbarlist: false,
+  },
+  {
+    label: 'Chat',
+    path: '/chat',
+    icon: IoCardSharp,
+    component: Chat,
+    protected: true,
+    menu: false,
+    sidbarlist: true,
   },
 ];
 

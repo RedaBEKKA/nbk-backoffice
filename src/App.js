@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
-import { Routes, Route, useLocation, useNavigate, Outlet, Navigate } from 'react-router-dom';
-import { Flex, Spinner } from '@chakra-ui/react';
+import React, { useEffect, useCallback } from "react";
+import { Routes, Route, useLocation, Outlet, Navigate } from "react-router-dom";
+import { Flex, Spinner } from "@chakra-ui/react";
+import jwt_decode from "jwt-decode";
 
-import routes from 'routes';
-import useStore from 'store';
+import routes from "routes";
+import useStore from "store";
 
 const PrivateRoute = () => {
   const isLoggedIn = useStore((state) => state.auth.isLoggedIn);
@@ -16,12 +17,30 @@ const UnprotectedRoute = () => {
   return !isLoggedIn ? <Outlet /> : <Navigate to="/dashboard" />;
 };
 export default function App() {
-  //   const location = useLocation();
   const getAppToken = useStore((state) => state.getAppToken);
   const appLoading = useStore((state) => state.auth.appLoading);
-  //   useEffect(() => {
-  //     console.log(location);
-  //   }, [location]);
+  const token = useStore((state) => state.auth.loginInfo?.AccessToken);
+  const logout = useStore((state) => state.logout);
+  let location = useLocation();
+
+  const checkToken = useCallback(() => {
+    if (token) {
+      let decodedToken = jwt_decode(token);
+      let currentDate = new Date();
+
+      if (decodedToken.exp * 1000 < currentDate.getTime()) {
+        console.log("Token expired.");
+        logout();
+      } else {
+        console.log("Valid token");
+      }
+    }
+  }, [logout, token]);
+
+  useEffect(() => {
+    checkToken();
+    console.log(location);
+  }, [checkToken, location]);
   useEffect(() => {
     getAppToken();
   }, [getAppToken]);
@@ -42,16 +61,38 @@ export default function App() {
                     path={nestedRoute.path}
                     element={<PrivateRoute />}
                   >
-                    <Route exact path={nestedRoute.path} element={<nestedRoute.component />} />
+                    <Route
+                      exact
+                      path={nestedRoute.path}
+                      element={<nestedRoute.component />}
+                    />
                   </Route>
                 ))
               ) : route.protected ? (
-                <Route key={route.label} exact path={route.path} element={<PrivateRoute />}>
-                  <Route exact path={route.path} element={<route.component />} />
+                <Route
+                  key={route.label}
+                  exact
+                  path={route.path}
+                  element={<PrivateRoute />}
+                >
+                  <Route
+                    exact
+                    path={route.path}
+                    element={<route.component />}
+                  />
                 </Route>
               ) : (
-                <Route key={route.label} exact path={route.path} element={<UnprotectedRoute />}>
-                  <Route exact path={route.path} element={<route.component />} />
+                <Route
+                  key={route.label}
+                  exact
+                  path={route.path}
+                  element={<UnprotectedRoute />}
+                >
+                  <Route
+                    exact
+                    path={route.path}
+                    element={<route.component />}
+                  />
                 </Route>
               );
             })}

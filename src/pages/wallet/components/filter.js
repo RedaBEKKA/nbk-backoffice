@@ -1,12 +1,30 @@
 import React from 'react';
-import { Select, FormControl, FormLabel, Button, Stack, Box } from '@chakra-ui/react';
+import { Select, FormControl, FormLabel, Button, Stack, Box, Input } from '@chakra-ui/react';
 import useFilter from '../hooks/useFilter';
 
 export default function Filter() {
   const { register, handleSubmit, isSubmitting, onSubmit } = useFilter();
+  const queries = [
+    "userId",
+  ];
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack direction={{ base: 'column', md: 'row' }}>
+      {queries.map((query, i) => (
+          <FormControl
+            m={{ base: "none", md: "" }}
+            my={{ base: "" }}
+            flex={{ base: "none", md: "1 0 21%" }}
+            key={i}
+          >
+            <FormLabel>{query}</FormLabel>
+            <Input
+              placeholder={query}
+              variant="filled"
+              {...register(query)}
+            ></Input>
+          </FormControl>
+        ))}
         <FormControl>
           <FormLabel>walletStatus</FormLabel>
           <Select variant="filled" {...register('walletStatus', { required: true })}>

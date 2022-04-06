@@ -41,11 +41,11 @@ export default function useGetWallets() {
   const kycreviewLoading = useStore((state) => state.users.kycreviewLoading);
   const user = useStore((state) => state.users.user);
 
-  console.log("kycrloading", kycreviewLoading);
+  // console.log("kycrloading", kycreviewLoading);
 
   let location = useLocation();
   const queryParams = new URLSearchParams(location?.search);
-  console.log(queryParams.get("id"));
+  // console.log(queryParams.get("id"));
   let userId = queryParams.get("id");
   useEffect(() => {
     userId ? getUser(userId) : getAllUsers();
@@ -215,7 +215,7 @@ function SingleView({ original }) {
   const getAllWallets = useStore((state) => state.getAllWallets);
 
   const getSingleView = () => {
-    // getAllWallets({ userId: original?.userId, pageCount: 10 });
+    // getAllWallets({ userId: original?.userId, pageCount: 2 });
     //TODO WALLET USERID IS HARD CODED
     getAllWallets({ userId: 2151518 });
     onOpen();

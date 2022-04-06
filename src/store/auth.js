@@ -28,7 +28,7 @@ const auth = (set, get) => ({
       set({
         auth: { ...get().auth, appInfo: res.data.data, appLoading: false },
       });
-      console.log(res);
+      // console.log(res);
       return res;
     } catch (error) {
       console.log(error.response);
@@ -41,7 +41,7 @@ const auth = (set, get) => ({
         userName: email,
         userPassword: password,
       });
-      console.log(res);
+      // console.log(res);
       set({
         auth: { ...get().auth, loginInfo: res.data.data, isLoggedIn: true },
       });
@@ -56,7 +56,7 @@ const auth = (set, get) => ({
       const res = await Axios.get(
         `/authentication/forgot/password/users/${email}`
       );
-      console.log(res);
+      // console.log(res);
       return res;
     } catch (error) {
       console.log(error.response);
@@ -68,7 +68,7 @@ const auth = (set, get) => ({
       const res = await Axios.get(
         `/authentication/confirm/forgotPassword/users/${email}/${password}/${code}`
       );
-      console.log(res);
+      // console.log(res);
       return res;
     } catch (error) {
       console.log(error.response);

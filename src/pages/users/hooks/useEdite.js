@@ -13,13 +13,13 @@ export default function useFilter(userId) {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     for (const key in data) {
       if (data[key] === '') {
         delete data[key];
       }
     }
-    console.log(data);
+    // console.log(data);
     const res = await editUser(userId, data);
     if (res?.data?.status === 'success') {
       toast({

@@ -10,11 +10,11 @@ const card = (set, get) => ({
     set({
       cards: { ...get().cards, getLoading: true },
     });
-    const params = { pageCount: 10 };
+    const params = { pageCount: 2 };
 
     try {
       const res = await Axios.get(`/cards`, { params });
-      console.log(res);
+      // console.log(res);
       set({
         cards: {
           ...get().cards,
@@ -37,7 +37,7 @@ const card = (set, get) => ({
     });
     try {
       const res = await Axios.get(`/cards`, { params });
-      console.log(res);
+      // console.log(res);
       set({
         cards: {
           ...get().cards,
@@ -56,7 +56,7 @@ const card = (set, get) => ({
       const res = await Axios.put(
         `/cards/${id}/lockUnlock?lockStatus=${lockStatus}`
       );
-      console.log("lockUnlock", res);
+      // console.log("lockUnlock", res);
 
       return res;
     } catch (error) {
@@ -67,7 +67,7 @@ const card = (set, get) => ({
   cardUnblockPin: async (id) => {
     try {
       const res = await Axios.put(`/cards/${id}/unblockPin`);
-      console.log("unblockPin", res);
+      // console.log("unblockPin", res);
 
       return res;
     } catch (error) {
@@ -78,7 +78,7 @@ const card = (set, get) => ({
   cardLimits: async (id, data) => {
     try {
       const res = await Axios.put(`/cards/${id}/limits`, data);
-      console.log("limits", res);
+      // console.log("limits", res);
 
       return res;
     } catch (error) {
@@ -89,7 +89,18 @@ const card = (set, get) => ({
   cardOptions: async (id, data) => {
     try {
       const res = await Axios.put(`/cards/${id}/options`, data);
-      console.log("options", res);
+      // console.log("options", res);
+
+      return res;
+    } catch (error) {
+      console.log(error.response);
+      return error.response;
+    }
+  },
+  cardActivate: async (id) => {
+    try {
+      const res = await Axios.put(`/cards/${id}/activate`);
+      console.log("activate", res);
 
       return res;
     } catch (error) {

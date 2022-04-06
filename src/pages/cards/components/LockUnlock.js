@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Modal,
   ModalOverlay,
@@ -12,17 +12,21 @@ import {
   FormControl,
   FormLabel,
   Select,
-} from '@chakra-ui/react';
-import useLockUnlock from '../hooks/useLockUnlock';
+  Text,
+} from "@chakra-ui/react";
+import useLockUnlock from "../hooks/useLockUnlock";
 
 export default function LockUnlock({ id }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { register, handleSubmit, isSubmitting, onSubmit } = useLockUnlock(id);
   return (
     <>
-      <Button onClick={onOpen} size="sm" colorScheme="orange">
+      {/* <Button onClick={onOpen} size="sm" colorScheme="orange">
         lockUnlock
-      </Button>
+      </Button> */}
+      <Text w="100%" onClick={onOpen}>
+        Lock Unlock
+      </Text>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -32,7 +36,11 @@ export default function LockUnlock({ id }) {
             <ModalBody>
               <FormControl>
                 <FormLabel>lock status</FormLabel>
-                <Select variant="filled" placeholder="lock status" {...register('lockStatus')}>
+                <Select
+                  variant="filled"
+                  placeholder="lock status"
+                  {...register("lockStatus")}
+                >
                   <option value="0">Unblock the card</option>
                   <option value="1">Block the card</option>
                   <option value="2">Lost card</option>
