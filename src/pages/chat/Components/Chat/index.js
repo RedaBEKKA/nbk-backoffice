@@ -9,6 +9,7 @@ import {
   WrapItem,
   Spinner,
   Center,
+  Stack,
 } from "@chakra-ui/react";
 import React from "react";
 import { Icon } from "@chakra-ui/react";
@@ -18,11 +19,39 @@ import { BiSend } from "react-icons/bi";
 import HeadChat from "./headChat/index.js";
 import Receiver from "./receiver/index.js";
 import Sender from "./Sender/index.js";
-import useGetUsers from "../../Hooks/useGetUsers";
 import useGetChannels from "../../Hooks/useGetChannels";
+import UseGetUsers from "pages/chat/Hooks/useGetUsers.js";
 function BackGroundMessage() {
-  // const {} = useGetUsers();
   const { loading, channels } = useGetChannels();
+  const {  user, getMessages,Messages } = UseGetUsers();
+  console.log('Messages----', Messages) 
+  const Loading = () => {
+    return (
+      <Stack >
+        Chargement...
+      </Stack>
+    );
+  };
+  const ItemsRender = ({item}) => {
+    console.log('item', item)
+    if (item?.author == '24411584' ) {
+      return (
+        <React.Suspense fallback={<Loading />}>
+          <Receiver item={item} />
+        </React.Suspense>
+      );
+    }
+    else {
+      return (
+        <React.Suspense fallback={<Loading />}>
+          <Sender item={item}  />
+        </React.Suspense>
+      );
+    }
+
+  };
+
+
   return (
     <Box
       bg="#333"
@@ -82,14 +111,17 @@ function BackGroundMessage() {
               </Center>
             ) : (
               <>
-                {channels && channels.length>0 && channels.map((channel) => (
-                  <Profile
-                    date={channel.createdAt}
-                    key={channel.channelId}
-                    title={channel.userId}
-                    url="https://bit.ly/tioluwani-kolawole"
-                  />
-                ))}
+                {channels &&
+                  channels.length > 0 &&
+                  channels.map((channel) => (
+                    <Profile
+                      date={channel.createdAt}
+                      key={channel.channelId}
+                      title={channel.userId}
+                      url="https://bit.ly/tioluwani-kolawole"
+                      channel={channel}
+                    />
+                  ))}
               </>
             )}
           </Box>
@@ -107,8 +139,13 @@ function BackGroundMessage() {
             ]}
             pos={"relative"}
           >
-            <Receiver />
-            <Sender />
+
+          {
+            Messages?.map((i)=>{
+              return <ItemsRender item={i} />
+
+            })
+          }
 
             <Flex
               bg={"#fff"}

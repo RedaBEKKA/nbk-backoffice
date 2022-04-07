@@ -1,7 +1,7 @@
 import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 
-function Receiver() {
+function Receiver({item}) {
   return (
     <>
       <Flex direction={"row"} align="flex-end">
@@ -23,35 +23,8 @@ function Receiver() {
             my="3"
             justifyContent={"center"}
             direction={"column"}
-            w="65px"
           >
-            <Text>Hello</Text>
-          </Flex>
-
-          <Flex
-            bg="#eee"
-            boxShadow={"md"}
-            borderRadius={20}
-            px={3}
-            h="40px"
-            my="3"
-            justifyContent={"center"}
-            direction={"column"}
-            w="175px"
-          >
-            <Text>lorem ipsum lorem</Text>
-          </Flex>
-          <Flex
-            bg="#eee"
-            boxShadow={"md"}
-            borderRadius={20}
-            px={3}
-            h="40px"
-            my="3"
-            justifyContent={"center"}
-            direction={"column"}
-          >
-            <Text>lorem ipsum lorem lorem ipsum loremlorem ipsum lorem</Text>
+            <Text>{item.body}</Text>
           </Flex>
         </Box>
       </Flex>

@@ -4,6 +4,8 @@ const channels = (set, get) => ({
   channels: {
     channels: null,
     getLoading: false,
+    getSingleLoading:false,
+    messages:null
   },
 
   getAllChannels: async () => {
@@ -14,13 +16,35 @@ const channels = (set, get) => ({
 
     try {
       const res = await Axios.get(`/channels`, { params });
-      console.log("channels", res.data.data.channels);
+      // console.log("channels", res.data.data.channels);
 
       set({
         channels: {
           ...get().channels,
           channels: res?.data?.data?.channels,
           getLoading: false,
+        },
+      });
+      return res;
+    } catch (error) {
+      console.log(error.response);
+      return error.response;
+    }
+  },
+
+  getMessages: async (id) => {
+    set({
+      channels: { ...get().channels, getSingleLoading: true },
+    });
+    try {
+      const res = await Axios.get(`/messages/${id}/channels`);
+      // console.log("messages--------", res?.data?.data?.messages);
+
+      set({
+        channels: {
+          ...get().channels,
+          messages: res?.data?.data?.messages,
+          getSingleLoading: false,
         },
       });
       return res;

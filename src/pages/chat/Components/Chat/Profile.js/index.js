@@ -11,16 +11,26 @@ import {
 import React from "react";
 import dayjs from "dayjs";
 import UseGetUsers from "../../../Hooks/useGetUsers";
+import useStore from "store";
 
-function Profile({ title, url, date }) {
-  const { loading, user } = UseGetUsers(title);
+function Profile({ title, url, date, channel }) {
+  const { loading, user, getMessages,Messages } = UseGetUsers(title, channel.channelId);
+  const get = () => {
+    getMessages(channel.channelId);
+  };
+ 
+
+  // console.log("Messages -------- **** **** ", Messages);
+
   return (
     <Box
       mt="5"
+      cursor={"pointer"}
       _hover={{
         background: "#eee",
         color: "teal.500",
       }}
+      onClick={get}
     >
       <Flex direction={"row"} justify={"space-between"} py="3" w="100%">
         <Flex px={"5"} direction={"row"} align="center">
