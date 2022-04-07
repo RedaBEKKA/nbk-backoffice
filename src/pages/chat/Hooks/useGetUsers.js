@@ -11,7 +11,7 @@ export default function UseGetUsers(id,key) {
   const userFetch = useCallback(async () => {
     setLoading(true);
     const res = await getUser(id);
-    // console.log(res?.data?.data?.users);
+    // console.log(res?.data?.data?.users?.userId);
     setUser(res?.data?.data?.users);
     setLoading(false);
     return res?.data?.data?.users;

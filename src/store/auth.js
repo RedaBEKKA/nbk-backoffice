@@ -41,7 +41,7 @@ const auth = (set, get) => ({
         userName: email,
         userPassword: password,
       });
-      // console.log(res);
+      // console.log('data*****',res?.data);
       set({
         auth: { ...get().auth, loginInfo: res.data.data, isLoggedIn: true },
       });
