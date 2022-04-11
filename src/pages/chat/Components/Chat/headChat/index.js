@@ -1,21 +1,35 @@
-import { Avatar, Flex, Heading, WrapItem } from "@chakra-ui/react";
+import { Avatar, Flex, Heading, Skeleton, SkeletonCircle, WrapItem } from "@chakra-ui/react";
 import React from "react";
 
-function HeadChat() {
+function HeadChat({ userSelected, LoadingUserSelected }) {
+  let bgc = LoadingUserSelected ? "#fff" : "#2DDCB1";
   return (
-    <Flex align={"center"} bg="#2DDCB1" h="4rem" px={5}>
+    <Flex align={"center"} bg={bgc} h="5rem" px={5}>
       <WrapItem>
-        <Avatar
-          cursor="pointer"
-          name="Oan Abrahmov"
-          src="https://bit.ly/tioluwani-kolawole"
-          size="md"
-        />
+        {LoadingUserSelected ? (
+          <SkeletonCircle size="8" />
+        ) : (
+          <Avatar
+            cursor="pointer"
+            name={userSelected.firstname}
+            src="https://bit.ly/tioluwani-kolawole"
+            size="md"
+          />
+        )}
       </WrapItem>
 
-      <Heading as="h2" px={"5"} size="md" color="#fff">
-        Dan Abrahmov
-      </Heading>
+      {LoadingUserSelected ? (
+        <>
+          <Skeleton m="2" w="100px" height="15px" />
+          <Skeleton m="2" w="100px" height="15px" />
+        </>
+      ) : (
+        <>
+          <Heading as="h2" px={"5"} size="md" color="#fff">
+            {userSelected.firstname} {userSelected.lastname}
+          </Heading>
+        </>
+      )}
     </Flex>
   );
 }

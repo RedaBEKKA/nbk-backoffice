@@ -9,18 +9,17 @@ import {
   SkeletonCircle,
 } from "@chakra-ui/react";
 import React from "react";
-import dayjs from "dayjs";
 import UseGetUsers from "../../../Hooks/useGetUsers";
-import useStore from "store";
 
 function Profile({ title, url, date, channel }) {
-  const { loading, user, getMessages,Messages } = UseGetUsers(title, channel.channelId);
+  const { loading, user, getMessages, getUserSelected } = UseGetUsers(
+    title,
+    channel.channelId
+  );
   const get = () => {
     getMessages(channel.channelId);
+    getUserSelected(title);
   };
- 
-
-  // console.log("Messages -------- **** **** ", Messages);
 
   return (
     <Box

@@ -1,36 +1,69 @@
-import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
-import React from "react";
+import {
+  Avatar,
+  Box,
+  Flex,
+  Skeleton,
+  SkeletonCircle,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
+import UseGetUsers from "pages/chat/Hooks/useGetUsers";
+import React, { useEffect } from "react";
+import useStore from "store";
 
-function Receiver({item}) {
+function Receiver({ item }) {
+  const LoadingUserSelected = useStore(
+    (state) => state.channels.LoadingUserSelected
+  );
+  const userSelected = useStore((state) => state.channels.userSelected);
+  // console.log("item", );
+  const convert = (date) => {
+    let app = parseInt(date.replace(/[:\s\/\.-]/g, ""));
+    return app;
+  };
+  // useEffect(() => {
+  //   convert(item.createdAt)
+  // }, [])
+
+  const { user } = UseGetUsers();
+
   return (
-    <>
-      <Flex direction={"row"} align="flex-end">
-        <Avatar
-          m="5"
-          cursor="pointer"
-          name="Ban nbrahmov"
-          src="https://bit.ly/tioluwani-kolawole"
-          size="md"
-        />
+    
+      <Stack direction={"row"} align="flex-end" bg='#eee' m={5}  >
+        {LoadingUserSelected ? (
+          <SkeletonCircle size="8" />
+        ) : (
+          <Avatar
+            cursor="pointer"
+            name={userSelected.firstname}
+            src="https://bit.ly/tioluwani-kolawole"
+            size="sm"
+            m="5"
+          />
+        )}
+   
 
-        <Box>
-          <Flex
-            bg="#eee"
-            boxShadow={"md"}
-            borderRadius={20}
-            px={3}
-            h="40px"
-            my="3"
-            justifyContent={"center"}
-            direction={"column"}
-          >
-            <Text>{item.body}</Text>
-          </Flex>
-        </Box>
-      </Flex>
-
-
-    </>
+        {LoadingUserSelected ? (
+          <>
+            <Skeleton m="2" w="100px" height="35px" />
+          </>
+        ) : (
+            <Flex
+              bg="#ccc"
+              boxShadow={"md"}
+              borderRadius={20}
+              px={3}
+              h="35px"
+              justifyContent={"center"}
+              direction={"column"}
+              alignItems="center"
+              mb={5}
+            >
+              <Text>{item.body}</Text>
+            </Flex>
+        )}
+      </Stack>
+    
   );
 }
 

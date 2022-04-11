@@ -23,8 +23,8 @@ import useGetChannels from "../../Hooks/useGetChannels";
 import UseGetUsers from "pages/chat/Hooks/useGetUsers.js";
 function BackGroundMessage() {
   const { loading, channels } = useGetChannels();
-  const {  user, getMessages,Messages } = UseGetUsers();
-  console.log('Messages----', Messages) 
+  const {  user, getMessages,nombre ,Messages,userSelected,LoadingUserSelected} = UseGetUsers();
+  // console.log('userSelected----', userSelected) 
   const Loading = () => {
     return (
       <Stack >
@@ -32,22 +32,23 @@ function BackGroundMessage() {
       </Stack>
     );
   };
-  const ItemsRender = ({item}) => {
-    console.log('item', item)
-    if (item?.author == '24411584' ) {
+  const ItemsRender = ({item,nombre,userSelected}) => {
+    // console.log('nombre******', nombre)
+    // console.log('item', item)
+    // if (item?.author == '24411584' ) {
       return (
         <React.Suspense fallback={<Loading />}>
-          <Receiver item={item} />
+          <Receiver item={item} nbr={nombre} userSelected={userSelected} />
         </React.Suspense>
       );
-    }
-    else {
-      return (
-        <React.Suspense fallback={<Loading />}>
-          <Sender item={item}  />
-        </React.Suspense>
-      );
-    }
+    // }
+    // else {
+      // return (
+      //   <React.Suspense fallback={<Loading />}>
+      //     <Sender item={item}  />
+      //   </React.Suspense>
+      // );
+    // }
 
   };
 
@@ -64,7 +65,7 @@ function BackGroundMessage() {
     >
       <Flex direction="row">
         <Box h="83vh" bg="#fff" w={"25vw"}>
-          <Box bg="#f5f5f5" h="15%" pt="2">
+          <Box bg="#f5f5f5" h="10%" pt="25">
             <Flex
               direction="row"
               align={"center"}
@@ -85,20 +86,7 @@ function BackGroundMessage() {
                 cursor="pointer"
               />
             </Flex>
-            <Box mx="5" mt="4">
-              <InputGroup>
-                {/* <InputLeftElement
-                  pointerEvents="none"
-                  children={<Icon as={BiSearchAlt2} color="gray.300" />}
-                /> */}
-                <Input
-                  type="tel"
-                  placeholder="search or start new chat"
-                  borderRadius="20"
-                  boxShadow="sm"
-                />
-              </InputGroup>
-            </Box>
+ 
           </Box>
 
           <Box overflowY="auto" h="full" pb="8" pt="5" bg="#fff">
@@ -126,8 +114,8 @@ function BackGroundMessage() {
             )}
           </Box>
         </Box>
-        <Box h="83vh" bg="#888" w="100%">
-          <HeadChat />
+        <Box h="83vh" bg="#eee" w="100%">
+          <HeadChat userSelected={userSelected} LoadingUserSelected={LoadingUserSelected}/>
 
           <Box
             w="100%"
@@ -142,7 +130,7 @@ function BackGroundMessage() {
 
           {
             Messages?.map((i)=>{
-              return <ItemsRender item={i} />
+              return <ItemsRender item={i} nombre={nombre} userSelected={userSelected}/>
 
             })
           }
@@ -179,3 +167,19 @@ function BackGroundMessage() {
 
 export default BackGroundMessage;
 // <Icon as={BiSend} boxSize='30px' />
+
+
+           {/* <Box mx="5" mt="4">
+              <InputGroup> */}
+                {/* <InputLeftElement
+                  pointerEvents="none"
+                  children={<Icon as={BiSearchAlt2} color="gray.300" />}
+                /> */}
+                {/* <Input
+                  type="tel"
+                  placeholder="search or start new chat"
+                  borderRadius="20"
+                  boxShadow="sm"
+                />
+              </InputGroup>
+            </Box> */}
