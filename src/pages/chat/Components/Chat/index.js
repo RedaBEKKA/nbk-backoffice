@@ -24,7 +24,7 @@ import UseGetUsers from "pages/chat/Hooks/useGetUsers.js";
 function BackGroundMessage() {
   const { loading, channels } = useGetChannels();
   const {  user, getMessages,nombre ,Messages,userSelected,LoadingUserSelected} = UseGetUsers();
-  // console.log('userSelected----', userSelected) 
+  console.log('Messages----', Messages) 
   const Loading = () => {
     return (
       <Stack >
@@ -35,20 +35,20 @@ function BackGroundMessage() {
   const ItemsRender = ({item,nombre,userSelected}) => {
     // console.log('nombre******', nombre)
     // console.log('item', item)
-    // if (item?.author == '24411584' ) {
+    if (item?.author === '12344' ) {
       return (
         <React.Suspense fallback={<Loading />}>
           <Receiver item={item} nbr={nombre} userSelected={userSelected} />
         </React.Suspense>
       );
-    // }
-    // else {
-      // return (
-      //   <React.Suspense fallback={<Loading />}>
-      //     <Sender item={item}  />
-      //   </React.Suspense>
-      // );
-    // }
+    }
+    else {
+      return (
+        <React.Suspense fallback={<Loading />}>
+          <Receiver item={item}  nbr={nombre} userSelected={userSelected} />
+        </React.Suspense>
+      );
+    }
 
   };
 

@@ -25,45 +25,48 @@ function Receiver({ item }) {
   //   convert(item.createdAt)
   // }, [])
 
-  const { user } = UseGetUsers();
+ 
+  const bgg = item?.author === '12344'  ? '#ccc' :'#eee'
+  const bggcc = item?.author ===  '24411584' ? '#ddd' :'#eee'
+  const neme = item?.author === '12344' || '24411584' ? 'cc' : userSelected.firstname
+  const neme2 = item?.author ===  '24411584' ? 'a m' : userSelected.firstname
 
   return (
-    
-      <Stack direction={"row"} align="flex-end" bg='#eee' m={5}  >
-        {LoadingUserSelected ? (
-          <SkeletonCircle size="8" />
-        ) : (
-          <Avatar
-            cursor="pointer"
-            name={userSelected.firstname}
-            src="https://bit.ly/tioluwani-kolawole"
-            size="sm"
-            m="5"
-          />
-        )}
-   
+    <Box display="flex" alignItems="center" mb={2}>
+      {LoadingUserSelected ? (
+        <SkeletonCircle size="8" ml="7" mt="15" />
+      ) : (
+        <Avatar
+          cursor="pointer"
+          name={neme2}
+          src="https://bit.ly/tioluwani-kolawole"
+          size="sm"
+          ml="7"
+          mt="15"
+        />
+      )}
 
-        {LoadingUserSelected ? (
-          <>
-            <Skeleton m="2" w="100px" height="35px" />
-          </>
-        ) : (
-            <Flex
-              bg="#ccc"
-              boxShadow={"md"}
-              borderRadius={20}
-              px={3}
-              h="35px"
-              justifyContent={"center"}
-              direction={"column"}
-              alignItems="center"
-              mb={5}
-            >
-              <Text>{item.body}</Text>
-            </Flex>
-        )}
-      </Stack>
-    
+      {LoadingUserSelected ? (
+        <>
+          <Skeleton w="300px" height="25px" ml="7" mt="15" borderRadius={20} />
+        </>
+      ) : (
+        <Flex
+          bg={bggcc}
+          boxShadow={"md"}
+          borderRadius={20}
+          px={3}
+          h="30px"
+          justifyContent={"center"}
+          direction={"column"}
+          alignItems="center"
+          ml="6"
+          mt="15"
+        >
+          <Text fontSize='md'>{item.body}</Text>
+        </Flex>
+      )}
+    </Box>
   );
 }
 
