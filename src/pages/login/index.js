@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Box,
   Container,
@@ -15,15 +15,15 @@ import {
   Checkbox,
   FormErrorMessage,
   useToast,
-} from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { fr } from 'yup-locales';
-import { setLocale } from 'yup';
-import { useForm } from 'react-hook-form';
-import useStore from 'store';
-import { motion } from 'framer-motion';
+} from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { fr } from "yup-locales";
+import { setLocale } from "yup";
+import { useForm } from "react-hook-form";
+import useStore from "store";
+import { motion } from "framer-motion";
 
 const variants = {
   hidden: { opacity: 0, x: 0, y: 50 },
@@ -55,15 +55,16 @@ export default function Login() {
     const res = await login(data);
     if (res?.status === 200) {
       toast({
-        description: 'opération terminée avec succès',
-        status: 'success',
+        description: "opération terminée avec succès",
+        status: "success",
         duration: 3000,
         isClosable: true,
       });
     } else {
       toast({
-        description: res?.data?.StatusDescription || "quelque chose s'est mal passé",
-        status: 'error',
+        description:
+          res?.data?.StatusDescription || "quelque chose s'est mal passé",
+        status: "error",
         duration: 9000,
         isClosable: true,
       });
@@ -77,43 +78,59 @@ export default function Login() {
           initial="hidden" // Set the initial state to variants.hidden
           animate="enter" // Animated state to variants.enter
           exit="exit" // Exit state (used later) to variants.exit
-          transition={{ type: 'linear' }}
+          transition={{ type: "linear" }}
         >
           <Container maxW="6xl">
-            <SimpleGrid overflow="hidden" shadow="lg" rounded="lg" bg="white" columns={2}>
+            <SimpleGrid
+              overflow="hidden"
+              shadow="lg"
+              rounded="lg"
+              bg="white"
+              columns={2}
+            >
               <GridItem p="8" colSpan={{ base: 2, md: 1 }}>
                 <Flex m="4" justifyContent="center">
                   <Heading size="lg">Se connecter à votre compte</Heading>
                 </Flex>
+                <Text>lexoussoboiru-4108@yopmail.com</Text>
+                <Text>M0oiuyt12@uiU</Text>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <Stack spacing={3}>
                     <FormControl isInvalid={errors.email}>
                       <FormLabel>Address e-mail</FormLabel>
                       <Input
                         type="email"
-                        {...register('password')}
+                        {...register("password")}
                         required
                         placeholder="Address e-mail"
                         variant="filled"
-                        {...register('email')}
+                        {...register("email")}
                       ></Input>
-                      {errors.email && <FormErrorMessage>{errors.email.message}</FormErrorMessage>}
+                      {errors.email && (
+                        <FormErrorMessage>
+                          {errors.email.message}
+                        </FormErrorMessage>
+                      )}
                     </FormControl>
                     <FormControl isInvalid={errors.password}>
                       <FormLabel>Mot de passe</FormLabel>
                       <Input
-                        {...register('password')}
+                        {...register("password")}
                         required
                         placeholder="Mot de passe"
                         variant="filled"
                         type="password"
                       ></Input>
                       {errors.password && (
-                        <FormErrorMessage>{errors.password.message}</FormErrorMessage>
+                        <FormErrorMessage>
+                          {errors.password.message}
+                        </FormErrorMessage>
                       )}
                     </FormControl>
                     <Flex justifyContent="space-between">
-                      <Checkbox colorScheme="green">Se souvenir de moi</Checkbox>
+                      <Checkbox colorScheme="green">
+                        Se souvenir de moi
+                      </Checkbox>
                       <Link to="/resetPassword">
                         <Text color="green.500">Mot de passe oublié ?</Text>
                       </Link>
@@ -135,13 +152,20 @@ export default function Login() {
                 overflow="hidden"
                 bg="green.700"
                 p="8"
-                display={{ base: 'none', md: 'block' }}
+                display={{ base: "none", md: "block" }}
                 color="white"
               >
-                <Flex p="8" direction="column" alignItems="center" justifyContent="center" h="100%">
+                <Flex
+                  p="8"
+                  direction="column"
+                  alignItems="center"
+                  justifyContent="center"
+                  h="100%"
+                >
                   <Heading size="2xl">Bienvenue parmi NOUS!</Heading>
                   <Text fontSize="xl">
-                    s simply dummy text of the printing and typesetting industry. Lorem
+                    s simply dummy text of the printing and typesetting
+                    industry. Lorem
                   </Text>
                 </Flex>
               </GridItem>
