@@ -11,7 +11,7 @@ import UseGetUsers from "pages/chat/Hooks/useGetUsers";
 import React, { useEffect } from "react";
 import useStore from "store";
 
-function Receiver({ item }) {
+function Receiver({ item,first }) {
   const LoadingUserSelected = useStore(
     (state) => state.channels.LoadingUserSelected
   );
@@ -26,10 +26,9 @@ function Receiver({ item }) {
   // }, [])
 
  
-  const bgg = item?.author === '12344'  ? '#ccc' :'#eee'
-  const bggcc = item?.author ===  '24411584' ? '#ddd' :'#eee'
-  const neme = item?.author === '12344' || '24411584' ? 'cc' : userSelected.firstname
-  const neme2 = item?.author ===  '24411584' ? 'a m' : userSelected.firstname
+  const bg = item?.author === first  ? 'a' :'b'
+  const bg1 = item?.author ===  first ? '#ddd' :'#eee'
+
 
   return (
     <Box display="flex" alignItems="center" mb={2}>
@@ -38,7 +37,7 @@ function Receiver({ item }) {
       ) : (
         <Avatar
           cursor="pointer"
-          name={neme2}
+          name={bg}
           src="https://bit.ly/tioluwani-kolawole"
           size="sm"
           ml="7"
@@ -52,7 +51,7 @@ function Receiver({ item }) {
         </>
       ) : (
         <Flex
-          bg={bggcc}
+          bg={bg1}
           boxShadow={"md"}
           borderRadius={20}
           px={3}
