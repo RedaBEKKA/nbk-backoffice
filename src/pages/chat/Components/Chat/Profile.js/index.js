@@ -8,32 +8,35 @@ import {
   Skeleton,
   SkeletonCircle,
   Center,
+  HStack,
+  Stack,
 } from "@chakra-ui/react";
 import React from "react";
 import UseGetUsers from "../../../Hooks/useGetUsers";
 
 function Profile({ title, url, date, channel, subject }) {
-  const { loading, user, getMessages, getUserSelected } = UseGetUsers(
+  const { loading, user, getMessages, getUserSelected,getChannelSelected,ChannelSelected } = UseGetUsers(
     title,
     channel.channelId
   );
   const get = () => {
     getMessages(channel.channelId);
     getUserSelected(title);
+    getChannelSelected(channel.channelId)
   };
-  console.log(user);
+  // console.log(user);
   return (
     <Center
       mt="2"
       cursor={"pointer"}
       _hover={{
-        background: "#eee",
+        bg: "#eee",
         color: "teal.500",
       }}
       onClick={get}
     >
-      <Flex direction={"row"} justify={"space-around"} py="3" w="100%">
-        <Flex direction={"row"} align="center" w="50%">
+      <Flex direction={"row"} justify={"space-between"} py="3" w="100%">
+        <HStack direction={"row"} align="center" minW={"55%"} p="0">
           <WrapItem>
             {loading ? (
               <SkeletonCircle size="8" mx={"2"} />
@@ -43,42 +46,52 @@ function Profile({ title, url, date, channel, subject }) {
                 name={user?.firstname}
                 src={url}
                 size="sm"
-                mx={"2"}
+                ml={"2"}
+                mr={"1"}
               />
             )}
           </WrapItem>
-          <Flex mr="2" >
+          <>
             {loading ? (
               <>
-                <Skeleton m="2" w="100px" height="20px" />
-                <Skeleton m="2" w="40px" height="10px" />
+                <Skeleton m="2" w="100px" height="25px" />
+                <Skeleton m="2" w="60px" height="25px" />
               </>
             ) : (
-              <Flex align={"center"}>
-                <Center  height="40px"  >
-                  <Heading fontSize="sm">
-                    {user?.firstname} {user?.lastname}
-                  </Heading>
-                </Center>
-
-                <Box w={"100%"}  mx='2' >
+              <HStack w={"100%"}>
+                <HStack w={"80%"}>
+                  <Text fontSize={"16"} fontWeight="bold">
+                    {" "}
+                    {user?.firstname}
+                  </Text>
+                  <Text fontSize={"16"} fontWeight="bold">
+                    {" "}
+                    {user?.lastname}
+                  </Text>
+                </HStack>
+                <Stack mx="2">
                   {subject ? (
-                    <Text fontSize="16px"  >
-                      {subject.slice(0, 11) + "..."}
-                    </Text>
+                    <Text fontSize="12px">{subject.slice(0, 11) + "..."}</Text>
                   ) : (
-                    <Box fontSize="12px"  >
-                      {"No subject"}
-                    </Box>
+                    <Center w={"43"}>
+                      <Text fontSize="10px">no subject</Text>
+                    </Center>
                   )}
-                </Box>
-              </Flex>
+                </Stack>
+              </HStack>
             )}
-          </Flex>
-        </Flex>
-        <Center w="25%">
-          {date}
-        </Center>
+          </>
+        </HStack>
+
+        {loading ? (
+          <>
+            <Skeleton m="2" w="100px" height="25px" />
+          </>
+        ) : (
+          <Stack w="25%">
+            <Center>{date}</Center>
+          </Stack>
+        )}
       </Flex>
     </Center>
   );

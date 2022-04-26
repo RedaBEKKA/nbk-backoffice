@@ -8,7 +8,9 @@ const channels = (set, get) => ({
     messages:null,
     nombre:null,
     userSelected:null,
-    LoadingUserSelected:false
+    LoadingUserSelected:false,
+    ChannelSelected:null,
+    LoadingChannelSelected:false
   },
 
   getAllChannels: async () => {
@@ -34,7 +36,6 @@ const channels = (set, get) => ({
       return error.response;
     }
   },
-
   getMessages: async (id) => {
     set({
       channels: { ...get().channels, getSingleLoading: true },
@@ -70,6 +71,27 @@ const channels = (set, get) => ({
           ...get().channels,
           userSelected: res?.data?.data?.users,
           LoadingUserSelected: false,
+        },
+      });
+      return res;
+    } catch (error) {
+      console.log(error.response);
+      return error.response;
+    }
+  },
+  getChannelSelected: async (id) => {
+    set({
+      channels: { ...get().channels, LoadingChannelSelected: true },
+    });
+    try {
+      const res = await Axios.get(`/channels/${id}`);
+      console.log("res-channels-selected-data", res);
+
+      set({
+        channels: {
+          ...get().channels,
+          ChannelSelected: res?.data?.data?.channel,
+          LoadingChannelSelected: false,
         },
       });
       return res;

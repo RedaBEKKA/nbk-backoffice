@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import useStore from "store";
-export default function UseGetUsers(id,key) {
+export default function UseGetUsers(id, key) {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
   // const loading = useStore((state) => state.users.getSingleLoading);
@@ -9,9 +9,16 @@ export default function UseGetUsers(id,key) {
   const Messages = useStore((state) => state.channels.messages);
   const nombre = useStore((state) => state.channels.nombre);
   const userSelected = useStore((state) => state.channels.userSelected);
-  const LoadingUserSelected = useStore((state) => state.channels.LoadingUserSelected);
+  const ChannelSelected = useStore((state) => state.channels.ChannelSelected);
+  const LoadingUserSelected = useStore(
+    (state) => state.channels.LoadingUserSelected
+  );
+  const LoadingChannelSelected = useStore(
+    (state) => state.channels.LoadingChannelSelected
+  );
   const getUserSelected = useStore((state) => state.getUserSelected);
-  
+  const getChannelSelected = useStore((state) => state.getChannelSelected);
+
   const userFetch = useCallback(async () => {
     setLoading(true);
     const res = await getUser(id);
@@ -28,12 +35,17 @@ export default function UseGetUsers(id,key) {
     };
   }, [userFetch]);
 
-
-  // const getMessage = async() =>{
-    //  getMessages(key)
-    // console.log('res', res)
-  // }
-
-
-  return { loading, user ,getMessages,Messages,nombre,getUserSelected,userSelected,LoadingUserSelected};
+  return {
+    loading,
+    user,
+    getMessages,
+    Messages,
+    nombre,
+    getUserSelected,
+    userSelected,
+    LoadingUserSelected,
+    ChannelSelected,
+    LoadingChannelSelected,
+    getChannelSelected,
+  };
 }
