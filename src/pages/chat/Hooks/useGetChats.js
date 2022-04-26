@@ -33,12 +33,12 @@ export default function useGetChats() {
   // }
   useEffect(() => {
     let tab = [];
-    console.log("user", user);
+    // console.log("user", user);
     if (Id) {
       const namesArr = Id.filter(function (elem, pos) {
         return Id.indexOf(elem) == pos;
       });
-      console.log("namesArr", namesArr);
+      // console.log("namesArr", namesArr);
 
       namesArr.forEach((element) => {
         getUser(element);
@@ -47,7 +47,7 @@ export default function useGetChats() {
         // console.log("element", element);
       });
 
-      console.log("tab", tab);
+      // console.log("tab", tab);
     }
 
     // uniq();
@@ -55,9 +55,9 @@ export default function useGetChats() {
 
   // console.log('chats --------------------------', chats)
   // console.log("chatUsers", chatUsers);
-  console.log("channels", chats);
+  // console.log("channels", chats);
   // console.log('value', value)
-  console.log("value", value);
+  // console.log("value", value);
 
   return { ChatsLoading: getLoading, chats };
 }

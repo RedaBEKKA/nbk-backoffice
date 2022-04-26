@@ -71,7 +71,7 @@ export default function Login() {
     }
   };
   return (
-    <Box bg="linear-gradient(to right, #56ab2f, #a8e063)" w="100%" h="100vh">
+    <Box bg="linear-gradient(to right, #2DDCB1, #ffff)" w="100%" h="100vh">
       <Flex align="center" justifyContent="center" h="100%">
         <motion.div
           variants={variants}
@@ -142,6 +142,8 @@ export default function Login() {
                     width="full"
                     my="8"
                     colorScheme="green"
+                bg="#2DDCB1"
+
                     type="submit"
                   >
                     SE CONNECTER
@@ -150,7 +152,7 @@ export default function Login() {
               </GridItem>
               <GridItem
                 overflow="hidden"
-                bg="green.700"
+                bg="#2DDCB1"
                 p="8"
                 display={{ base: "none", md: "block" }}
                 color="white"

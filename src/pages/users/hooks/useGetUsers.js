@@ -223,7 +223,9 @@ function SingleView({ original }) {
 
   console.log("user id", original.userId);
   console.log("wallets of user", wallets);
-
+  function currencyFormat(num) {
+    return   num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '1 ') +' €'
+ }
   return (
     <>
       <Button onClick={getSingleView}>
@@ -301,18 +303,6 @@ function SingleView({ original }) {
                 </Text>
                 <Text fontSize="lg">{original.city}</Text>
               </Flex>
-              <Flex justifyContent="space-between" alignItems="center">
-                <Text fontSize="lg" fontWeight="bold">
-                  Wallet ID :{" "}
-                </Text>
-                <Text fontSize="lg">{original.walletId}</Text>
-              </Flex>
-              <Flex justifyContent="space-between" alignItems="center">
-                <Text fontSize="lg" fontWeight="bold">
-                  Card ID :{" "}
-                </Text>
-                <Text fontSize="lg">{original.cardId}</Text>
-              </Flex>
             </SimpleGrid>
             {getLoading ? (
               <Flex mt="8" justifyContent="center">
@@ -343,6 +333,18 @@ function SingleView({ original }) {
                     columns={{ base: 1, md: 2 }}
                     spacing={8}
                   >
+                    <Flex justifyContent="space-between" alignItems="center">
+                      <Text fontSize="lg" fontWeight="bold">
+                        Wallet ID :
+                      </Text>
+                      <Text fontSize="lg">{wallet.walletId}</Text>
+                    </Flex>
+                    <Flex justifyContent="space-between" alignItems="center">
+                      <Text fontSize="lg" fontWeight="bold">
+                        Solde :{" "}
+                      </Text>
+                      <Text fontSize="lg">{currencyFormat(wallet.solde)}</Text>
+                    </Flex>
                     <Flex justifyContent="space-between" alignItems="center">
                       <Text fontSize="lg" fontWeight="bold">
                         iban :{" "}

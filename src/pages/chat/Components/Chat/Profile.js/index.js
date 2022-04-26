@@ -7,54 +7,93 @@ import {
   WrapItem,
   Skeleton,
   SkeletonCircle,
+  Center,
+  HStack,
+  Stack,
 } from "@chakra-ui/react";
 import React from "react";
-import dayjs from "dayjs";
 import UseGetUsers from "../../../Hooks/useGetUsers";
 
-function Profile({ title, url, date }) {
-  const { loading, user } = UseGetUsers(title);
+function Profile({ title, url, date, channel, subject }) {
+  const { loading, user, getMessages, getUserSelected,getChannelSelected,ChannelSelected } = UseGetUsers(
+    title,
+    channel.channelId
+  );
+  const get = () => {
+    getMessages(channel.channelId);
+    getUserSelected(title);
+    getChannelSelected(channel.channelId)
+  };
+  // console.log(user);
   return (
-    <Box
-      mt="5"
+    <Center
+      mt="2"
+      cursor={"pointer"}
       _hover={{
-        background: "#eee",
+        bg: "#eee",
         color: "teal.500",
       }}
+      onClick={get}
     >
       <Flex direction={"row"} justify={"space-between"} py="3" w="100%">
-        <Flex px={"5"} direction={"row"} align="center">
+        <HStack direction={"row"} align="center" minW={"55%"} p="0">
           <WrapItem>
             {loading ? (
-              <SkeletonCircle size="8" />
+              <SkeletonCircle size="8" mx={"2"} />
             ) : (
               <Avatar
                 cursor="pointer"
                 name={user?.firstname}
                 src={url}
                 size="sm"
+                ml={"2"}
+                mr={"1"}
               />
             )}
           </WrapItem>
-          <Box px={3}>
+          <>
             {loading ? (
               <>
-                <Skeleton m="2" w="100px" height="20px" />
-                <Skeleton m="2" w="100px" height="10px" />
+                <Skeleton m="2" w="100px" height="25px" />
+                <Skeleton m="2" w="60px" height="25px" />
               </>
             ) : (
-              <>
-                <Heading fontSize="sm">{user?.firstname}</Heading>
-                <Text fontSize="xs">Lorem ipsu m lorem lorem</Text>
-              </>
+              <HStack w={"100%"}>
+                <HStack w={"80%"}>
+                  <Text fontSize={"16"} fontWeight="bold">
+                    {" "}
+                    {user?.firstname}
+                  </Text>
+                  <Text fontSize={"16"} fontWeight="bold">
+                    {" "}
+                    {user?.lastname}
+                  </Text>
+                </HStack>
+                <Stack mx="2">
+                  {subject ? (
+                    <Text fontSize="12px">{subject.slice(0, 11) + "..."}</Text>
+                  ) : (
+                    <Center w={"43"}>
+                      <Text fontSize="10px">no subject</Text>
+                    </Center>
+                  )}
+                </Stack>
+              </HStack>
             )}
-          </Box>
-        </Flex>
-        <Box px={"5"}>
-          <Text fontSize="sm">{date}</Text>
-        </Box>
+          </>
+        </HStack>
+
+        {loading ? (
+          <>
+            <Skeleton m="2" w="100px" height="25px" />
+          </>
+        ) : (
+          <Stack w="25%">
+            <Center>{date}</Center>
+          </Stack>
+        )}
       </Flex>
-    </Box>
+    </Center>
   );
 }
 
