@@ -157,7 +157,7 @@ export default function useGetWallets() {
             <>
               <HStack>
                 <SingleView original={original}></SingleView>
-                <Button
+                {/* <Button
                   isLoading={kyclivenessLoading?.userId === original?.userId}
                   isDisabled={kyclivenessLoading?.loading}
                   onClick={() => disptachKycLivenessUpdate(original?.userId)}
@@ -172,7 +172,7 @@ export default function useGetWallets() {
                   colorScheme="orange"
                 >
                   kycreview
-                </Button>
+                </Button> */}
               </HStack>
             </>
           );

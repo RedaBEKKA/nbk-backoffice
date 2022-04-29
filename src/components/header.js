@@ -25,17 +25,9 @@ export default function Header({ title, FilterForm, edit }) {
       >
         <Heading>{title}</Heading>
         {!edit && (
-          <Stack spacing={4} justify="flex-end">
-            <Stack direction="row">
-              <Button
-                leftIcon={<AiFillFileAdd />}
-                _hover={{ bg: "gray.900" }}
-                _focus={{ bg: "gray.900" }}
-                bg="black"
-                color="white"
-              >
-                Ajoutes
-              </Button>
+          <Stack spacing={2} justify="flex-start">
+            <Stack direction="column">
+              
               <Button
                 leftIcon={<FaFileExport />}
                 _hover={{ bg: "gray.900" }}

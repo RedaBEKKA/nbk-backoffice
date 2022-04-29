@@ -41,7 +41,7 @@ const ChannelsProfiles = () => {
                     date={channel.createdAt}
                     key={channel.channelId}
                     title={channel.userId}
-                    subject={channel.subject}
+                    
                     url="https://bit.ly/tioluwani-kolawole"
                     channel={channel}
                   />

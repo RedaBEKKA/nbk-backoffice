@@ -36,7 +36,7 @@ function BackGroundMessage() {
               <ItemsRender
                 item={i}
                 nombre={nombre}
-                first={Messages[0].author}
+                first={Messages[0]?.author}
                 userSelected={userSelected}
                 
               />
