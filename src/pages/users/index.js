@@ -17,6 +17,8 @@ export default function Users() {
         FilterForm={Filter}
         title={userId ? "Éditer Un Utilisateur" : "Gestion des Utilisateurs"}
         edit={userId ? true : false}
+        users={users}
+        fileName={"ExcelFile-Users"}
       ></Header>
       <Container maxW="8xl">
         {userId ? (

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Flex, Heading, Button, Text, Stack } from "@chakra-ui/react";
 import { BiShow } from "react-icons/bi";
-import { FaFileExport } from "react-icons/fa";
 import { AiFillFileAdd } from "react-icons/ai";
 import Filter from "./filter";
+import { ExportCSV } from "components/Export";
 
-export default function Header({ title, FilterForm, edit }) {
+export default function Header({ title, FilterForm, edit,users,fileName }) {
   const [showfilter, setShowfilter] = useState(false);
   const handleShowfilter = () => {
     setShowfilter(!showfilter);
@@ -27,16 +27,7 @@ export default function Header({ title, FilterForm, edit }) {
         {!edit && (
           <Stack spacing={2} justify="flex-start">
             <Stack direction="column">
-              
-              <Button
-                leftIcon={<FaFileExport />}
-                _hover={{ bg: "gray.900" }}
-                _focus={{ bg: "gray.900" }}
-                bg="black"
-                color="white"
-              >
-                Export
-              </Button>
+              <ExportCSV csvData={users} fileName={fileName} />
             </Stack>
             <Stack
               cursor="pointer"
