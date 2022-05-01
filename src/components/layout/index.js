@@ -324,8 +324,9 @@ const MobileNav = ({ onOpen, ...rest }) => {
               <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem>
               <MenuDivider /> */}
-
-              <MenuItem onClick={handleLogout}>se déconnecter</MenuItem>
+              <MenuItem>Créer un compte</MenuItem>
+              <MenuDivider/>
+              <MenuItem onClick={handleLogout}>Se déconnecter</MenuItem>
             </MenuList>
           </Menu>
         </Flex>

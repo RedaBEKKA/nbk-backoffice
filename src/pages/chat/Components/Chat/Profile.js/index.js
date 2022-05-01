@@ -14,7 +14,7 @@ import {
 import React from "react";
 import UseGetUsers from "../../../Hooks/useGetUsers";
 
-function Profile({ title, url, date, channel, subject }) {
+function Profile({ title, url, date, channel }) {
   const { loading, user, getMessages, getUserSelected,getChannelSelected,ChannelSelected } = UseGetUsers(
     title,
     channel.channelId
@@ -69,7 +69,7 @@ function Profile({ title, url, date, channel, subject }) {
                     {user?.lastname}
                   </Text>
                 </HStack>
-                <Stack mx="2">
+                {/* <Stack mx="2">
                   {subject ? (
                     <Text fontSize="12px">{subject.slice(0, 11) + "..."}</Text>
                   ) : (
@@ -77,7 +77,7 @@ function Profile({ title, url, date, channel, subject }) {
                       <Text fontSize="10px">no subject</Text>
                     </Center>
                   )}
-                </Stack>
+                </Stack> */}
               </HStack>
             )}
           </>

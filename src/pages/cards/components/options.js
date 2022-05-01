@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 import useOptions from "../hooks/useOptions";
 
-const params = ["foreign ", "online", "nfc", "atm"];
+const params = ["foreign", "online", "nfc", "atm"];
 export default function Options({ id }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { register, handleSubmit, isSubmitting, onSubmit, errors } =

@@ -11,7 +11,7 @@ function HeadChat({ userSelected, LoadingUserSelected,ChannelSelected,LoadingCha
         ) : (
           <Avatar
             cursor="pointer"
-            name={userSelected.firstname}
+            name={userSelected?.firstname}
             src="https://bit.ly/tioluwani-kolawole"
             size="md"
           />
@@ -27,10 +27,10 @@ function HeadChat({ userSelected, LoadingUserSelected,ChannelSelected,LoadingCha
       ) : (
         <>
           <Heading as="h2" px={"5"} size="md" color="#fff">
-            {userSelected.firstname} {userSelected.lastname}
+            {userSelected?.firstname} {userSelected?.lastname}
           </Heading>
           <Heading as="h3" px={"2"} size="xs" color="#fff">
-            {ChannelSelected?.subject ? ChannelSelected?.subject : "no subject" }
+            {ChannelSelected?.subject ? "("+ChannelSelected?.subject+")" : "(no subject)" }
           </Heading>
         </>
       )}
