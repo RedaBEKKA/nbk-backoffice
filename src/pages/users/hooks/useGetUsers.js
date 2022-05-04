@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Badge,
   Button,
@@ -16,6 +16,8 @@ import {
   Text,
   HStack,
   useToast,
+  Input,
+  Center,
 } from "@chakra-ui/react";
 import { BiShow } from "react-icons/bi";
 import { useLocation } from "react-router-dom";
@@ -213,7 +215,7 @@ function SingleView({ original }) {
   const getLoading = useStore((state) => state.wallets.getLoading);
   const wallets = useStore((state) => state.wallets.wallets);
   const getAllWallets = useStore((state) => state.getAllWallets);
-
+  const [first, setfirst] = useState(false);
   const getSingleView = () => {
     // getAllWallets({ userId: original?.userId, pageCount: 2 });
     //TODO WALLET USERID IS HARD CODED
@@ -221,15 +223,26 @@ function SingleView({ original }) {
     onOpen();
   };
 
+  const getSingleCloture = () => {
+    getAllWallets({ userId: 2151518 });
+    setfirst(!first);
+  };
+
+  const OnClosed = () => {
+    setfirst(false);
+  };
   console.log("user id", original.userId);
   console.log("wallets of user", wallets);
   function currencyFormat(num) {
-    return   num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '1 ') +' €'
- }
+    return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "1 ") + " €";
+  }
   return (
     <>
       <Button onClick={getSingleView}>
         <BiShow style={{ fontSize: 24 }}></BiShow>
+      </Button>
+      <Button onClick={getSingleCloture} width={20}>
+        Clôturer
       </Button>
 
       <Drawer size="xl" placement={"right"} onClose={onClose} isOpen={isOpen}>
@@ -353,6 +366,116 @@ function SingleView({ original }) {
                     </Flex>
                   </SimpleGrid>
                 ))}
+              </>
+            )}
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+      <Drawer size="xl" placement={"right"} onClose={OnClosed} isOpen={first}>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerHeader
+            // bg="linear-gradient(to right, #56ab2f, #a8e063)"
+            bg="#2DDCB1"
+            color="white"
+            borderBottomWidth="1px"
+            h="md"
+          >
+            <Flex py="8" justifyContent="space-between" alignItems="center">
+              <Box>Cloture </Box>
+              <HStack>
+                <Link to={`/users?id=${original?.userId}`}>
+                  <Button bg="black" _hover={{ bg: "black" }}>
+                    <RiEditBoxFill style={{ fontSize: 26 }}></RiEditBoxFill>
+                  </Button>
+                </Link>
+                <DisableUser userName={original?.email}></DisableUser>
+                <EnableUser userName={original?.email}></EnableUser>
+              </HStack>
+            </Flex>
+          </DrawerHeader>
+          <DrawerBody>
+            {getLoading ? (
+              <Flex mt="8" justifyContent="center">
+                <Spinner></Spinner>
+              </Flex>
+            ) : (
+              <>
+                <Heading my="4" size="md">
+                  user wallets :
+                </Heading>
+                {!wallets && (
+                  <Flex
+                    w="full"
+                    p="16"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    il n'y a pas de données
+                  </Flex>
+                )}
+                {wallets?.map((wallet) => (
+                  <SimpleGrid
+                    key={wallet.walletId}
+                    border="1px solid black"
+                    rounded="xl"
+                    p="4"
+                    mt="8"
+                    columns={{ base: 1, md: 2 }}
+                    spacing={8}
+                  >
+                    <Flex justifyContent="space-between" alignItems="center">
+                      <Text fontSize="lg" fontWeight="bold">
+                        Wallet ID :
+                      </Text>
+                      <Text fontSize="lg">{wallet.walletId}</Text>
+                    </Flex>
+                    <Flex justifyContent="space-between" alignItems="center">
+                      <Text fontSize="lg" fontWeight="bold">
+                        Solde :{" "}
+                      </Text>
+                      <Text fontSize="lg">{currencyFormat(wallet.solde)}</Text>
+                    </Flex>
+                    <Flex justifyContent="space-between" alignItems="center">
+                      <Text fontSize="lg" fontWeight="bold">
+                        iban :{" "}
+                      </Text>
+                      <Text fontSize="lg">{wallet.iban}</Text>
+                    </Flex>
+                  </SimpleGrid>
+                ))}
+                <SimpleGrid
+                  fullWidth
+                  rounded="xl"
+                  p="4"
+                  mt="8"
+                  columns={{ base: 1, md: 2 }}
+                  spacing={1}
+                  alignItems="center"
+                >
+                  <Text fontSize="lg" fontWeight="bold">
+                    iban :{" "}
+                  </Text>
+                  <Input
+                    mx="2"
+                    variant="filled"
+                    type="number"
+                    w={"100%"}
+                    // defaultValue={}
+                    onChange={(e) => {}}
+                    placeholder="Enter iban"
+                  />
+                </SimpleGrid>
+                <HStack
+                  fullWidth
+                  mt="4"
+                  justifyContent='center'
+                >
+                <Button  width={40} color='#f00' >
+                  Valider la clôture
+                </Button>
+                </HStack>
+
               </>
             )}
           </DrawerBody>
