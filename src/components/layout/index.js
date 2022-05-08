@@ -154,8 +154,7 @@ const NavItem = ({ icon, children, path, menu, nested, ...rest }) => {
                 borderRadius="lg"
                 role="group"
                 cursor="pointer"
-                fontWeight= "bold"
-
+                fontWeight="bold"
                 _hover={{
                   // bg: "linear-gradient(to right, #56ab2f, #a8e063)",
                   bg: "#eeeeee",
@@ -213,8 +212,7 @@ const NavItem = ({ icon, children, path, menu, nested, ...rest }) => {
             borderRadius="lg"
             role="group"
             cursor="pointer"
-            fontWeight= "bold"
-
+            fontWeight="bold"
             _hover={{
               // bg: "linear-gradient(to right, #56ab2f, #a8e063)",
               bg: "#eeeeee",
@@ -324,8 +322,10 @@ const MobileNav = ({ onOpen, ...rest }) => {
               <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem>
               <MenuDivider /> */}
-              <MenuItem>Créer un compte</MenuItem>
-              <MenuDivider/>
+              <Link to="/users/add">
+                <MenuItem>Créer un compte</MenuItem>
+              </Link>
+              <MenuDivider />
               <MenuItem onClick={handleLogout}>Se déconnecter</MenuItem>
             </MenuList>
           </Menu>

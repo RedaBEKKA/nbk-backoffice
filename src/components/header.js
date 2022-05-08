@@ -5,7 +5,7 @@ import { FaFileExport } from "react-icons/fa";
 import { AiFillFileAdd } from "react-icons/ai";
 import Filter from "./filter";
 
-export default function Header({ title, FilterForm, edit }) {
+export default function Header({ title, FilterForm, edit, Actions }) {
   const [showfilter, setShowfilter] = useState(false);
   const handleShowfilter = () => {
     setShowfilter(!showfilter);
@@ -27,7 +27,7 @@ export default function Header({ title, FilterForm, edit }) {
         {!edit && (
           <Stack spacing={2} justify="flex-start">
             <Stack direction="column">
-              
+              {/* {Actions && <Actions></Actions>} */}
               <Button
                 leftIcon={<FaFileExport />}
                 _hover={{ bg: "gray.900" }}

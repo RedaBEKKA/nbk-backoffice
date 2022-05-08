@@ -1,32 +1,33 @@
 //icons
-import { RiDashboardFill, RiSettings5Fill } from 'react-icons/ri';
-import { HiUsers } from 'react-icons/hi';
-import { FaWallet } from 'react-icons/fa';
-import { IoDocumentsSharp, IoCardSharp } from 'react-icons/io5';
-import { SiBuzzfeed } from 'react-icons/si';
-import { BiTransfer } from 'react-icons/bi';
+import { RiDashboardFill, RiSettings5Fill } from "react-icons/ri";
+import { HiUsers } from "react-icons/hi";
+import { FaWallet } from "react-icons/fa";
+import { IoDocumentsSharp, IoCardSharp } from "react-icons/io5";
+import { SiBuzzfeed } from "react-icons/si";
+import { BiTransfer } from "react-icons/bi";
 
 // components
-import Login from 'pages/login';
-import ResetPassword from 'pages/resetPassword';
-import ConfirmReset from 'pages/confirmReset';
-import Dashboard from 'pages/dashboard';
-import Wallet from 'pages/wallet';
-import Cards from 'pages/cards';
-import Transactions from 'pages/transactions';
-import Transfers from 'pages/transfers';
-import Users from 'pages/users';
-import EditeUser from 'pages/users/components/Edite';
-import Documents from 'pages/documents';
-import Benifit from 'pages/benefit';
-import Payins from 'pages/operations/payins';
-import FourOfour from 'pages/404';
-import Chat from 'pages/chat';
+import Login from "pages/login";
+import ResetPassword from "pages/resetPassword";
+import ConfirmReset from "pages/confirmReset";
+import Dashboard from "pages/dashboard";
+import Wallet from "pages/wallet";
+import Cards from "pages/cards";
+import Transactions from "pages/transactions";
+import Transfers from "pages/transfers";
+import Users from "pages/users";
+import EditeUser from "pages/users/components/Edite";
+import AddUser from "pages/users/components/AddUser";
+import Documents from "pages/documents";
+import Benifit from "pages/benefit";
+import Payins from "pages/operations/payins";
+import FourOfour from "pages/404";
+import Chat from "pages/chat";
 
 const routes = [
   {
-    label: 'Login',
-    path: '/',
+    label: "Login",
+    path: "/",
     icon: RiDashboardFill,
     component: Login,
     protected: false,
@@ -34,8 +35,8 @@ const routes = [
     sidbarlist: false,
   },
   {
-    label: 'reset Password',
-    path: '/resetPassword',
+    label: "reset Password",
+    path: "/resetPassword",
     icon: RiDashboardFill,
     component: ResetPassword,
     protected: false,
@@ -43,8 +44,8 @@ const routes = [
     sidbarlist: false,
   },
   {
-    label: 'confirm reset Password',
-    path: '/confirmResetPassword',
+    label: "confirm reset Password",
+    path: "/confirmResetPassword",
     icon: RiDashboardFill,
     component: ConfirmReset,
     protected: false,
@@ -52,8 +53,8 @@ const routes = [
     sidbarlist: false,
   },
   {
-    label: 'Tableau de bord',
-    path: '/dashboard',
+    label: "Tableau de bord",
+    path: "/dashboard",
     icon: RiDashboardFill,
     component: Dashboard,
     protected: true,
@@ -61,8 +62,8 @@ const routes = [
     sidbarlist: true,
   },
   {
-    label: 'Gestion des Utilisateurs',
-    path: '/users',
+    label: "Gestion des Utilisateurs",
+    path: "/users",
     icon: HiUsers,
     component: Users,
     protected: true,
@@ -70,8 +71,8 @@ const routes = [
     sidbarlist: true,
   },
   {
-    label: 'edit Utilisateurs',
-    path: '/users/edit',
+    label: "edit Utilisateurs",
+    path: "/users/edit",
     icon: HiUsers,
     component: EditeUser,
     protected: true,
@@ -79,8 +80,17 @@ const routes = [
     sidbarlist: false,
   },
   {
-    label: 'Gestion des Portefeuille',
-    path: '/wallet',
+    label: "Créer un utilisateur",
+    path: "/users/add",
+    icon: HiUsers,
+    component: AddUser,
+    protected: true,
+    menu: false,
+    sidbarlist: false,
+  },
+  {
+    label: "Gestion des Portefeuille",
+    path: "/wallet",
     icon: FaWallet,
     component: Wallet,
     protected: true,
@@ -88,8 +98,8 @@ const routes = [
     sidbarlist: true,
   },
   {
-    label: 'Gestion des documents',
-    path: '/documents',
+    label: "Gestion des documents",
+    path: "/documents",
     icon: IoDocumentsSharp,
     component: Documents,
     protected: true,
@@ -97,7 +107,7 @@ const routes = [
     sidbarlist: true,
   },
   {
-    label: 'Gestion des opérations',
+    label: "Gestion des opérations",
     icon: RiSettings5Fill,
     // component: components,
     protected: true,
@@ -105,8 +115,8 @@ const routes = [
     sidbarlist: true,
     nested: [
       {
-        label: 'Payins',
-        path: '/payins',
+        label: "Payins",
+        path: "/payins",
         // icon: RiDashboardFill,
         component: Payins,
         protected: true,
@@ -133,17 +143,17 @@ const routes = [
     ],
   },
   {
-    label: 'Gestion des bénéficiaires',
+    label: "Gestion des bénéficiaires",
     icon: SiBuzzfeed,
-    path: '/benefit',
+    path: "/benefit",
     component: Benifit,
     protected: true,
     menu: false,
     sidbarlist: true,
   },
   {
-    label: 'Gestion des transactions',
-    path: '/transactions',
+    label: "Gestion des transactions",
+    path: "/transactions",
     icon: BiTransfer,
     component: Transactions,
     protected: true,
@@ -151,8 +161,8 @@ const routes = [
     sidbarlist: true,
   },
   {
-    label: 'Gestion des transfers',
-    path: '/transfers',
+    label: "Gestion des transfers",
+    path: "/transfers",
     icon: BiTransfer,
     component: Transfers,
     protected: true,
@@ -160,8 +170,8 @@ const routes = [
     sidbarlist: true,
   },
   {
-    label: 'Gestion des cartes',
-    path: '/cards',
+    label: "Gestion des cartes",
+    path: "/cards",
     icon: IoCardSharp,
     component: Cards,
     protected: true,
@@ -169,16 +179,16 @@ const routes = [
     sidbarlist: true,
   },
   {
-    label: '404',
-    path: '*',
+    label: "404",
+    path: "*",
     component: FourOfour,
     protected: false,
     menu: false,
     sidbarlist: false,
   },
   {
-    label: 'Chat',
-    path: '/chat',
+    label: "Chat",
+    path: "/chat",
     icon: IoCardSharp,
     component: Chat,
     protected: true,

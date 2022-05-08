@@ -7,6 +7,7 @@ import Layout from "components/layout";
 import useGetUsers from "./hooks/useGetUsers";
 import Filter from "./components/filter";
 import Edite from "./components/Edite";
+import Actions from "./components/Actions";
 export default function Users() {
   const { users, userColumns, userLoading, userId, user, getSingleLoading } =
     useGetUsers();
@@ -14,6 +15,7 @@ export default function Users() {
   return (
     <Layout>
       <Header
+        // Actions={Actions}
         FilterForm={Filter}
         title={userId ? "Éditer Un Utilisateur" : "Gestion des Utilisateurs"}
         edit={userId ? true : false}
