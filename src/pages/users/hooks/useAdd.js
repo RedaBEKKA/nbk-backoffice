@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { fr } from "yup-locales";
 import { setLocale } from "yup";
+import ErrorHandler from "components/ErrorHandler";
 setLocale(fr);
 
 const schema = yup
@@ -40,7 +41,7 @@ export default function useAdd() {
       });
     } else {
       toast({
-        description: "quelque chose s'est mal passé",
+        description: <ErrorHandler res={res}></ErrorHandler>,
         status: "error",
         duration: 9000,
         isClosable: true,

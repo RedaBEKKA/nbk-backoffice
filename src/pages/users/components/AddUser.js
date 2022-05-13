@@ -14,6 +14,8 @@ import {
   Flex,
   Container,
   FormErrorMessage,
+  InputGroup,
+  InputRightElement,
 } from "@chakra-ui/react";
 import useAdd from "../hooks/useAdd";
 import ConfirmUser from "./ConfirmUser";
@@ -21,6 +23,8 @@ import ConfirmUser from "./ConfirmUser";
 export default function AddUser() {
   const { register, handleSubmit, isSubmitting, onSubmit, errors, confirm } =
     useAdd();
+  const [show, setShow] = React.useState(false);
+  const handleClick = () => setShow(!show);
   return (
     <Layout>
       <Header
@@ -31,7 +35,7 @@ export default function AddUser() {
       {confirm.form ? (
         <ConfirmUser confirm={confirm}></ConfirmUser>
       ) : (
-        <Container maxW="8xl">
+        <Container>
           <Box p="4" bg="white" rounded="xl" shadow="xl">
             <form onSubmit={handleSubmit(onSubmit)}>
               <SimpleGrid
@@ -52,12 +56,25 @@ export default function AddUser() {
                 </FormControl>
                 <FormControl isInvalid={errors.password}>
                   <FormLabel> Password</FormLabel>
-                  <Input
+                  <InputGroup size="md">
+                    <Input
+                      variant="filled"
+                      {...register("password")}
+                      type={show ? "text" : "password"}
+                      placeholder="Enter password"
+                    />
+                    <InputRightElement width="4.5rem">
+                      <Button h="1.75rem" size="sm" onClick={handleClick}>
+                        {show ? "Hide" : "Show"}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
+                  {/* <Input
                     type="password"
-                    variant="filled"
                     placeholder="password"
+                    variant="filled"
                     {...register("password")}
-                  ></Input>
+                  ></Input> */}
                   {errors.password && (
                     <FormErrorMessage>
                       {errors.password.message}

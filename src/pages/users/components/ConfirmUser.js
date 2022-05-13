@@ -44,7 +44,7 @@ export default function ConfirmUser({ confirm }) {
     }
   };
   return (
-    <Container maxW="8xl">
+    <Container>
       <Box p="4" bg="white" rounded="xl" shadow="xl">
         <form onSubmit={handleSubmit(onSubmit)}>
           <SimpleGrid

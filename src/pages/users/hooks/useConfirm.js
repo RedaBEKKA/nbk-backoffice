@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useToast } from "@chakra-ui/react";
 import useStore from "store";
@@ -7,6 +6,7 @@ import * as yup from "yup";
 import { fr } from "yup-locales";
 import { setLocale } from "yup";
 import { useNavigate } from "react-router-dom";
+import ErrorHandler from "components/ErrorHandler";
 
 setLocale(fr);
 
@@ -42,7 +42,7 @@ export default function useConfirm() {
       });
     } else {
       toast({
-        description: "quelque chose s'est mal passé",
+        description: <ErrorHandler res={res}></ErrorHandler>,
         status: "error",
         duration: 9000,
         isClosable: true,
