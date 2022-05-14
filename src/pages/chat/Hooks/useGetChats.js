@@ -1,4 +1,4 @@
-import { id } from "date-fns/locale";
+
 import { useEffect, useState } from "react";
 import useStore from "store";
 
@@ -7,12 +7,9 @@ export default function useGetChats() {
   const getLoading = useStore((state) => state.chats.getLoading);
   const chats = useStore((state) => state.chats.chats);
   const getAllChats = useStore((state) => state.getAllChats);
-
   const getUser = useStore((state) => state.getUser);
-  const getSingleLoading = useStore((state) => state.users.getSingleLoading);
   const user = useStore((state) => state.users.user);
-  const chatUsers = useStore((state) => state.users.chatUsers);
-  const [value, setValue] = useState([]);
+
 
   useEffect(() => {
     getAllChats();

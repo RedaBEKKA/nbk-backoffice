@@ -1,8 +1,6 @@
 import {
   Avatar,
-  Box,
   Flex,
-  Heading,
   Text,
   WrapItem,
   Skeleton,
@@ -11,20 +9,34 @@ import {
   HStack,
   Stack,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import UseGetUsers from "../../../Hooks/useGetUsers";
 
 function Profile({ title, url, date, channel }) {
-  const { loading, user, getMessages, getUserSelected,getChannelSelected,ChannelSelected } = UseGetUsers(
-    title,
-    channel.channelId
-  );
+  const {
+    loading,
+    user,
+    getMessages,
+    getUserSelected,
+    getChannelSelected,
+    refresh,
+    ChannelSelected,
+  } = UseGetUsers(title, channel.channelId);
   const get = () => {
     getMessages(channel.channelId);
     getUserSelected(title);
-    getChannelSelected(channel.channelId)
+    getChannelSelected(channel.channelId);
   };
-  // console.log(user);
+
+  const getMesssg = () => {
+    getMessages(ChannelSelected.channelId);
+  };
+
+  // get new messages from back
+  useEffect(() => {
+    if (refresh) getMesssg();
+  }, [refresh]);
+
   return (
     <Center
       mt="2"

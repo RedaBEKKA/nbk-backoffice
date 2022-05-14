@@ -45,7 +45,8 @@ function BackGroundMessage() {
           })}
 
           {/* Send messgae */}
-          <ContainerSendMessage />
+          
+          <ContainerSendMessage userSelected={userSelected} ChannelSelected={ChannelSelected}  />
         </Box>
       </Box>
     </Chatcontainer>

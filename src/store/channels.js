@@ -4,13 +4,15 @@ const channels = (set, get) => ({
   channels: {
     channels: null,
     getLoading: false,
-    getSingleLoading:false,
-    messages:null,
-    nombre:null,
-    userSelected:null,
-    LoadingUserSelected:false,
-    ChannelSelected:null,
-    LoadingChannelSelected:false
+    getSingleLoading: false,
+    messages: null,
+    nombre: null,
+    userSelected: null,
+    LoadingUserSelected: false,
+    ChannelSelected: null,
+    LoadingChannelSelected: false,
+    messagesSend: null,
+    refresh:false
   },
 
   getAllChannels: async () => {
@@ -42,14 +44,15 @@ const channels = (set, get) => ({
     });
     try {
       const res = await Axios.get(`/messages/${id}/channels`);
-      // console.log("messages--------", res?.data?.data?.messages?.length);
 
       set({
         channels: {
           ...get().channels,
           messages: res?.data?.data?.messages,
           getSingleLoading: false,
-          nombre:res?.data?.data?.messages?.length
+          nombre: res?.data?.data?.messages?.length,
+          refresh:false
+
         },
       });
       return res;
@@ -58,7 +61,7 @@ const channels = (set, get) => ({
       return error.response;
     }
   },
-  getUserSelected : async (id) =>{
+  getUserSelected: async (id) => {
     set({
       channels: { ...get().channels, LoadingUserSelected: true },
     });
@@ -99,7 +102,28 @@ const channels = (set, get) => ({
       console.log(error.response);
       return error.response;
     }
-  }
+  },
+  postMessages: async (channelId, author, body) => {
+    try {
+      const res = await Axios.post(`/messages`, {
+        channelId,
+        author,
+        body,
+      });
+      // console.log('data*****',res?.data);
+      set({
+        channels: {
+          ...get().channels,
+          messagesSend: res.data.data,
+          refresh:true
+        },
+      });
+      return res;
+    } catch (error) {
+      console.log(error.response);
+      return error.response;
+    }
+  },
 });
 
 export default channels;
