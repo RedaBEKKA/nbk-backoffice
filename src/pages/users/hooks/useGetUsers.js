@@ -382,7 +382,7 @@ function SingleView({ original }) {
             h="md"
           >
             <Flex py="8" justifyContent="space-between" alignItems="center">
-              <Box>Cloture </Box>
+              <Box>Cloture d'un compte </Box>
               <HStack>
                 <Link to={`/users?id=${original?.userId}`}>
                   <Button bg="black" _hover={{ bg: "black" }}>
