@@ -178,6 +178,20 @@ export default function useGetWallets() {
           );
         },
       },
+      {
+        accessor: "links",
+        Cell: ({ row: { original } }) => {
+          return (
+            <>
+              <Text color="purple.500" fontWeight="bold" cursor="pointer">
+                <Link to={`/transactions?userId=${original.userId}`}>
+                  transactions
+                </Link>
+              </Text>
+            </>
+          );
+        },
+      },
       //   {
       //     accessor: 'links',
       //     Cell: ({ row: { original } }) => {
@@ -191,12 +205,7 @@ export default function useGetWallets() {
       //     },
       //   },
     ],
-    [
-      kycreviewLoading,
-      disptachKycReviewUpdate,
-      disptachKycLivenessUpdate,
-      kyclivenessLoading,
-    ]
+    []
   );
   return {
     userLoading: getLoading,
@@ -224,8 +233,8 @@ function SingleView({ original }) {
   console.log("user id", original.userId);
   console.log("wallets of user", wallets);
   function currencyFormat(num) {
-    return   num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '1 ') +' €'
- }
+    return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "1 ") + " €";
+  }
   return (
     <>
       <Button onClick={getSingleView}>

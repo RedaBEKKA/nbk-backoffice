@@ -30,7 +30,7 @@ export default function AddUser() {
       <Header
         FilterForm={null}
         title={"Créer un utilisateur"}
-        edit={false}
+        edit={true}
       ></Header>
       {confirm.form ? (
         <ConfirmUser confirm={confirm}></ConfirmUser>

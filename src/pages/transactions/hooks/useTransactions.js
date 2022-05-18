@@ -15,13 +15,18 @@ import {
 import { BiShow } from "react-icons/bi";
 
 import useStore from "store";
-export default function useTransactions({ walletId }) {
+export default function useTransactions({ walletId, userId }) {
   const getLoading = useStore((state) => state.transactions.getLoading);
   const transactions = useStore((state) => state.transactions.transactions);
   const getAllTransactions = useStore((state) => state.getAllTransactions);
+  const getUserTransactions = useStore((state) => state.getUserTransactions);
   useEffect(() => {
-    getAllTransactions({ walletId });
-  }, [getAllTransactions, walletId]);
+    if (userId) {
+      getUserTransactions({ walletId, userId });
+    } else {
+      getAllTransactions({ walletId });
+    }
+  }, [getAllTransactions, getUserTransactions, userId, walletId]);
   const transactionColumns = useMemo(
     () => [
       {
