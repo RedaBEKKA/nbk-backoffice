@@ -184,7 +184,7 @@ export default function useGetWallets() {
           return (
             <>
               <Text color="purple.500" fontWeight="bold" cursor="pointer">
-                <Link to={`/transactions?userId=${original.userId}`}>
+                <Link to={`/users/transactions?userId=${original.userId}`}>
                   transactions
                 </Link>
               </Text>

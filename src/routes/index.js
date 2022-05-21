@@ -16,6 +16,7 @@ import Cards from "pages/cards";
 import Transactions from "pages/transactions";
 import Transfers from "pages/transfers";
 import Users from "pages/users";
+import UserTransaction from "pages/users/components/UserTransaction";
 import EditeUser from "pages/users/components/Edite";
 import AddUser from "pages/users/components/AddUser";
 import Documents from "pages/documents";
@@ -75,6 +76,15 @@ const routes = [
     path: "/users/edit",
     icon: HiUsers,
     component: EditeUser,
+    protected: true,
+    menu: false,
+    sidbarlist: false,
+  },
+  {
+    label: "user transactions",
+    path: "/users/transactions",
+    icon: HiUsers,
+    component: UserTransaction,
     protected: true,
     menu: false,
     sidbarlist: false,
