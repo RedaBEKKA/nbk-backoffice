@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Flex,
   Input,
@@ -28,41 +29,46 @@ const ContainerSendMessage = ({ ChannelSelected }) => {
   };
   const handleChange = (event) => setbody(event.target.value);
   return (
-    <form onSubmit={handleSubmit(submit)}>
-      <Flex
-        bg={"#fff"}
-        m="5"
-        pos={"absolute"}
-        bottom="5rem"
-        w="95%"
-        borderRadius={25}
-      >
-        <InputGroup>
-          <Input
-            placeholder="send a message"
-            borderRadius={25}
-            value={body}
-            onChange={handleChange}
-          />
-          <Button style={{ backgroundColor: "transparent" }} type="submit">
-            <InputRightElement
-              pointerEvents="stroke"
-              children={
-                <Icon
-                  color="gray.300"
-                  as={BiSend}
-                  cursor="pointer"
-                  boxSize="30px"
-                  _hover={{
-                    color: "#2DDCB1",
-                  }}
-                />
-              }
+    <Box w="95%" bottom={"3"} left="30px" pos={"absolute"}>
+      <form onSubmit={handleSubmit(submit)}>
+        <Flex bg={"#fff"} borderRadius={25}>
+          <InputGroup>
+            <Input
+              placeholder="send a message"
+              borderRadius={25}
+              value={body}
+              onChange={handleChange}
             />
-          </Button>
-        </InputGroup>
-      </Flex>
-    </form>
+            <Button
+              style={{
+                backgroundColor: "transparent",
+                outline: 0,
+                borderWidth: 0,
+                borderColor:"#fff"
+              }}
+              type="submit"
+            >
+              <InputRightElement
+                pointerEvents="stroke"
+                children={
+                  <Icon
+                    color="gray.300"
+                    as={BiSend}
+                    cursor="pointer"
+                    boxSize="30px"
+                    _hover={{
+                      color: "#2DDCB1",
+                      outline: 0,
+                      borderWidth: 0,
+                    }}
+                  />
+                }
+              />
+            </Button>
+          </InputGroup>
+        </Flex>
+      </form>
+    </Box>
   );
 };
 

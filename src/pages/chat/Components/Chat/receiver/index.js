@@ -24,7 +24,7 @@ function Receiver({ item,first }) {
 
 
   return (
-    <Box display="flex" alignItems="center" mb={2} justifyContent={"flex-end"}>
+    <Box display="flex" alignItems="center" mb={2} justifyContent={"flex-end"} >
 
 
       {LoadingUserSelected ? (
