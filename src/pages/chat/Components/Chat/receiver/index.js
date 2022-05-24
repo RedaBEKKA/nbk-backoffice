@@ -19,12 +19,13 @@ function Receiver({ item,first }) {
   // };
 
  
-  const bg = item?.author === first  ? 'a' :'b'
-  const bg1 = item?.author ===  first ? '#ddd' :'#eee'
-
+  const bg = item?.author == first  ? 'a' :'b'
+  const bg1 = item?.author ==  first ? '#ddd' :'#eee'
+  const justify = item?.author ==  first ? 'flex-end' :'flex-end'
+const direction = item?.author ==  first ? "row" :"row-reverse"
 
   return (
-    <Box display="flex" alignItems="center" mb={2} justifyContent={"flex-end"} >
+    <Box display="flex" alignItems="center" mb={2} justifyContent={justify}  flexDirection={direction} >
 
 
       {LoadingUserSelected ? (

@@ -12,7 +12,7 @@ import { BiSend } from "react-icons/bi";
 import useSendMessages from "pages/chat/Hooks/useSendMessage";
 import { useForm } from "react-hook-form";
 
-const ContainerSendMessage = ({ ChannelSelected }) => {
+const ContainerSendMessage = ({ ChannelSelected,userIDStore }) => {
   const {
     register,
     handleSubmit,
@@ -22,7 +22,7 @@ const ContainerSendMessage = ({ ChannelSelected }) => {
   const [body, setbody] = useState("");
   const { onSubmit } = useSendMessages();
   const submit = () => {
-    onSubmit(ChannelSelected.channelId, ChannelSelected.userId, body);
+    onSubmit(ChannelSelected.channelId, userIDStore, body);
     setTimeout(() => {
       setbody("");
     }, 2000);

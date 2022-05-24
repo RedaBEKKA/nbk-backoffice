@@ -12,7 +12,7 @@ const channels = (set, get) => ({
     ChannelSelected: null,
     LoadingChannelSelected: false,
     messagesSend: null,
-    refresh:false
+    refresh: false,
   },
 
   getAllChannels: async () => {
@@ -44,15 +44,14 @@ const channels = (set, get) => ({
     });
     try {
       const res = await Axios.get(`/messages/${id}/channels`);
-
+      // console.log("res", res);
       set({
         channels: {
           ...get().channels,
           messages: res?.data?.data?.messages,
           getSingleLoading: false,
           nombre: res?.data?.data?.messages?.length,
-          refresh:false
-
+          refresh: false,
         },
       });
       return res;
@@ -88,7 +87,7 @@ const channels = (set, get) => ({
     });
     try {
       const res = await Axios.get(`/channels/${id}`);
-      console.log("res-channels-selected-data", res);
+      // console.log("res-channels-selected-data", res);
 
       set({
         channels: {
@@ -115,7 +114,7 @@ const channels = (set, get) => ({
         channels: {
           ...get().channels,
           messagesSend: res.data.data,
-          refresh:true
+          refresh: true,
         },
       });
       return res;

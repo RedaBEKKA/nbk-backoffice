@@ -14,6 +14,7 @@ function BackGroundMessage() {
     LoadingUserSelected,
     ChannelSelected,
     LoadingChannelSelected,
+    userIDStore
   } = UseGetUsers();
   // console.log("Messages----", Messages);
   const BackGround = [
@@ -29,7 +30,7 @@ function BackGroundMessage() {
       messageEndRef?.current?.scrollIntoView();
     }
   }, [Messages]);
-
+console.log('MessagesMessagesMessagesMessages', Messages)
   return (
     <Chatcontainer>
       {/* Left side Chat */}
@@ -60,8 +61,10 @@ function BackGroundMessage() {
                 <ItemsRender
                   item={i}
                   nombre={nombre}
-                  first={Messages[0]?.author}
+                  // first={Messages[0]?.author}
+                  first={userIDStore?.userId}
                   userSelected={userSelected}
+                  // userIDStore={userIDStore?.userId}
                 />
                 <Box ref={messageEndRef} />
               </Stack>
@@ -72,6 +75,8 @@ function BackGroundMessage() {
         <ContainerSendMessage
           userSelected={userSelected}
           ChannelSelected={ChannelSelected}
+          userIDStore={userIDStore?.userId}
+
         />
       </Box>
     </Chatcontainer>
