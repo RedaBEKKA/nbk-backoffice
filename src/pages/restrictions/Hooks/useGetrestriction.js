@@ -1,7 +1,6 @@
 import { useEffect, useMemo } from "react";
-import { Badge, Text } from "@chakra-ui/react";
+import { Badge } from "@chakra-ui/react";
 import useStore from "store";
-import { Link } from "react-router-dom";
 export default function useGetRestrictions() {
   const getLoading = useStore((state) => state.restrictions.getLoading);
   const restrictions = useStore((state) => state.restrictions.restriction);
