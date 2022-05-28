@@ -22,6 +22,7 @@ import Benifit from 'pages/benefit';
 import Payins from 'pages/operations/payins';
 import FourOfour from 'pages/404';
 import Chat from 'pages/chat';
+import Restrictions from 'pages/restrictions';
 
 const routes = [
   {
@@ -164,6 +165,15 @@ const routes = [
     path: '/cards',
     icon: IoCardSharp,
     component: Cards,
+    protected: true,
+    menu: false,
+    sidbarlist: true,
+  },
+  {
+    label: 'Gestion des restrictions',
+    path: '/restrictions',
+    icon: IoCardSharp,
+    component: Restrictions,
     protected: true,
     menu: false,
     sidbarlist: true,

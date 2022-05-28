@@ -96,7 +96,6 @@ const users = (set, get) => ({
       return error.response;
     }
   },
-
   // addUsers: (payload) =>
   //   set(
   //     produce((draft) => {

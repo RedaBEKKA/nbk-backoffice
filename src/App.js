@@ -39,7 +39,7 @@ export default function App() {
 
   useEffect(() => {
     checkToken();
-    console.log(location);
+    // console.log(location);
   }, [checkToken, location]);
   useEffect(() => {
     getAppToken();

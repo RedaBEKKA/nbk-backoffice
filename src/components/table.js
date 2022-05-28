@@ -160,6 +160,8 @@ function DashTable({ columns, data }) {
 }
 
 function App({ columns, data }) {
+  // console.log("dataaaa", data);
+
   return (
     <Box w="100%" overflowX="auto" overflowY="hidden">
       {true && <DashTable columns={columns} data={data} />}

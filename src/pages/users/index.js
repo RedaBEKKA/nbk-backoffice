@@ -8,8 +8,14 @@ import useGetUsers from "./hooks/useGetUsers";
 import Filter from "./components/filter";
 import Edite from "./components/Edite";
 export default function Users() {
-  const { users, userColumns, userLoading, userId, user, getSingleLoading } =
-    useGetUsers();
+  const {
+    users,
+    userColumns,
+    userLoading,
+    userId,
+    user,
+    getSingleLoading,
+  } = useGetUsers();
 
   return (
     <Layout>

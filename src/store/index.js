@@ -11,6 +11,7 @@ import benefit from "./benefit";
 import documents from "./documents";
 import transactions from "./transactions";
 import channels from "./channels";
+import restrictions from "./restrictions";
 
 const useStore = create(
   devtools(
@@ -26,6 +27,7 @@ const useStore = create(
         ...documents(set, get),
         ...transactions(set, get),
         ...channels(set, get),
+        ...restrictions(set, get),
       }),
       {
         name: "nbk",
