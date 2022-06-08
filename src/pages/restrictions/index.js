@@ -8,7 +8,7 @@ import Table from 'components/table';
 
 function Restrictions() {
   const {restrictionsLoading , restrictions, col  } = useGeRestrictions();
-  console.log("firstss", restrictions, col);
+  // console.log("firstss", restrictions, col);
 
   return (
     <Layout>

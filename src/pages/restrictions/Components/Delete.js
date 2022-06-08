@@ -17,14 +17,14 @@ export default function Delete({ id }) {
   const onClose = () => setIsOpen(false);
   const cancelRef = React.useRef();
   const toast = useToast();
-  const deleteDocument = useStore((state) => state.deleteDocument);
-  const getAllDocuments = useStore((state) => state.getAllDocuments);
-  const deleteLoading = useStore((state) => state.documents.deleteLoading);
+  const deleteRestriction = useStore((state) => state.deleteRestriction);
+  const getAllRestrictions = useStore((state) => state.getAllRestrictions);
+  const deleteLoading = useStore((state) => state.restrictions.deleteLoading);
 
   const remove = async () => {
-    const res = await deleteDocument(id);
+    const res = await deleteRestriction(id);
     if (res?.data?.status === "success") {
-      await getAllDocuments();
+      await getAllRestrictions();
       onClose();
     } else {
       toast({
