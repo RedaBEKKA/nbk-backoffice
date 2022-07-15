@@ -10,14 +10,13 @@ import Filter from "./components/filter";
 export default function Transaction() {
   const [searchParams] = useSearchParams();
   const walletId = searchParams.get("walletId");
+  const userId = searchParams.get("userId");
   // console.log(walletId);
-  const {
-    transactions,
-    transactionColumns,
-    transactionLoading,
-  } = useTransactions({
-    walletId,
-  });
+  const { transactions, transactionColumns, transactionLoading } =
+    useTransactions({
+      walletId,
+      userId,
+    });
 
   return (
     <Layout>

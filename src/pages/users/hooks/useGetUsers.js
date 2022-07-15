@@ -180,6 +180,20 @@ export default function useGetWallets() {
           );
         },
       },
+      {
+        accessor: "links",
+        Cell: ({ row: { original } }) => {
+          return (
+            <>
+              <Text color="purple.500" fontWeight="bold" cursor="pointer">
+                <Link to={`/users/transactions?userId=${original.userId}`}>
+                  transactions
+                </Link>
+              </Text>
+            </>
+          );
+        },
+      },
       //   {
       //     accessor: 'links',
       //     Cell: ({ row: { original } }) => {
@@ -193,12 +207,7 @@ export default function useGetWallets() {
       //     },
       //   },
     ],
-    [
-      kycreviewLoading,
-      disptachKycReviewUpdate,
-      disptachKycLivenessUpdate,
-      kyclivenessLoading,
-    ]
+    []
   );
   return {
     userLoading: getLoading,

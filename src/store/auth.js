@@ -6,6 +6,7 @@ const auth = (set, get) => ({
     appInfo: null,
     appLoading: false,
     loginInfo: null,
+    resendCodeLoading: false,
   },
   logout: () => {
     set({
@@ -47,6 +48,48 @@ const auth = (set, get) => ({
       });
       return res;
     } catch (error) {
+      console.log(error.response);
+      return error.response;
+    }
+  },
+  register: async (body) => {
+    try {
+      const res = await Axios.post(`/registration/users`, body);
+      // console.log('data*****',res?.data);
+      return res;
+    } catch (error) {
+      console.log(error.response);
+      return error.response;
+    }
+  },
+  confirmUser: async ({ email, code }) => {
+    try {
+      const res = await Axios.get(
+        `/registration/users/confirmation/${email}/${code}`
+      );
+
+      return res;
+    } catch (error) {
+      console.log(error.response);
+      return error.response;
+    }
+  },
+  resendCode: async (email) => {
+    try {
+      set({
+        auth: { ...get().auth, resendCodeLoading: true },
+      });
+      const res = await Axios.get(
+        `/registration/users/resend/${email}/confirmationcode`
+      );
+      set({
+        auth: { ...get().auth, resendCodeLoading: false },
+      });
+      return res;
+    } catch (error) {
+      set({
+        auth: { ...get().auth, resendCodeLoading: false },
+      });
       console.log(error.response);
       return error.response;
     }
