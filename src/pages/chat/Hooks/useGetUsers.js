@@ -5,6 +5,7 @@ export default function UseGetUsers(id, key) {
   const [loading, setLoading] = useState(false);
   // const loading = useStore((state) => state.users.getSingleLoading);
   const getUser = useStore((state) => state.getUser);
+  const refresh = useStore((state) => state.channels.refresh);
   const getMessages = useStore((state) => state.getMessages);
   const Messages = useStore((state) => state.channels.messages);
   const nombre = useStore((state) => state.channels.nombre);
@@ -47,5 +48,6 @@ export default function UseGetUsers(id, key) {
     ChannelSelected,
     LoadingChannelSelected,
     getChannelSelected,
+    refresh
   };
 }

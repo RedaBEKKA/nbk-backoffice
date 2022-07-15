@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   IconButton,
   Avatar,
@@ -29,6 +29,7 @@ import {
   ListIcon,
   OrderedList,
   UnorderedList,
+  Button,
 } from "@chakra-ui/react";
 import {
   FiHome,
@@ -54,6 +55,15 @@ const variants = {
 };
 export default function SidebarWithHeader({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [Show, setShow] = useState(false);
+  const Close = () => {
+    setShow(false);
+  };
+  const handleShowForm = () => {
+    setShow(true);
+  };
+
   return (
     <Box minH="100vh" bg={useColorModeValue("gray.50", "gray.900")}>
       <SidebarContent
@@ -74,7 +84,7 @@ export default function SidebarWithHeader({ children }) {
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
-      <MobileNav onOpen={onOpen} />
+      <MobileNav onOpen={onOpen} handleShowForm={handleShowForm} />
       <Box pb="16" ml={{ base: 0, md: "350px" }}>
         <motion.div
           variants={variants}

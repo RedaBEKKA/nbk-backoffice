@@ -4,7 +4,6 @@ import React from "react";
 const Chatcontainer = ( { children }) => {
   return (
     <Box
-      bg="#333"
       outline="hidden"
       m="20px 60px"
       h="83vh"

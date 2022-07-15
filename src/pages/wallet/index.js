@@ -10,7 +10,11 @@ export default function Contacts() {
 
   return (
     <Layout>
-      <Header FilterForm={Filter} title="Gestion des Portefeuille"></Header>
+      <Header FilterForm={Filter} title="Gestion des Portefeuille"
+        users={wallets}
+        fileName={"ExcelFile-wallets"}
+      
+      ></Header>
       <Container maxW="8xl">
         {walletLoading ? (
           <LoadingTable></LoadingTable>

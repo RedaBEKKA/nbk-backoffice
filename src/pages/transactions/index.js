@@ -20,7 +20,12 @@ export default function Transaction() {
 
   return (
     <Layout>
-      <Header FilterForm={Filter} title="Gestion des Transaction"></Header>
+      <Header
+        FilterForm={Filter}
+        title="Gestion des Transaction"
+        users={transactions}
+        fileName={"ExcelFile-transactions"}
+      ></Header>
       {walletId ? (
         <Container maxW="8xl">
           {transactionLoading ? (

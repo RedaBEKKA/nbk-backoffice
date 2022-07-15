@@ -12,8 +12,9 @@ export default function Contacts() {
     <Layout>
       <Header
         FilterForm={Filter}
-        title="Gestion des Beneficiaries
-"
+        title="Gestion des Beneficiaries"
+        users={benefits}
+        fileName={"ExcelFile-benefits"}
       ></Header>
       <Container maxW="8xl">
         {benefitLoading ? (

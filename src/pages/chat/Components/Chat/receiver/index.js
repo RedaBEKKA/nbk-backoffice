@@ -4,26 +4,19 @@ import {
   Flex,
   Skeleton,
   SkeletonCircle,
-  Stack,
   Text,
 } from "@chakra-ui/react";
-import UseGetUsers from "pages/chat/Hooks/useGetUsers";
-import React, { useEffect } from "react";
+import React from "react";
 import useStore from "store";
 
 function Receiver({ item,first }) {
   const LoadingUserSelected = useStore(
     (state) => state.channels.LoadingUserSelected
   );
-  const userSelected = useStore((state) => state.channels.userSelected);
-  // console.log("item", );
-  const convert = (date) => {
-    let app = parseInt(date.replace(/[:\s\/\.-]/g, ""));
-    return app;
-  };
-  // useEffect(() => {
-  //   convert(item.createdAt)
-  // }, [])
+  // const convert = (date) => {
+  //   let app = parseInt(date.replace(/[:\s\/\.-]/g, ""));
+  //   return app;
+  // };
 
  
   const bg = item?.author === first  ? 'a' :'b'
@@ -31,19 +24,8 @@ function Receiver({ item,first }) {
 
 
   return (
-    <Box display="flex" alignItems="center" mb={2}>
-      {LoadingUserSelected ? (
-        <SkeletonCircle size="8" ml="7" mt="15" />
-      ) : (
-        <Avatar
-          cursor="pointer"
-          name={bg}
-          src="https://bit.ly/tioluwani-kolawole"
-          size="sm"
-          ml="7"
-          mt="15"
-        />
-      )}
+    <Box display="flex" alignItems="center" mb={2} justifyContent={"flex-end"} >
+
 
       {LoadingUserSelected ? (
         <>
@@ -64,6 +46,20 @@ function Receiver({ item,first }) {
         >
           <Text fontSize='md'>{item.body}</Text>
         </Flex>
+      )}
+
+
+      {LoadingUserSelected ? (
+        <SkeletonCircle size="8" ml="7" mt="15" />
+      ) : (
+        <Avatar
+          cursor="pointer"
+          name={bg}
+          src="https://bit.ly/tioluwani-kolawole"
+          size="sm"
+          mx="2"
+          mt="15"
+        />
       )}
     </Box>
   );
