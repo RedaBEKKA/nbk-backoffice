@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from "react";
-import { Routes, Route, useLocation, Outlet, Navigate } from "react-router-dom";
+import { Routes, Route, useLocation, Outlet, Navigate, useNavigate } from "react-router-dom";
 import { Flex, Spinner } from "@chakra-ui/react";
 import jwt_decode from "jwt-decode";
 
@@ -14,7 +14,7 @@ const PrivateRoute = () => {
 const UnprotectedRoute = () => {
   const isLoggedIn = useStore((state) => state.auth.isLoggedIn);
 
-  return !isLoggedIn ? <Outlet /> : <Navigate to="/dashboard" />;
+  return !isLoggedIn ? <Outlet /> : <Navigate to="/users" />;
 };
 export default function App() {
   const getAppToken = useStore((state) => state.getAppToken);

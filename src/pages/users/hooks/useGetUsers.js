@@ -98,18 +98,18 @@ export default function useGetWallets() {
 
   const userColumns = useMemo(
     () => [
+      // {
+      //   Header: "userId ",
+      //   accessor: "userId",
+      // },
       {
-        Header: "userId ",
-        accessor: "userId",
+        Header: "Identifiant ",
+        accessor: `firstname` ,
       },
-      {
-        Header: "Nom ",
-        accessor: "firstname",
-      },
-      {
-        Header: "Prénom",
-        accessor: "lastname",
-      },
+      // {
+      //   Header: "Prénom",
+      //   accessor: "lastname",
+      // },
       {
         Header: "Email",
         accessor: "email",
@@ -152,7 +152,9 @@ export default function useGetWallets() {
           );
         },
       },
+
       {
+        Header: "actions",
         accessor: "viewww",
         Cell: ({ row: { original } }) => {
           return (
@@ -181,6 +183,7 @@ export default function useGetWallets() {
         },
       },
       {
+        Header: "transactions",
         accessor: "links",
         Cell: ({ row: { original } }) => {
           return (
@@ -194,18 +197,19 @@ export default function useGetWallets() {
           );
         },
       },
-      //   {
-      //     accessor: 'links',
-      //     Cell: ({ row: { original } }) => {
-      //       return (
-      //         <>
-      //           <Text color="purple.500" fontWeight="bold" cursor="pointer">
-      //             <Link to={`/transfers?userId=${original.userId}`}>transfers</Link>
-      //           </Text>
-      //         </>
-      //       );
-      //     },
-      //   },
+      {
+        Header: "Beneficiare",
+        accessor: "linksss",
+        Cell: ({ row: { original } }) => {
+          return (
+            <>
+              <Text color="purple.500" fontWeight="bold" cursor="pointer">
+                <Link to={`#`}>Beneficiare</Link>
+              </Text>
+            </>
+          );
+        },
+      },
     ],
     []
   );
@@ -240,16 +244,16 @@ function SingleView({ original }) {
   const OnClosed = () => {
     setfirst(false);
   };
-  console.log("user id", original.userId);
-  console.log("wallets of user", wallets);
+  // console.log("user id", original.userId);
+  // console.log("wallets of user", wallets);
   function currencyFormat(num) {
     return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "1 ") + " €";
   }
   return (
     <>
-      <Button onClick={getSingleView}>
+      {/* <Button onClick={getSingleView}>
         <BiShow style={{ fontSize: 24 }}></BiShow>
-      </Button>
+      </Button> */}
       <Button onClick={getSingleCloture} width={20}>
         Clôturer
       </Button>
@@ -475,16 +479,11 @@ function SingleView({ original }) {
                     placeholder="Enter iban"
                   />
                 </SimpleGrid>
-                <HStack
-                  fullWidth
-                  mt="4"
-                  justifyContent='center'
-                >
-                <Button  width={40} color='#f00' >
-                  Valider la clôture
-                </Button>
+                <HStack fullWidth mt="4" justifyContent="center">
+                  <Button width={40} color="#f00">
+                    Valider la clôture
+                  </Button>
                 </HStack>
-
               </>
             )}
           </DrawerBody>

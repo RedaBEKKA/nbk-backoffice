@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import { useTable, usePagination } from "react-table";
-import React from "react";
+import React, { useState } from "react";
 import {
   Table,
   Thead,
@@ -14,7 +14,9 @@ import {
   Input,
   Select,
   Stack,
+  useDisclosure,
 } from "@chakra-ui/react";
+import UseDrawer from "pages/users/useDrawer";
 // import makeData from './makeData';
 
 function DashTable({ columns, data }) {
@@ -46,6 +48,8 @@ function DashTable({ columns, data }) {
     },
     usePagination
   );
+  const [Originale, setOriginale] = useState(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
@@ -83,7 +87,17 @@ function DashTable({ columns, data }) {
           {page.map((row, i) => {
             prepareRow(row);
             return (
-              <Tr key={i} {...row.getRowProps()}>
+              <Tr
+                key={i}
+                {...row.getRowProps()}
+                cursor={"pointer"}
+                _hover={{ bg: "teal.50" }}
+                onClick={() => {
+                  // console.log("cloic", row);
+                  setOriginale(row.original);
+                  onOpen();
+                }}
+              >
                 {row.cells.map((cell, i) => {
                   return (
                     <Td key={i} {...cell.getCellProps()}>
@@ -95,6 +109,7 @@ function DashTable({ columns, data }) {
             );
           })}
         </Tbody>
+      {  Originale && <UseDrawer original={Originale}  isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>}
       </Table>
 
       {!data.length && (
