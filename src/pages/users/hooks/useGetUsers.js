@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import React from "react";
+
 import {
   Badge,
   Button,
@@ -18,8 +20,21 @@ import {
   useToast,
   Input,
   Center,
+  AlertDialog,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogBody,
+  AlertDialogFooter,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
 } from "@chakra-ui/react";
-import { BiShow } from "react-icons/bi";
+
 import { useLocation } from "react-router-dom";
 
 import useStore from "store";
@@ -104,7 +119,7 @@ export default function useGetWallets() {
       // },
       {
         Header: "Identifiant ",
-        accessor: `firstname` ,
+        accessor: `firstname`,
       },
       // {
       //   Header: "Prénom",
@@ -203,9 +218,9 @@ export default function useGetWallets() {
         Cell: ({ row: { original } }) => {
           return (
             <>
-              <Text color="purple.500" fontWeight="bold" cursor="pointer">
-                <Link to={`#`}>Beneficiare</Link>
-              </Text>
+              <BeneficiareButton original={original}>
+                Beneficiare
+              </BeneficiareButton>
             </>
           );
         },
@@ -229,6 +244,7 @@ function SingleView({ original }) {
   const wallets = useStore((state) => state.wallets.wallets);
   const getAllWallets = useStore((state) => state.getAllWallets);
   const [first, setfirst] = useState(false);
+
   const getSingleView = () => {
     // getAllWallets({ userId: original?.userId, pageCount: 2 });
     //TODO WALLET USERID IS HARD CODED
@@ -237,6 +253,7 @@ function SingleView({ original }) {
   };
 
   const getSingleCloture = () => {
+    // console.log('original', original.userId) 
     getAllWallets({ userId: 2151518 });
     setfirst(!first);
   };
@@ -489,6 +506,125 @@ function SingleView({ original }) {
           </DrawerBody>
         </DrawerContent>
       </Drawer>
+    </>
+  );
+}
+
+function BeneficiareButton({ children, original }) {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const onClose = () => setIsOpen(false);
+  const cancelRef = React.useRef();
+  const disableUser = useStore((state) => state.disableUser);
+  const blockLoading = useStore((state) => state.users.blockLoading);
+  const getLoading = useStore((state) => state.benefits.getLoading);
+  const benefits = useStore((state) => state.benefits.benefits);
+  const getFilteredBenefits = useStore((state) => state.getFilteredBenefits);
+  const toast = useToast();
+  // console.log("benefits", benefits);
+  const disable = async () => {
+    // console.log('diable');
+    // const res = await disableUser({ userName });
+    // if (res?.data?.status === 'success') {
+    //   toast({
+    //     description: 'opération terminée avec succès',
+    //     status: 'success',
+    //     duration: 3000,
+    //     isClosable: true,
+    //   });
+    //   onClose();
+    // } else {
+    //   toast({
+    //     description: "quelque chose s'est mal passé",
+    //     status: 'error',
+    //     duration: 9000,
+    //     isClosable: true,
+    //   });
+    // }
+  };
+  return (
+    <>
+      <Button
+        cursor="pointer"
+        onClick={() => {
+          setIsOpen(true);
+          getFilteredBenefits(original.id);
+        }}
+      >
+        {children}
+      </Button>
+
+
+      <Modal isOpen={isOpen} size={"xl"} onClose={onClose} scrollBehavior={"inside"}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Liste Beneficiares</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            {benefits.length ? (
+              benefits.map((benefits) => {
+                return (
+                  <SimpleGrid
+                    // border="1px solid black"
+                    rounded="xl"
+                    p="4"
+                    // columns={{ base: 1, md: 2 }}
+                    // spacing={8}
+                  >
+                    <Flex justifyContent="space-between" alignItems="center">
+                      <Text fontSize="lg" fontWeight="bold">
+                        USER ID :{" "}
+                      </Text>
+                      <Text fontSize="lg">{benefits.userId}</Text>
+                    </Flex>
+                    <Flex justifyContent="space-between" alignItems="center">
+                      <Text fontSize="lg" fontWeight="bold">
+                        NICK NAME :{" "}
+                      </Text>
+                      <Text fontSize="lg">{benefits.nickName}</Text>
+                    </Flex>
+
+                    {/* <Flex justifyContent="space-between" alignItems="center">
+                      <Text fontSize="lg" fontWeight="bold">
+                        NICK NAME :{" "}
+                      </Text>
+                      <Text fontSize="lg">{benefits.nickName}</Text>
+                    </Flex>
+                    <Flex justifyContent="space-between" alignItems="center">
+                      <Text fontSize="lg" fontWeight="bold">
+                        NAME :{" "}
+                      </Text>
+                      <Text fontSize="lg">{benefits.name}</Text>
+                    </Flex> */}
+                  </SimpleGrid>
+                );
+              })
+            ) : (
+              <Flex w="full" p="16" justifyContent="center" alignItems="center">
+                il n'y a pas de données
+              </Flex>
+            )}
+          </ModalBody>
+
+          <ModalFooter>
+          <Button
+                isDisabled={blockLoading}
+                ref={cancelRef}
+                onClick={onClose}
+              >
+                Cancel
+              </Button>
+              <Button
+                isDisabled={blockLoading}
+                isLoading={blockLoading}
+                colorScheme="green"
+                // onClick={disable}
+                ml={3}
+              >
+                Créer Bénéficiaire
+              </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 }

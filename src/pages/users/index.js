@@ -1,4 +1,4 @@
-import { Container, Flex, Spinner } from "@chakra-ui/react";
+import { Container, Flex, Spinner, useDisclosure } from "@chakra-ui/react";
 import Table from "components/table";
 
 import LoadingTable from "components/loadingTable";
@@ -18,6 +18,19 @@ export default function Users() {
     getSingleLoading,
   } = useGetUsers();
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const display = (cell) => {
+    if (
+      cell.column.Header === "Beneficiare" ||
+      cell.column.Header === "actions"
+    ) {
+      return;
+    } else {
+      // setOriginale(row.original);
+      onOpen();
+    }
+  };
   return (
     <Layout>
       <Header
@@ -45,7 +58,14 @@ export default function Users() {
               <LoadingTable></LoadingTable>
             ) : (
               <>
-                <Table columns={userColumns} data={users || []}></Table>
+                <Table
+                  columns={userColumns}
+                  data={users || []}
+                  display={display}
+                  isOpen={isOpen}
+                  onOpen={onOpen}
+                  onClose={onClose}
+                ></Table>
               </>
             )}
           </>

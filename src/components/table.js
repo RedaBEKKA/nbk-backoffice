@@ -19,7 +19,7 @@ import {
 import UseDrawer from "pages/users/useDrawer";
 // import makeData from './makeData';
 
-function DashTable({ columns, data }) {
+function DashTable({ columns, data, display, isOpen, onOpen, onClose }) {
   // console.log("dataaaa", data);
   const {
     getTableProps,
@@ -49,7 +49,6 @@ function DashTable({ columns, data }) {
     usePagination
   );
   const [Originale, setOriginale] = useState(null);
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
@@ -95,12 +94,16 @@ function DashTable({ columns, data }) {
                 onClick={() => {
                   // console.log("cloic", row);
                   setOriginale(row.original);
-                  onOpen();
+                  // onOpen();
                 }}
               >
                 {row.cells.map((cell, i) => {
                   return (
-                    <Td key={i} {...cell.getCellProps()}>
+                    <Td
+                      key={i}
+                      {...cell.getCellProps()}
+                      onClick={() => display(cell)}
+                    >
                       {cell.render("Cell")}
                     </Td>
                   );
@@ -109,7 +112,14 @@ function DashTable({ columns, data }) {
             );
           })}
         </Tbody>
-      {  Originale && <UseDrawer original={Originale}  isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>}
+        {Originale && (
+          <UseDrawer
+            original={Originale}
+            isOpen={isOpen}
+            onOpen={onOpen}
+            onClose={onClose}
+          />
+        )}
       </Table>
 
       {!data.length && (
@@ -174,12 +184,21 @@ function DashTable({ columns, data }) {
   );
 }
 
-function App({ columns, data }) {
+function App({ columns, data, display, isOpen, onOpen, onClose }) {
   // console.log("dataaaa", data);
 
   return (
     <Box w="100%" overflowX="auto" overflowY="hidden">
-      {true && <DashTable columns={columns} data={data} />}
+      {true && (
+        <DashTable
+          columns={columns}
+          data={data}
+          display={display}
+          isOpen={isOpen}
+          onOpen={onOpen}
+          onClose={onClose}
+        />
+      )}
     </Box>
   );
 }

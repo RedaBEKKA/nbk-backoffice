@@ -32,6 +32,7 @@ const benefits = (set, get) => ({
     const params = {
       ...payload,
     };
+    console.log('params', params)
     set({
       benefits: { ...get().benefits, getLoading: true },
     });
