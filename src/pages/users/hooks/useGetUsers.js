@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import React from "react";
-
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
 import {
   Badge,
   Button,
@@ -33,6 +34,10 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalFooter,
+  Stack,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 
 import { useLocation } from "react-router-dom";
@@ -42,6 +47,7 @@ import { RiEditBoxFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import DisableUser from "../components/DisableUser";
 import EnableUser from "../components/EnableUser";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function useGetWallets() {
   const toast = useToast();
@@ -253,7 +259,7 @@ function SingleView({ original }) {
   };
 
   const getSingleCloture = () => {
-    // console.log('original', original.userId) 
+    // console.log('original', original.userId)
     getAllWallets({ userId: 2151518 });
     setfirst(!first);
   };
@@ -511,50 +517,88 @@ function SingleView({ original }) {
 }
 
 function BeneficiareButton({ children, original }) {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const onClose = () => setIsOpen(false);
+  // const [isOpen, setIsOpen] = React.useState(false);
+  // const onClose = () => setIsOpen(false);
   const cancelRef = React.useRef();
   const disableUser = useStore((state) => state.disableUser);
   const blockLoading = useStore((state) => state.users.blockLoading);
   const getLoading = useStore((state) => state.benefits.getLoading);
   const benefits = useStore((state) => state.benefits.benefits);
   const getFilteredBenefits = useStore((state) => state.getFilteredBenefits);
+  const createBenifits = useStore((state) => state.createBenifits);
+
+  const schema = yup
+    .object({
+      address: yup.string().required(),
+      bic: yup.string().min(5).required(),
+      iban: yup.string().min(5).required(),
+      name: yup.string().min(5).required(),
+      nickName: yup.string().min(5).required(),
+      userId: yup.string().min(5).required(),
+      
+    })
+    .required();
+
+  const login = useStore((state) => state.login);
   const toast = useToast();
-  // console.log("benefits", benefits);
-  const disable = async () => {
-    // console.log('diable');
-    // const res = await disableUser({ userName });
-    // if (res?.data?.status === 'success') {
-    //   toast({
-    //     description: 'opération terminée avec succès',
-    //     status: 'success',
-    //     duration: 3000,
-    //     isClosable: true,
-    //   });
-    //   onClose();
-    // } else {
-    //   toast({
-    //     description: "quelque chose s'est mal passé",
-    //     status: 'error',
-    //     duration: 9000,
-    //     isClosable: true,
-    //   });
-    // }
+
+  const {
+    register,
+    handleSubmit,
+
+    formState: { errors, isSubmitting },
+  } = useForm({ resolver: yupResolver(schema) });
+
+  const onSubmit = async (data) => {
+    const res = await createBenifits(data);
+console.log('res', res.status)
+    if (res?.status === 200) {
+      toast({
+        description: "opération terminée avec succès",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    } else {
+      toast({
+        description:
+          res?.data?.StatusDescription || "quelque chose s'est mal passé",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
   };
+
+  const {
+    isOpen: isEditOpen,
+    onOpen: onEditOpen,
+    onClose: onEditClose,
+  } = useDisclosure();
+  const {
+    isOpen: isDeleteOpen,
+    onOpen: onDeleteOpen,
+    onClose: onDeleteClose,
+  } = useDisclosure();
+  // console.log('benefits', benefits)
   return (
     <>
       <Button
         cursor="pointer"
         onClick={() => {
-          setIsOpen(true);
+          onEditOpen();
           getFilteredBenefits(original.id);
         }}
       >
         {children}
       </Button>
 
-
-      <Modal isOpen={isOpen} size={"xl"} onClose={onClose} scrollBehavior={"inside"}>
+      <Modal
+        isOpen={isEditOpen}
+        size={"xl"}
+        onClose={onEditClose}
+        scrollBehavior={"inside"}
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Liste Beneficiares</ModalHeader>
@@ -606,23 +650,159 @@ function BeneficiareButton({ children, original }) {
           </ModalBody>
 
           <ModalFooter>
-          <Button
-                isDisabled={blockLoading}
-                ref={cancelRef}
-                onClick={onClose}
-              >
+            <Button
+              isDisabled={blockLoading}
+              ref={cancelRef}
+              onClick={onEditClose}
+            >
+              Cancel
+            </Button>
+            <Button
+              isDisabled={blockLoading}
+              isLoading={blockLoading}
+              colorScheme="green"
+              onClick={() => {
+                onEditClose();
+
+                // setTimeout(() => {
+                onDeleteOpen();
+                // console.log("original click", original);
+                // }, 1000);
+              }}
+              ml={3}
+            >
+              Créer Bénéficiaire
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <Modal isOpen={isDeleteOpen} onClose={onDeleteClose} size={"4xl"}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Créer Bénéficiaire</ModalHeader>
+          <ModalCloseButton />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <ModalBody>
+              <Stack spacing={3}>
+                <Flex>
+                <FormControl isInvalid={errors.UserId} mx={2}>
+                    <FormLabel>UserId</FormLabel>{original.userId}
+                    <Input
+                      type="number"
+                      required
+                      placeholder="userId"
+                      variant="filled"
+                      {...register("userId")}
+                      // value={original.userId}
+                      // disabled
+                    ></Input>
+                    {errors.userId && (
+                      <FormErrorMessage>{errors.userId.message}</FormErrorMessage>
+                    )}
+                  </FormControl>
+                  <FormControl isInvalid={errors.name} mx={2}>
+                    <FormLabel>name</FormLabel>
+                    <Input
+                      type="name"
+                      required
+                      placeholder="nom"
+                      variant="filled"
+                      {...register("name")}
+                    ></Input>
+                    {errors.name && (
+                      <FormErrorMessage>{errors.name.message}</FormErrorMessage>
+                    )}
+                  </FormControl>
+                  <FormControl isInvalid={errors.nickName}>
+                    <FormLabel>Surnom</FormLabel>
+                    <Input
+                      type="nickName"
+                      required
+                      placeholder="Surnom"
+                      variant="filled"
+                      {...register("nickName")}
+                    ></Input>
+                    {errors.nickName && (
+                      <FormErrorMessage>
+                        {errors.nickName.message}
+                      </FormErrorMessage>
+                    )}
+                  </FormControl>
+                </Flex>
+            
+
+                <Flex>
+
+                <FormControl isInvalid={errors.address} mx={2}>
+                  <FormLabel>address</FormLabel>
+                  <Input
+                    type="address"
+                    required
+                    placeholder="address"
+                    variant="filled"
+                    {...register("address")}
+                  ></Input>
+                  {errors.address && (
+                    <FormErrorMessage>
+                      {errors.address.message}
+                    </FormErrorMessage>
+                  )}
+                </FormControl>
+                  <FormControl isInvalid={errors.bic} mx={2}>
+                    <FormLabel>bic</FormLabel>
+                    <Input
+                      {...register("bic")}
+                      required
+                      placeholder="bic"
+                      variant="filled"
+                      type="bic"
+                    ></Input>
+                    {errors.bic && (
+                      <FormErrorMessage>{errors.bic.message}</FormErrorMessage>
+                    )}
+                  </FormControl>
+                  <FormControl isInvalid={errors.iban}>
+                    <FormLabel>iban</FormLabel>
+                    <Input
+                      {...register("iban")}
+                      required
+                      placeholder="iban"
+                      variant="filled"
+                      type="iban"
+                    ></Input>
+                    {errors.iban && (
+                      <FormErrorMessage>{errors.iban.message}</FormErrorMessage>
+                    )}
+                  </FormControl>
+
+                  
+        
+                </Flex>
+
+              </Stack>
+              {/* <Button
+                    isLoading={isSubmitting}
+                    isDisabled={isSubmitting}
+                    width="full"
+                    my="8"
+                    colorScheme="green"
+                bg="#2DDCB1"
+
+                    type="submit"
+                  >
+                    SE CONNECTER
+                  </Button> */}
+            </ModalBody>
+
+            <ModalFooter>
+              <Button variant="ghost" mr={3} onClick={onDeleteClose}>
                 Cancel
               </Button>
-              <Button
-                isDisabled={blockLoading}
-                isLoading={blockLoading}
-                colorScheme="green"
-                // onClick={disable}
-                ml={3}
-              >
-                Créer Bénéficiaire
+              <Button colorScheme="green" type="submit">
+                Cree
               </Button>
-          </ModalFooter>
+            </ModalFooter>
+          </form>
         </ModalContent>
       </Modal>
     </>

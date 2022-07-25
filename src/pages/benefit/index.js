@@ -7,7 +7,7 @@ import useGetBenefits from './hooks/useGetBenefits';
 import Filter from './components/filter';
 export default function Contacts() {
   const { benefits, benefitColumns, benefitLoading } = useGetBenefits();
-
+console.log('benefits', benefits)
   return (
     <Layout>
       <Header

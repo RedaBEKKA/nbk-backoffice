@@ -32,7 +32,6 @@ const benefits = (set, get) => ({
     const params = {
       ...payload,
     };
-    console.log('params', params)
     set({
       benefits: { ...get().benefits, getLoading: true },
     });
@@ -56,6 +55,17 @@ const benefits = (set, get) => ({
     try {
       const res = await Axios.delete(`/beneficiaries/${id}`);
       // console.log(res);
+      return res;
+    } catch (error) {
+      console.log(error.response);
+      return error.response;
+    }
+  },
+  createBenifits: async (data) => {
+    try {
+      const res = await Axios.post(`/beneficiaries`,data);
+      console.log('data*****',data);
+      console.log('createBenifits*****',res?.data);
       return res;
     } catch (error) {
       console.log(error.response);
